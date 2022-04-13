@@ -100,8 +100,18 @@ export default {
             type="transition"
             :name="!drag ? 'flip-list' : null"
           >
-            <div v-for="(element, index) in list1" :key="element.widget">
-              <button v-on:click="removeWidget(index, list1)">x</button>
+            <div
+              style="position: relative"
+              v-for="(element, index) in list1"
+              :key="element.widget"
+            >
+              <button
+                style="position: absolute; right: 0; top: 0; z-index: 1000"
+                class="btn btn-link"
+                v-on:click="removeWidget(index, list1)"
+              >
+                x
+              </button>
               <component :is="element.widget"></component>
             </div>
           </transition-group>
@@ -122,8 +132,18 @@ export default {
             type="transition"
             :name="!drag ? 'flip-list' : null"
           >
-            <div v-for="(element, index) in list2" :key="element.widget">
-              <button v-on:click="removeWidget(index, list2)">x</button>
+            <div
+              style="position: relative"
+              v-for="(element, index) in list2"
+              :key="element.widget"
+            >
+              <button
+                style="position: absolute; right: 0; top: 0; z-index: 1000"
+                class="btn btn-link"
+                v-on:click="removeWidget(index, list2)"
+              >
+                x
+              </button>
               <component :is="element.widget"></component>
             </div>
           </transition-group>
@@ -144,8 +164,18 @@ export default {
             type="transition"
             :name="!drag ? 'flip-list' : null"
           >
-            <div v-for="(element, index) in list3" :key="element.widget">
-              <button v-on:click="removeWidget(index, list3)">x</button>
+            <div
+              style="position: relative"
+              v-for="(element, index) in list3"
+              :key="element.widget"
+            >
+              <button
+                style="position: absolute; right: 0; top: 0; z-index: 1000"
+                class="btn btn-link"
+                v-on:click="removeWidget(index, list3)"
+              >
+                x
+              </button>
               <component :is="element.widget"></component>
             </div>
           </transition-group>
