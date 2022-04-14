@@ -1,7 +1,7 @@
 {
-  "name": "smarthris",
+  "name": "icc",
   "version": "1.0.0",
-  "description": "Smart HRIS Bima Sakti Alterra",
+  "description": "ICC Dashboard",
   "private": true,
   "scripts": {
     "dev": "nuxt",

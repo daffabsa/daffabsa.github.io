@@ -70,7 +70,7 @@ export default {
   computed: {
     dragOptions() {
       return {
-        animation: 200,
+        animation: 300,
         group: "description",
         disabled: false,
         ghostClass: "ghost",
@@ -82,7 +82,15 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div
+    style="
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -o-user-select: none;
+    "
+  >
     <PageHeader :title="title" :items="items" />
 
     <div class="row">
@@ -91,6 +99,7 @@ export default {
           class="list-group"
           :list="list1"
           group="widgets"
+          :empty-insert-threshold="100"
           @change="log"
           v-bind="dragOptions"
           @start="drag = true"
@@ -106,23 +115,39 @@ export default {
               :key="element.widget"
             >
               <button
-                style="position: absolute; right: 0; top: 0; z-index: 1000"
+                style="position: absolute; right: 0; top: 0; z-index: 5"
                 class="btn btn-link"
                 v-on:click="removeWidget(index, list1)"
               >
                 x
               </button>
-              <component :is="element.widget"></component>
+              <component :is="element.widget" class="card-moveable"></component>
             </div>
           </transition-group>
         </draggable>
+        <div class="container">
+          <div class="row">
+            <div @click="$bvModal.show('bv-modal-add-widget')" class="box-add">
+              <div
+                class="d-flex justify-content-center"
+                style="z-index: 5; margin: auto"
+              >
+                <i
+                  style="font-size: 40px"
+                  class="fa fa-plus-circle"
+                  aria-hidden="true"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="col-6">
         <draggable
           class="list-group"
           :list="list2"
-          group="widgets"
+          group="widgets2"
           @change="log"
           v-bind="dragOptions"
           @start="drag = true"
@@ -144,10 +169,26 @@ export default {
               >
                 x
               </button>
-              <component :is="element.widget"></component>
+              <component :is="element.widget" class="card-moveable"></component>
             </div>
           </transition-group>
         </draggable>
+        <div class="container">
+          <div class="row">
+            <div @click="$bvModal.show('bv-modal-add-widget')" class="box-add">
+              <div
+                class="d-flex justify-content-center"
+                style="z-index: 5; margin: auto"
+              >
+                <i
+                  style="font-size: 40px"
+                  class="fa fa-plus-circle"
+                  aria-hidden="true"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="col-3">
@@ -176,12 +217,38 @@ export default {
               >
                 x
               </button>
-              <component :is="element.widget"></component>
+              <component :is="element.widget" class="card-moveable"></component>
             </div>
           </transition-group>
         </draggable>
+        <div class="container">
+          <div class="row">
+            <div @click="$bvModal.show('bv-modal-add-widget')" class="box-add">
+              <div
+                class="d-flex justify-content-center"
+                style="z-index: 5; margin: auto"
+              >
+                <i
+                  style="font-size: 40px"
+                  class="fa fa-plus-circle"
+                  aria-hidden="true"
+                ></i>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <b-modal id="bv-modal-add-widget" hide-footer>
+      <template #modal-title> Using <code>$bvModal</code> Methods </template>
+      <div class="d-block text-center">
+        <h3>Hello From This Modal!</h3>
+      </div>
+      <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')"
+        >Close Me</b-button
+      >
+    </b-modal>
   </div>
 </template>
 
@@ -195,5 +262,20 @@ export default {
 .ghost {
   opacity: 0.5;
   background: #c8ebfb;
+}
+
+.card-moveable {
+  cursor: move;
+}
+
+.box-add {
+  border: 2px;
+  border-style: dashed;
+  border-color: #dfe3e8;
+  padding: 20px 0px 20px 0px;
+  margin: 0 auto;
+  width: 100%;
+  background-color: #f9fafb;
+  z-index: 1;
 }
 </style>
