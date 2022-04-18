@@ -241,11 +241,11 @@ export default {
     </div>
 
     <b-modal id="bv-modal-add-widget" hide-footer>
-      <template #modal-title> Using <code>$bvModal</code> Methods </template>
+      <template #modal-title> Tambahkan widget </template>
       <div class="d-block text-center">
         <h3>Hello From This Modal!</h3>
       </div>
-      <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-example')"
+      <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-add-widget')"
         >Close Me</b-button
       >
     </b-modal>
