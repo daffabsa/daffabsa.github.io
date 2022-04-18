@@ -17,16 +17,16 @@ export default {
   },
   data() {
     return {
-      title: "CRM",
+      title: "ICC",
       items: [
         {
-          text: "SmartHRS",
+          text: "Command Center",
         },
         {
           text: "Dashboards",
         },
         {
-          text: "CRM",
+          text: "ICC",
           active: true,
         },
       ],
@@ -56,22 +56,35 @@ export default {
           text: "34.61%",
         },
       ],
-      list1: [{ widget: "Campaigns" }, { widget: "Revenue" }],
-      list2: [{ widget: "TopPerforming" }, { widget: "Todo" }],
-      list3: [{ widget: "RecentLeads" }],
+      list1: ["Campaigns", "Revenue"],
+      list2: ["TopPerforming", "Todo"],
+      list3: ["RecentLeads"],
+      availableWidget: ["TopPerforming", "Todo", "RecentLeads"],
       drag: false,
+      selectedList: "",
     };
   },
   methods: {
     removeWidget(index, list) {
       list.splice(index, 1);
     },
+    addWidget(list, widget) {
+      if (list.indexOf(widget) < 0) {
+        list.push(widget);
+      } else {
+        alert("Widget sudah ada");
+      }
+    },
+    showModalAdd(item) {
+      this.selectedList = item;
+      this.$bvModal.show("bv-modal-add-widget");
+    },
   },
   computed: {
     dragOptions() {
       return {
         animation: 300,
-        group: "description",
+        group: "widgets",
         disabled: false,
         ghostClass: "ghost",
       };
@@ -112,7 +125,7 @@ export default {
             <div
               style="position: relative"
               v-for="(element, index) in list1"
-              :key="element.widget"
+              :key="element"
             >
               <button
                 style="position: absolute; right: 0; top: 0; z-index: 5"
@@ -121,13 +134,13 @@ export default {
               >
                 x
               </button>
-              <component :is="element.widget" class="card-moveable"></component>
+              <component :is="element" class="card-moveable"></component>
             </div>
           </transition-group>
         </draggable>
         <div class="container">
           <div class="row">
-            <div @click="$bvModal.show('bv-modal-add-widget')" class="box-add">
+            <div @click="showModalAdd(list1)" class="box-add">
               <div
                 class="d-flex justify-content-center"
                 style="z-index: 5; margin: auto"
@@ -160,7 +173,7 @@ export default {
             <div
               style="position: relative"
               v-for="(element, index) in list2"
-              :key="element.widget"
+              :key="element"
             >
               <button
                 style="position: absolute; right: 0; top: 0; z-index: 1000"
@@ -169,13 +182,13 @@ export default {
               >
                 x
               </button>
-              <component :is="element.widget" class="card-moveable"></component>
+              <component :is="element" class="card-moveable"></component>
             </div>
           </transition-group>
         </draggable>
         <div class="container">
           <div class="row">
-            <div @click="$bvModal.show('bv-modal-add-widget')" class="box-add">
+            <div @click="showModalAdd(list2)" class="box-add">
               <div
                 class="d-flex justify-content-center"
                 style="z-index: 5; margin: auto"
@@ -208,7 +221,7 @@ export default {
             <div
               style="position: relative"
               v-for="(element, index) in list3"
-              :key="element.widget"
+              :key="element"
             >
               <button
                 style="position: absolute; right: 0; top: 0; z-index: 1000"
@@ -217,13 +230,13 @@ export default {
               >
                 x
               </button>
-              <component :is="element.widget" class="card-moveable"></component>
+              <component :is="element" class="card-moveable"></component>
             </div>
           </transition-group>
         </draggable>
         <div class="container">
           <div class="row">
-            <div @click="$bvModal.show('bv-modal-add-widget')" class="box-add">
+            <div @click="showModalAdd(list3)" class="box-add">
               <div
                 class="d-flex justify-content-center"
                 style="z-index: 5; margin: auto"
@@ -243,7 +256,20 @@ export default {
     <b-modal id="bv-modal-add-widget" hide-footer>
       <template #modal-title> Tambahkan widget </template>
       <div class="d-block text-center">
-        <h3>Hello From This Modal!</h3>
+        <div
+          style="position: relative"
+          v-for="element in availableWidget"
+          :key="element"
+        >
+          <component :is="element"></component>
+          <button
+            class="btn btn-info form-control"
+            @click="addWidget(selectedList, element)"
+          >
+            Tambah Widget
+          </button>
+          <hr />
+        </div>
       </div>
       <b-button class="mt-3" block @click="$bvModal.hide('bv-modal-add-widget')"
         >Close Me</b-button
