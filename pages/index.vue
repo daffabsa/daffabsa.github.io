@@ -83,8 +83,8 @@ export default {
       -ms-user-select: none;
       user-select: none;
       -o-user-select: none;
-      margin-top: 20px;
     "
+    class="mt-2"
   >
     <div class="row">
       <div class="col-lg-3">
