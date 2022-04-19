@@ -1,9 +1,14 @@
 <script>
+import { EventBus } from "~/plugins/eventBus.js";
 /**
  * Topbar component
  */
 export default {
-  data() {},
+  data() {
+    return {
+      editLayout: false,
+    };
+  },
   methods: {
     /**
      * Toggle menu
@@ -23,6 +28,11 @@ export default {
       this.$router.push({
         path: "/account/login",
       });
+    },
+
+    layoutEditor() {
+      this.editLayout = !this.editLayout;
+      EventBus.$emit("editLayout", this.editLayout);
     },
   },
 };
@@ -54,15 +64,32 @@ export default {
             </div>
           </template>
 
-          <a class="dropdown-item">
+          <a
+            class="dropdown-item"
+            style="
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none;
+            "
+          >
             <i class="fe-settings mr-1"></i>
-            <span>Pengaturan</span>
+            <span>{{ $t("navbar.dropdown.name.list.settings") }}</span>
           </a>
 
           <b-dropdown-divider></b-dropdown-divider>
-          <a class="dropdown-item">
+          <a
+            class="dropdown-item"
+            @click="layoutEditor"
+            style="
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none;
+            "
+          >
             <i class="fa fa-plus mr-1"></i>
-            <span>Atur Layout</span>
+            <span>{{ $t("navbar.dropdown.name.list.editlayout") }}</span>
           </a>
 
           <b-dropdown-divider></b-dropdown-divider>

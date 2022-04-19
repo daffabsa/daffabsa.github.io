@@ -10,7 +10,8 @@
           "projects": "New Projects",
           "users": "Create Users",
           "revenue": "Revenue Report",
-          "settings": "Settings",
+          "settings": "Pengaturan",
+          "editlayout": "Atur Layout",
           "help": "Help & Support"
         }
       },
@@ -102,8 +103,9 @@
           "greet": "Welcome !",
           "account": "My Account",
           "mywallet": "My Wallet",
-          "settings": "Settings",
           "lockscreen": "Lock screen",
+          "settings": "Pengaturan",
+          "editlayout": "Atur Layout",
           "logout": "Logout"
         }
       }

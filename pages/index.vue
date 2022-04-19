@@ -1,6 +1,7 @@
 <script>
 import CrmWidget from "~/components/widgets/Crm-widget";
 import draggable from "vuedraggable";
+import { EventBus } from "~/plugins/eventBus.js";
 
 /**
  * CRM component
@@ -38,6 +39,11 @@ export default {
       selectedList: "",
       editLayout: false,
     };
+  },
+  created() {
+    EventBus.$on("editLayout", (editLayoutBool) => {
+      this.editLayout = editLayoutBool;
+    });
   },
   methods: {
     removeWidget(index, list) {
@@ -77,10 +83,9 @@ export default {
       -ms-user-select: none;
       user-select: none;
       -o-user-select: none;
+      margin-top: 20px;
     "
   >
-    <button @click="editLayout = !editLayout">Atur Layout</button>
-
     <div class="row">
       <div class="col-lg-3">
         <draggable
@@ -110,7 +115,10 @@ export default {
               >
                 x
               </button>
-              <component :is="element" class="card-moveable"></component>
+              <component
+                :is="element"
+                :class="{ 'card-moveable': editLayout === true }"
+              ></component>
             </div>
           </transition-group>
         </draggable>
@@ -158,7 +166,10 @@ export default {
               >
                 x
               </button> -->
-              <component :is="element" class="card-moveable"></component>
+              <component
+                :is="element"
+                :class="{ 'card-moveable': editLayout === true }"
+              ></component>
             </div>
           </transition-group>
         </draggable>
@@ -207,7 +218,10 @@ export default {
               >
                 x
               </button>
-              <component :is="element" class="card-moveable"></component>
+              <component
+                :is="element"
+                :class="{ 'card-moveable': editLayout === true }"
+              ></component>
             </div>
           </transition-group>
         </draggable>

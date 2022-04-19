@@ -11,6 +11,7 @@
                     "users": "Créer des utilisateurs",
                     "revenue": "Rapport de revenus",
                     "settings": "Paramètres",
+                    "editlayout": "Atur Layout",
                     "help": "Support d'aide"
                 }
             },
@@ -102,8 +103,9 @@
                     "greet": "Bienvenue !",
                     "account": "Mon compte",
                     "mywallet": "Mon portefeuille",
-                    "settings": "Réglages",
                     "lockscreen": "Écran verrouillé",
+                    "settings": "Pengaturan",
+                    "editlayout": "Atur Layout",
                     "logout": "Se déconnecter"
                 }
             }
