@@ -104,6 +104,19 @@
     }
 }
 
+.navbar-custom-layout {
+    background-color: #4BCA81;
+    box-shadow: $shadow;
+    padding: 0 10px 0 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: $topbar-height;
+    transition: all .1s ease-out;
+    z-index: 1001;
+}
+
 
 /* Notification */
 .noti-scroll {
