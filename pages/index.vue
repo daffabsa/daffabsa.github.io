@@ -8,7 +8,7 @@ import draggable from "vuedraggable";
 export default {
   head() {
     return {
-      title: `${this.title} Dashboard | SmartHRIS - Aplikasi HR lengkap dari BSA`,
+      title: `${this.title} Dashboard`,
     };
   },
   components: {
@@ -56,9 +56,9 @@ export default {
           text: "34.61%",
         },
       ],
-      list1: ["Campaigns", "Revenue"],
+      list1: ["SkorRoe"],
       list2: ["TopPerforming", "Todo"],
-      list3: ["RecentLeads"],
+      list3: ["Revenue", "Campaigns"],
       availableWidget: ["TopPerforming", "Todo", "RecentLeads"],
       drag: false,
       selectedList: "",
