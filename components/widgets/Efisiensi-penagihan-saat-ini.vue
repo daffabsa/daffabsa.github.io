@@ -3,7 +3,7 @@
  * Top-performing component
  */
 export default {
-  name: "Efisiensi Penagihan Saat ini",
+  name: "EfisiensiPenagihanSaatini",
   data() {
     return {
       efficiencyData: {

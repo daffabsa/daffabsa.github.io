@@ -78,6 +78,7 @@ export default {
     'bootstrap-vue/nuxt',
     // '@nuxtjs/sentry',
     '@nuxtjs/i18n',
+    'nuxt-leaflet',
   ],
   sentry: {
     dsn: "https://dd728a21cadd416f9916eb9c774d1c81@sentry-dev.bsa.id/5",

@@ -31,9 +31,9 @@ export default {
         },
       ],
       list1: ["SkorRoe", "EfisiensiPenagihan"],
-      list2: ["Todo"],
+      list2: ["Maps"],
       list3: ["EfisiensiPenagihanSaatIni"],
-      availableWidget: ["Todo", "RecentLeads"],
+      availableWidget: ["Maps", "RecentLeads"],
       drag: false,
       selectedList: "",
       editLayout: false,
@@ -86,14 +86,13 @@ export default {
     </div>
 
     <div class="row">
-      <div class="col-3">
+      <div class="col-lg-3">
         <draggable
           class="list-group"
           :list="list1"
           :disabled="!editLayout"
           group="widgets"
           :empty-insert-threshold="100"
-          @change="log"
           v-bind="dragOptions"
           @start="drag = true"
           @end="drag = false"
@@ -108,7 +107,7 @@ export default {
               :key="element"
             >
               <button
-                style="position: absolute; right: 0; top: 0; z-index: 5"
+                style="position: absolute; right: 0; top: 0; z-index: 1"
                 class="btn btn-link"
                 v-on:click="removeWidget(index, list1)"
               >
@@ -136,13 +135,12 @@ export default {
         </div>
       </div>
 
-      <div class="col-6">
+      <div class="col-lg-6">
         <draggable
           class="list-group"
           :list="list2"
           :disabled="!editLayout"
           group="widgets2"
-          @change="log"
           v-bind="dragOptions"
           @start="drag = true"
           @end="drag = false"
@@ -153,16 +151,16 @@ export default {
           >
             <div
               style="position: relative"
-              v-for="(element, index) in list2"
+              v-for="element in list2"
               :key="element"
             >
-              <button
-                style="position: absolute; right: 0; top: 0; z-index: 1000"
+              <!-- <button
+                style="position: absolute; right: 0; top: 0; z-index: 1"
                 class="btn btn-link"
                 v-on:click="removeWidget(index, list2)"
               >
                 x
-              </button>
+              </button> -->
               <component :is="element" class="card-moveable"></component>
             </div>
           </transition-group>
@@ -185,13 +183,12 @@ export default {
         </div>
       </div>
 
-      <div class="col-3">
+      <div class="col-lg-3">
         <draggable
           class="list-group"
           :list="list3"
           :disabled="!editLayout"
           group="widgets"
-          @change="log"
           v-bind="dragOptions"
           @start="drag = true"
           @end="drag = false"
@@ -206,7 +203,7 @@ export default {
               :key="element"
             >
               <button
-                style="position: absolute; right: 0; top: 0; z-index: 1000"
+                style="position: absolute; right: 0; top: 0; z-index: 1"
                 class="btn btn-link"
                 v-on:click="removeWidget(index, list3)"
               >
