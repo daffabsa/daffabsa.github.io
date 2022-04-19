@@ -4,7 +4,7 @@ export default {};
 </script>
 
 <template>
-  <div class="card" style="height: 650px; width: 100%">
+  <div class="card" style="height: 480px; width: 100%">
     <div class="card-body">
       <div id="map-wrap" style="height: 100%">
         <client-only>

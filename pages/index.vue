@@ -33,7 +33,7 @@ export default {
       list1: ["SkorRoe", "EfisiensiPenagihan"],
       list2: ["Maps"],
       list3: ["EfisiensiPenagihanSaatIni"],
-      availableWidget: ["Maps", "RecentLeads"],
+      availableWidget: ["EfisiensiPenagihanSaatIni", "SkorRoe"],
       drag: false,
       selectedList: "",
       editLayout: false,
@@ -79,11 +79,7 @@ export default {
       -o-user-select: none;
     "
   >
-    <PageHeader :title="title" :items="items" />
     <button @click="editLayout = !editLayout">Atur Layout</button>
-    <div v-if="editLayout == true">
-      <h1>Layout sedang diatur</h1>
-    </div>
 
     <div class="row">
       <div class="col-lg-3">
@@ -110,6 +106,7 @@ export default {
                 style="position: absolute; right: 0; top: 0; z-index: 1"
                 class="btn btn-link"
                 v-on:click="removeWidget(index, list1)"
+                v-if="editLayout == true"
               >
                 x
               </button>
@@ -206,6 +203,7 @@ export default {
                 style="position: absolute; right: 0; top: 0; z-index: 1"
                 class="btn btn-link"
                 v-on:click="removeWidget(index, list3)"
+                v-if="editLayout == true"
               >
                 x
               </button>
