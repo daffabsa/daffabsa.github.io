@@ -62,6 +62,7 @@ export default {
       availableWidget: ["TopPerforming", "Todo", "RecentLeads"],
       drag: false,
       selectedList: "",
+      editLayout: false,
     };
   },
   methods: {
@@ -105,12 +106,17 @@ export default {
     "
   >
     <PageHeader :title="title" :items="items" />
+    <button @click="editLayout = !editLayout">Atur Layout</button>
+    <div v-if="editLayout == true">
+      <h1>Layout sedang diatur</h1>
+    </div>
 
     <div class="row">
       <div class="col-3">
         <draggable
           class="list-group"
           :list="list1"
+          :disabled="!editLayout"
           group="widgets"
           :empty-insert-threshold="100"
           @change="log"
@@ -138,7 +144,7 @@ export default {
             </div>
           </transition-group>
         </draggable>
-        <div class="container">
+        <div class="container" v-if="editLayout == true">
           <div class="row">
             <div @click="showModalAdd(list1)" class="box-add">
               <div
@@ -160,6 +166,7 @@ export default {
         <draggable
           class="list-group"
           :list="list2"
+          :disabled="!editLayout"
           group="widgets2"
           @change="log"
           v-bind="dragOptions"
@@ -186,7 +193,7 @@ export default {
             </div>
           </transition-group>
         </draggable>
-        <div class="container">
+        <div class="container" v-if="editLayout == true">
           <div class="row">
             <div @click="showModalAdd(list2)" class="box-add">
               <div
@@ -208,6 +215,7 @@ export default {
         <draggable
           class="list-group"
           :list="list3"
+          :disabled="!editLayout"
           group="widgets"
           @change="log"
           v-bind="dragOptions"
@@ -234,7 +242,7 @@ export default {
             </div>
           </transition-group>
         </draggable>
-        <div class="container">
+        <div class="container" v-if="editLayout == true">
           <div class="row">
             <div @click="showModalAdd(list3)" class="box-add">
               <div
