@@ -217,15 +217,14 @@
 }
 
 @include media-breakpoint-down(md) {
+    .textTitle {
+        display: none !important;
+    }
     .logo-box {
         width: $leftbar-width-condensed !important;
         padding-right: 0 !important;
 
         .logo-lg {
-            display: none !important;
-        }
-
-        .textTitle {
             display: none !important;
         }
 

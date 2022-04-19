@@ -81,7 +81,12 @@ export default {
       <div class="logo-box">
         <nuxt-link to="/" class="logo logo-light text-center">
           <span class="logo-sm">
-            <img src="~/assets/images/logo-sm.png" alt height="24" />
+            <img
+              src="~/assets/images/pdam_pintar.png"
+              alt
+              height="25"
+              style="margin-right: 20px"
+            />
           </span>
           <span class="logo-lg">
             <img
