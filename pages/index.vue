@@ -130,10 +130,11 @@ export default {
                 style="z-index: 5; margin: auto"
               >
                 <i
-                  style="font-size: 40px"
-                  class="fa fa-plus-circle"
+                  style="font-size: 19px"
+                  class="fa fa-plus"
                   aria-hidden="true"
                 ></i>
+                &nbsp; &nbsp;Tambah Card
               </div>
             </div>
           </div>
@@ -181,10 +182,11 @@ export default {
                 style="z-index: 5; margin: auto"
               >
                 <i
-                  style="font-size: 40px"
-                  class="fa fa-plus-circle"
+                  style="font-size: 19px"
+                  class="fa fa-plus"
                   aria-hidden="true"
                 ></i>
+                &nbsp; &nbsp;Tambah Card
               </div>
             </div>
           </div>
@@ -233,10 +235,11 @@ export default {
                 style="z-index: 5; margin: auto"
               >
                 <i
-                  style="font-size: 40px"
-                  class="fa fa-plus-circle"
+                  style="font-size: 19px"
+                  class="fa fa-plus"
                   aria-hidden="true"
                 ></i>
+                &nbsp; &nbsp;Tambah Card
               </div>
             </div>
           </div>
@@ -288,11 +291,12 @@ export default {
 .box-add {
   border: 2px;
   border-style: dashed;
+  border-radius: 15px;
   border-color: #dfe3e8;
-  padding: 20px 0px 20px 0px;
+  padding: 40px 0px 40px 0px;
   margin: 0 auto;
   width: 100%;
-  background-color: #f9fafb;
+  background-color: #ffffff;
   z-index: 1;
 }
 </style>
