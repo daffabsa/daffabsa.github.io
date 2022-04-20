@@ -1,4 +1,5 @@
 <script>
+import axios from "~/plugins/axios";
 /**
  * Top-performing component
  */
@@ -6,10 +7,13 @@ export default {
   name: "EfisiensiPenagihanSaatini",
   data() {
     return {
-      efficiencyData: {
-        efficiency_billing: 85.88,
-      },
+      billing_efficiency_now: {},
     };
+  },
+  beforeMount() {
+    axios.get("/billing_efficiency_now").then((res) => {
+      this.billing_efficiency_now = res.data;
+    });
   },
 };
 </script>
@@ -27,7 +31,7 @@ export default {
         </div>
         <div class="row" style="margin-top: 10px">
           <div class="box-card">
-            <h2>{{ efficiencyData.efficiency_billing }}%</h2>
+            <h2>{{ billing_efficiency_now.percentage }}%</h2>
           </div>
         </div>
       </div>

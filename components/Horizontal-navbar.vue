@@ -214,7 +214,7 @@ export default {
                     padding-bottom: 17px;
                   "
                 >
-                  Jum’at, 24 September 2021 18.00 WITA
+                  Selasa, 19 April 2022 15.00 WITA
                 </p>
               </div>
             </ul>

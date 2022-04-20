@@ -1,22 +1,18 @@
 <script>
+import axios from "~/plugins/axios";
 /**
  * Skor-roe component
  */
 export default {
   data() {
     return {
-      roeData: {
-        skor: "Value",
-        profit_after_tax: "Value",
-        profit_after_tax_accumulatives: "Value",
-        equity: "Value",
-        equity_accumulatives: "Value",
-        max_limit: "Value",
-        max_limit_percentage: "Value",
-        roe_value: "Value",
-        roe_value_percentage: "Value",
-      },
+      score_roe: {},
     };
+  },
+  beforeMount() {
+    axios.get("/score_roe").then((res) => {
+      this.score_roe = res.data;
+    });
   },
 };
 </script>
@@ -35,7 +31,7 @@ export default {
         <div class="row" style="margin-top: 10px">
           <div class="box-card">
             <p>Skor ROE</p>
-            <h2>{{ roeData.skor }}</h2>
+            <h2>{{ score_roe.roe_score }}</h2>
           </div>
         </div>
         <div
@@ -49,14 +45,14 @@ export default {
             <p style="color: #1b2559">Laba Setelah Pajak</p>
           </div>
           <div class="col-3">
-            <p class="value-text">{{ roeData.profit_after_tax }}</p>
-            <div class="row">
+            <p class="value-text">{{ score_roe.profit_after_tax }}</p>
+            <div class="row" style="float: right; margin-right: 0px">
               <i
                 class="fa fa-arrow-up"
                 style="font-size: 11px; line-height: 0px; color: #009f68"
               ></i>
               <p class="value-plus-text">
-                {{ roeData.profit_after_tax_accumulatives }}%
+                {{ score_roe.profit_after_tax_accumulatives }}%
               </p>
             </div>
           </div>
@@ -67,14 +63,14 @@ export default {
             <p style="color: #1b2559">Ekuitas</p>
           </div>
           <div class="col-3">
-            <p class="value-text">{{ roeData.equity }}</p>
-            <div class="row">
+            <p class="value-text">{{ score_roe.equity }}</p>
+            <div class="row" style="float: right; margin-right: 0px">
               <i
-                class="fa fa-arrow-up"
+                class="fa fa-arrow-down"
                 style="font-size: 11px; line-height: 0px; color: #ff4a6d"
               ></i>
               <p class="value-minus-text">
-                {{ roeData.equity_accumulatives }}%
+                {{ score_roe.equity_accumulatives }}%
               </p>
             </div>
           </div>
@@ -85,10 +81,10 @@ export default {
             <p style="color: #1b2559">Batas Maksimal</p>
           </div>
           <div class="col-3">
-            <p class="value-text">{{ roeData.max_limit }}</p>
+            <p class="value-text">{{ score_roe.max_limit }}</p>
 
             <p class="value-default-text">
-              {{ roeData.max_limit_percentage }}%
+              {{ score_roe.max_limit_percentage }}%
             </p>
           </div>
         </div>
@@ -98,10 +94,10 @@ export default {
             <p style="color: #1b2559">Nilai Roe</p>
           </div>
           <div class="col-3">
-            <p class="value-text">{{ roeData.roe_value }}</p>
+            <p class="value-text">{{ score_roe.roe_value }}</p>
 
             <p class="value-default-text">
-              {{ roeData.roe_value_percentage }}%
+              {{ score_roe.roe_value_percentage }}%
             </p>
           </div>
         </div>
