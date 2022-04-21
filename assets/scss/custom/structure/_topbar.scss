@@ -3,7 +3,7 @@
 //
 
 .navbar-custom {
-    background-color: $bg-topbar-dark;
+    background-color: white;
     box-shadow: $shadow;
     padding: 0 10px 0 0;
     position: fixed;
@@ -25,7 +25,7 @@
 
         .nav-link {
             padding: 0 15px;
-            color: rgba($white, 0.75);
+            color: #222222;
             min-width: 32px;
             display: block;
             line-height: $topbar-height;
@@ -102,6 +102,19 @@
     .button-menu-mobile.disable-btn {
         display: none;
     }
+}
+
+.navbar-custom-layout {
+    background-color: #4BCA81;
+    box-shadow: $shadow;
+    padding: 0 10px 0 0;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: $topbar-height;
+    transition: all .1s ease-out;
+    z-index: 1001;
 }
 
 
@@ -217,6 +230,9 @@
 }
 
 @include media-breakpoint-down(md) {
+    .textTitle {
+        display: none !important;
+    }
     .logo-box {
         width: $leftbar-width-condensed !important;
         padding-right: 0 !important;

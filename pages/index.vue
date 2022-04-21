@@ -1,6 +1,7 @@
 <script>
 import CrmWidget from "~/components/widgets/Crm-widget";
 import draggable from "vuedraggable";
+import { EventBus } from "~/plugins/eventBus.js";
 
 /**
  * CRM component
@@ -8,7 +9,7 @@ import draggable from "vuedraggable";
 export default {
   head() {
     return {
-      title: `${this.title} Dashboard | SmartHRIS - Aplikasi HR lengkap dari BSA`,
+      title: `${this.title} Dashboard`,
     };
   },
   components: {
@@ -30,39 +31,19 @@ export default {
           active: true,
         },
       ],
-      widgetData: [
-        {
-          title: "Campaign Sent",
-          icon: "ri-stack-line",
-          value: "865",
-          text: "5.27%",
-        },
-        {
-          title: "New Leads",
-          icon: "ri-slideshow-2-line",
-          value: "384",
-          text: "3.27%",
-        },
-        {
-          title: "Deals",
-          icon: "ri-hand-heart-line",
-          value: "34,521",
-          text: "8.58%",
-        },
-        {
-          title: "Booked Revenue",
-          icon: "ri-money-dollar-box-line",
-          value: "$89,357",
-          text: "34.61%",
-        },
-      ],
-      list1: ["Campaigns", "Revenue"],
-      list2: ["TopPerforming", "Todo"],
-      list3: ["RecentLeads"],
-      availableWidget: ["TopPerforming", "Todo", "RecentLeads"],
+      list1: ["SkorRoe", "EfisiensiPenagihan"],
+      list2: ["Maps"],
+      list3: ["EfisiensiPenagihanSaatIni"],
+      availableWidget: ["EfisiensiPenagihanSaatIni", "SkorRoe"],
       drag: false,
       selectedList: "",
+      editLayout: false,
     };
+  },
+  created() {
+    EventBus.$on("editLayout", (editLayoutBool) => {
+      this.editLayout = editLayoutBool;
+    });
   },
   methods: {
     removeWidget(index, list) {
@@ -103,17 +84,16 @@ export default {
       user-select: none;
       -o-user-select: none;
     "
+    class="mt-2"
   >
-    <PageHeader :title="title" :items="items" />
-
     <div class="row">
-      <div class="col-3">
+      <div class="col-lg-3">
         <draggable
           class="list-group"
           :list="list1"
+          :disabled="!editLayout"
           group="widgets"
           :empty-insert-threshold="100"
-          @change="log"
           v-bind="dragOptions"
           @start="drag = true"
           @end="drag = false"
@@ -128,17 +108,21 @@ export default {
               :key="element"
             >
               <button
-                style="position: absolute; right: 0; top: 0; z-index: 5"
+                style="position: absolute; right: 0; top: 0; z-index: 1"
                 class="btn btn-link"
                 v-on:click="removeWidget(index, list1)"
+                v-if="editLayout == true"
               >
                 x
               </button>
-              <component :is="element" class="card-moveable"></component>
+              <component
+                :is="element"
+                :class="{ 'card-moveable': editLayout === true }"
+              ></component>
             </div>
           </transition-group>
         </draggable>
-        <div class="container">
+        <div class="container" v-if="editLayout == true">
           <div class="row">
             <div @click="showModalAdd(list1)" class="box-add">
               <div
@@ -146,22 +130,23 @@ export default {
                 style="z-index: 5; margin: auto"
               >
                 <i
-                  style="font-size: 40px"
-                  class="fa fa-plus-circle"
+                  style="font-size: 19px"
+                  class="fa fa-plus"
                   aria-hidden="true"
                 ></i>
+                &nbsp; &nbsp;Tambah Card
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-6">
+      <div class="col-lg-6">
         <draggable
           class="list-group"
           :list="list2"
+          :disabled="!editLayout"
           group="widgets2"
-          @change="log"
           v-bind="dragOptions"
           @start="drag = true"
           @end="drag = false"
@@ -172,21 +157,24 @@ export default {
           >
             <div
               style="position: relative"
-              v-for="(element, index) in list2"
+              v-for="element in list2"
               :key="element"
             >
-              <button
-                style="position: absolute; right: 0; top: 0; z-index: 1000"
+              <!-- <button
+                style="position: absolute; right: 0; top: 0; z-index: 1"
                 class="btn btn-link"
                 v-on:click="removeWidget(index, list2)"
               >
                 x
-              </button>
-              <component :is="element" class="card-moveable"></component>
+              </button> -->
+              <component
+                :is="element"
+                :class="{ 'card-moveable': editLayout === true }"
+              ></component>
             </div>
           </transition-group>
         </draggable>
-        <div class="container">
+        <div class="container" v-if="editLayout == true">
           <div class="row">
             <div @click="showModalAdd(list2)" class="box-add">
               <div
@@ -194,22 +182,23 @@ export default {
                 style="z-index: 5; margin: auto"
               >
                 <i
-                  style="font-size: 40px"
-                  class="fa fa-plus-circle"
+                  style="font-size: 19px"
+                  class="fa fa-plus"
                   aria-hidden="true"
                 ></i>
+                &nbsp; &nbsp;Tambah Card
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-3">
+      <div class="col-lg-3">
         <draggable
           class="list-group"
           :list="list3"
+          :disabled="!editLayout"
           group="widgets"
-          @change="log"
           v-bind="dragOptions"
           @start="drag = true"
           @end="drag = false"
@@ -224,17 +213,21 @@ export default {
               :key="element"
             >
               <button
-                style="position: absolute; right: 0; top: 0; z-index: 1000"
+                style="position: absolute; right: 0; top: 0; z-index: 1"
                 class="btn btn-link"
                 v-on:click="removeWidget(index, list3)"
+                v-if="editLayout == true"
               >
                 x
               </button>
-              <component :is="element" class="card-moveable"></component>
+              <component
+                :is="element"
+                :class="{ 'card-moveable': editLayout === true }"
+              ></component>
             </div>
           </transition-group>
         </draggable>
-        <div class="container">
+        <div class="container" v-if="editLayout == true">
           <div class="row">
             <div @click="showModalAdd(list3)" class="box-add">
               <div
@@ -242,10 +235,11 @@ export default {
                 style="z-index: 5; margin: auto"
               >
                 <i
-                  style="font-size: 40px"
-                  class="fa fa-plus-circle"
+                  style="font-size: 19px"
+                  class="fa fa-plus"
                   aria-hidden="true"
                 ></i>
+                &nbsp; &nbsp;Tambah Card
               </div>
             </div>
           </div>
@@ -297,11 +291,12 @@ export default {
 .box-add {
   border: 2px;
   border-style: dashed;
+  border-radius: 15px;
   border-color: #dfe3e8;
-  padding: 20px 0px 20px 0px;
+  padding: 40px 0px 40px 0px;
   margin: 0 auto;
   width: 100%;
-  background-color: #f9fafb;
+  background-color: #ffffff;
   z-index: 1;
 }
 </style>

@@ -10,6 +10,7 @@ File: Main Css File (Default Demo)
 
 //Fonts
 @import "custom/fonts/fonts";
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 
 //Core files
 @import "./node_modules/bootstrap/scss/functions";
@@ -108,3 +109,88 @@ File: Main Css File (Default Demo)
 // @import "custom/rtl/plugins-rtl";
 // @import "custom/rtl/components-rtl";
 // @import "custom/rtl/pages-rtl";
+
+html, body {
+    font-family: 'Manrope', sans-serif;
+}
+
+div.badges {
+    border: 1px solid #dfe3e8;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    width: fit-content;
+}
+
+div.badges span {
+    margin: 8px;
+    font-size: 11px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 25px;
+    color: #1b2559;
+}
+
+.heading-text {
+    color: #1b2559;
+    font-weight: 500;
+    margin: 10px;
+    font-size: 20px;
+}
+
+.box-card {
+    border-radius: 15px;
+    background-image: linear-gradient(to right, #2275ff, #5293ff);
+    width: 100%;
+    padding: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+    box-shadow: 0 18px 40px 0 rgba(112, 144, 176, 0.12);
+}
+
+.box-card p {
+    color: white; 
+    font-weight: 600; 
+    font-size: 12px;
+}
+
+.box-card h2 {
+    color: white; 
+    font-size: 34px;
+}
+
+.alternate-text {
+    color: rgba(163, 174, 208, 1); 
+    font-size: 12px;
+}
+
+.value-text {
+    font-weight: bold;
+    color: #1b2559;
+    text-align: right;
+    font-size: 16px;
+}
+
+.value-plus-text {
+    font-weight: bold;
+    color: #009f68;
+    font-size: 12px;
+    line-height: 0px;
+    text-align: right;
+}
+
+.value-minus-text {
+    font-weight: bold;
+    color: #ff4a6d;
+    font-size: 12px;
+    line-height: 0px;
+    text-align: right;
+}
+
+.value-default-text {
+    font-weight: bold;
+    color: #9e9e9e;
+    font-size: 12px;
+    line-height: 0px;
+    text-align: right;
+}

@@ -11,6 +11,7 @@
           "users": "أنشئ مستخدمين",
           "revenue": "تقرير الإيرادات",
           "settings": "الإعدادات",
+          "editlayout": "Atur Layout",
           "help": "ساعد لدعم"
         }
       },
@@ -102,8 +103,9 @@
           "greet": "أهلا بك !",
           "account": "حسابي",
           "mywallet": "محفظتي",
-          "settings": "الإعدادات",
           "lockscreen": "اقفل الشاشة",
+          "settings": "Pengaturan",
+          "editlayout": "Atur Layout",
           "logout": "تسجيل خروج"
         }
       }
