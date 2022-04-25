@@ -194,3 +194,31 @@ div.badges span {
     line-height: 0px;
     text-align: right;
 }
+
+.marquee-parent {
+  position: relative;
+  width: 120%;
+  overflow: hidden;
+  height: 50px;
+  display: block;
+}
+.marquee-child {
+  display: flex;
+  width: 200%;
+  /* width of your text div */
+  height: auto;
+  /* height of your text div */
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  animation: marquee 30s linear infinite; /* change 5s value to your desired speed */
+}
+@keyframes marquee {
+  0% {
+    left: 100%;
+  }
+  100% {
+    left: -200% /* same as your text width */
+  }
+}
