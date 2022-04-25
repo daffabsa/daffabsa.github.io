@@ -9,6 +9,20 @@ export default {
   data() {
     return {
       menuItems: menuItems,
+      announcement: [
+        "Sambungan Baru",
+        "Pengaduan Masuk",
+        "Sambungan Baru",
+        "Pengaduan Masuk",
+        "Sambungan Baru",
+        "Pengaduan Masuk",
+        "Sambungan Baru",
+        "Pengaduan Masuk",
+        "Sambungan Baru",
+        "Pengaduan Masuk",
+        "Sambungan Baru",
+        "Pengaduan Masuk",
+      ],
     };
   },
   computed: mapState(["layout"]),
@@ -218,6 +232,40 @@ export default {
                 </p>
               </div>
             </ul>
+            <div style="width: 80%">
+              <div class="marquee-parent">
+                <div class="marquee-child">
+                  <div
+                    v-for="(message, index) in announcement"
+                    :key="index"
+                    style="
+                      border-radius: 20px;
+                      background: #e6faf5;
+                      color: #009f68;
+                      padding: 5px 15px;
+                      font-weight: bold;
+                      display: block;
+                      margin: 0px 5px;
+                    "
+                  >
+                    <div
+                      style="
+                        border-radius: 20px;
+                        background: #009f68;
+                        color: white;
+                        padding: 0px 5px;
+                        font-weight: bold;
+                        display: inline;
+                        margin-right: 10px;
+                      "
+                    >
+                      +1
+                    </div>
+                    {{ message }}
+                  </div>
+                </div>
+              </div>
+            </div>
             <!-- end navbar-->
           </div>
           <!-- end .collapsed-->

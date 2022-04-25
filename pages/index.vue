@@ -31,10 +31,15 @@ export default {
           active: true,
         },
       ],
-      list1: ["SkorRoe", "EfisiensiPenagihan"],
-      list2: ["Maps"],
-      list3: ["EfisiensiPenagihanSaatIni"],
-      availableWidget: ["EfisiensiPenagihanSaatIni", "SkorRoe"],
+      availableWidget: [
+        "EfisiensiPenagihanSaatIni",
+        "SkorRoe",
+        "Campaigns",
+        "Chat",
+        "Inbox",
+        "Projections",
+        "Revenue",
+      ],
       drag: false,
       selectedList: "",
       editLayout: false,
@@ -44,21 +49,60 @@ export default {
     EventBus.$on("editLayout", (editLayoutBool) => {
       this.editLayout = editLayoutBool;
     });
+    // this.$store.dispatch("layout/savePositionList", {
+    //   key: "_list1",
+    //   list: this.list1,
+    // });
+    // this.$store.dispatch("layout/savePositionList", {
+    //   key: "_list2",
+    //   list: this.list2,
+    // });
+    // this.$store.dispatch("layout/savePositionList", {
+    //   key: "_list3",
+    //   list: this.list3,
+    // });
+  },
+  watch: {
+    editLayout: {
+      handler: function (value) {
+        console.log("Edit Mode:" + value);
+        if (value == true) {
+        }
+      },
+      deep: true,
+    },
   },
   methods: {
     removeWidget(index, list) {
-      list.splice(index, 1);
+      this.$store.dispatch("layout/removeItemList", {
+        key: list,
+        index: index,
+      });
     },
     addWidget(list, widget) {
-      if (list.indexOf(widget) < 0) {
-        list.push(widget);
-      } else {
-        alert("Widget sudah ada");
-      }
+      this.$store.dispatch("layout/addItemList", {
+        key: list,
+        item: widget,
+      });
     },
     showModalAdd(item) {
       this.selectedList = item;
       this.$bvModal.show("bv-modal-add-widget");
+    },
+
+    handleDrop() {
+      this.$store.dispatch("layout/savePositionList", {
+        key: "list1",
+        list: this.list1,
+      });
+      this.$store.dispatch("layout/savePositionList", {
+        key: "list2",
+        list: this.list2,
+      });
+      this.$store.dispatch("layout/savePositionList", {
+        key: "list3",
+        list: this.list3,
+      });
     },
   },
   computed: {
@@ -69,6 +113,39 @@ export default {
         disabled: false,
         ghostClass: "ghost",
       };
+    },
+    list1: {
+      get() {
+        return this.$store.state.layout.datalist.list1;
+      },
+      set(value) {
+        this.$store.dispatch("layout/savePositionList", {
+          key: "list1",
+          list: value,
+        });
+      },
+    },
+    list2: {
+      get() {
+        return this.$store.state.layout.datalist.list2;
+      },
+      set(value) {
+        this.$store.dispatch("layout/savePositionList", {
+          key: "list2",
+          list: value,
+        });
+      },
+    },
+    list3: {
+      get() {
+        return this.$store.state.layout.datalist.list3;
+      },
+      set(value) {
+        this.$store.dispatch("layout/savePositionList", {
+          key: "list3",
+          list: value,
+        });
+      },
     },
   },
   middleware: "router-auth",
@@ -89,14 +166,14 @@ export default {
     <div class="row">
       <div class="col-lg-3">
         <draggable
+          v-model="list1"
           class="list-group"
-          :list="list1"
           :disabled="!editLayout"
           group="widgets"
           :empty-insert-threshold="100"
           v-bind="dragOptions"
           @start="drag = true"
-          @end="drag = false"
+          @end="handleDrop"
         >
           <transition-group
             type="transition"
@@ -110,7 +187,7 @@ export default {
               <button
                 style="position: absolute; right: 0; top: 0; z-index: 1"
                 class="btn btn-link"
-                v-on:click="removeWidget(index, list1)"
+                v-on:click="removeWidget(index, 'list1')"
                 v-if="editLayout == true"
               >
                 x
@@ -124,7 +201,7 @@ export default {
         </draggable>
         <div class="container" v-if="editLayout == true">
           <div class="row">
-            <div @click="showModalAdd(list1)" class="box-add">
+            <div @click="showModalAdd('list1')" class="box-add">
               <div
                 class="d-flex justify-content-center"
                 style="z-index: 5; margin: auto"
@@ -143,14 +220,15 @@ export default {
 
       <div class="col-lg-6">
         <draggable
+          v-model="list2"
           class="list-group"
-          :list="list2"
           :disabled="!editLayout"
           group="widgets2"
           v-bind="dragOptions"
           @start="drag = true"
-          @end="drag = false"
+          @end="handleDrop"
         >
+          <!-- @end="drag = false" -->
           <transition-group
             type="transition"
             :name="!drag ? 'flip-list' : null"
@@ -176,7 +254,7 @@ export default {
         </draggable>
         <div class="container" v-if="editLayout == true">
           <div class="row">
-            <div @click="showModalAdd(list2)" class="box-add">
+            <div @click="showModalAdd('list2')" class="box-add">
               <div
                 class="d-flex justify-content-center"
                 style="z-index: 5; margin: auto"
@@ -195,13 +273,13 @@ export default {
 
       <div class="col-lg-3">
         <draggable
+          v-model="list3"
           class="list-group"
-          :list="list3"
           :disabled="!editLayout"
           group="widgets"
           v-bind="dragOptions"
           @start="drag = true"
-          @end="drag = false"
+          @end="handleDrop"
         >
           <transition-group
             type="transition"
@@ -215,7 +293,7 @@ export default {
               <button
                 style="position: absolute; right: 0; top: 0; z-index: 1"
                 class="btn btn-link"
-                v-on:click="removeWidget(index, list3)"
+                v-on:click="removeWidget(index, 'list3')"
                 v-if="editLayout == true"
               >
                 x
@@ -229,7 +307,7 @@ export default {
         </draggable>
         <div class="container" v-if="editLayout == true">
           <div class="row">
-            <div @click="showModalAdd(list3)" class="box-add">
+            <div @click="showModalAdd('list3')" class="box-add">
               <div
                 class="d-flex justify-content-center"
                 style="z-index: 5; margin: auto"
@@ -255,12 +333,11 @@ export default {
           v-for="element in availableWidget"
           :key="element"
         >
-          <component :is="element"></component>
           <button
             class="btn btn-info form-control"
             @click="addWidget(selectedList, element)"
           >
-            Tambah Widget
+            {{ element }}
           </button>
           <hr />
         </div>

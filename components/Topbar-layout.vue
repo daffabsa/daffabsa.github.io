@@ -31,6 +31,35 @@ export default {
     },
 
     layoutEditor() {
+      this.$store.dispatch("layout/savePositionList", {
+        key: "_list1",
+        list: this.$store.state.layout.datalist.list1,
+      });
+      this.$store.dispatch("layout/savePositionList", {
+        key: "_list2",
+        list: this.$store.state.layout.datalist.list2,
+      });
+      this.$store.dispatch("layout/savePositionList", {
+        key: "_list3",
+        list: this.$store.state.layout.datalist.list3,
+      });
+      this.editLayout = !this.editLayout;
+      EventBus.$emit("editLayout", this.editLayout);
+    },
+
+    cancelEdit() {
+      this.$store.dispatch("layout/savePositionList", {
+        key: "list1",
+        list: this.$store.state.layout.datalist._list1,
+      });
+      this.$store.dispatch("layout/savePositionList", {
+        key: "list2",
+        list: this.$store.state.layout.datalist._list2,
+      });
+      this.$store.dispatch("layout/savePositionList", {
+        key: "list3",
+        list: this.$store.state.layout.datalist._list3,
+      });
       this.editLayout = !this.editLayout;
       EventBus.$emit("editLayout", this.editLayout);
     },
@@ -63,7 +92,7 @@ export default {
             background-color: #4bca81;
             font-size: 14px;
           "
-          @click="layoutEditor"
+          @click="cancelEdit"
         >
           Batal
         </button>

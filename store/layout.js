@@ -5,7 +5,15 @@ export const state = () => ({
   leftSidebarSize: "default",
   menuPosition: "fixed",
   topbar: "dark",
-  loader: false
+  loader: false,
+  datalist: {
+    _list1: ["SkorRoe", "EfisiensiPenagihan"],
+    _list2: ["Maps"],
+    _list3: ["EfisiensiPenagihanSaatIni"],
+    list1: ["SkorRoe", "EfisiensiPenagihan"],
+    list2: ["Maps"],
+    list3: ["EfisiensiPenagihanSaatIni"],
+  }
 });
 
 export const mutations = {
@@ -30,6 +38,30 @@ export const mutations = {
   CHANGE_POSITION(state, menuPosition) {
     state.menuPosition = menuPosition;
   },
+
+  saveList(state, {key, list}){
+    state.datalist[key] = list;
+    if(key == 'list1'){
+      console.log('list1:'+state.datalist[key]);
+      console.log('_list1:'+state.datalist._list1);
+    }
+  },
+
+  addList(state, {key, item}){
+    if (state.datalist[key].indexOf(item) < 0) {
+      state.datalist[key].push(item);
+      console.log('list1:'+state.datalist[key]);
+      console.log('_list1:'+state.datalist._list1);
+    } else {
+      alert('widget sudah ada');
+    }
+  },
+
+  removeList(state, {key, index}){
+    state.datalist[key].splice(index, 1);
+    console.log('list1:'+state.datalist[key]);
+    console.log('_list1:'+state.datalist._list1);
+  }
 };
 
 export const actions = {
@@ -59,7 +91,19 @@ export const actions = {
 
   changeMenuPosition({ commit }, { menuPosition }) {
     commit("CHANGE_POSITION", menuPosition);
-  }
+  },
+
+  savePositionList({ commit }, { key, list }) {
+    commit("saveList", {key, list});
+  },
+
+  addItemList({ commit }, { key, item }) {
+    commit("addList", {key, item});
+  },
+
+  removeItemList({ commit }, { key, index, item }) {
+    commit("removeList", {key, index, item});
+  },
 };
 
 // export { state, mutations, actions };
