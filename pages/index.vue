@@ -31,7 +31,15 @@ export default {
           active: true,
         },
       ],
-      availableWidget: ["EfisiensiPenagihanSaatIni", "SkorRoe"],
+      availableWidget: [
+        "EfisiensiPenagihanSaatIni",
+        "SkorRoe",
+        "Campaigns",
+        "Chat",
+        "Inbox",
+        "Projections",
+        "Revenue",
+      ],
       drag: false,
       selectedList: "",
       editLayout: false,
@@ -41,18 +49,18 @@ export default {
     EventBus.$on("editLayout", (editLayoutBool) => {
       this.editLayout = editLayoutBool;
     });
-    this.$store.dispatch("layout/savePositionList", {
-      key: "_list1",
-      list: this.list1,
-    });
-    this.$store.dispatch("layout/savePositionList", {
-      key: "_list2",
-      list: this.list2,
-    });
-    this.$store.dispatch("layout/savePositionList", {
-      key: "_list3",
-      list: this.list3,
-    });
+    // this.$store.dispatch("layout/savePositionList", {
+    //   key: "_list1",
+    //   list: this.list1,
+    // });
+    // this.$store.dispatch("layout/savePositionList", {
+    //   key: "_list2",
+    //   list: this.list2,
+    // });
+    // this.$store.dispatch("layout/savePositionList", {
+    //   key: "_list3",
+    //   list: this.list3,
+    // });
   },
   watch: {
     editLayout: {
@@ -69,7 +77,6 @@ export default {
       this.$store.dispatch("layout/removeItemList", {
         key: list,
         index: index,
-        item: 1,
       });
     },
     addWidget(list, widget) {
@@ -112,7 +119,8 @@ export default {
         return this.$store.state.layout.datalist.list1;
       },
       set(value) {
-        this.$store.dispatch("layout/saveList1Position", {
+        this.$store.dispatch("layout/savePositionList", {
+          key: "list1",
           list: value,
         });
       },
@@ -122,7 +130,8 @@ export default {
         return this.$store.state.layout.datalist.list2;
       },
       set(value) {
-        this.$store.dispatch("layout/saveList2Position", {
+        this.$store.dispatch("layout/savePositionList", {
+          key: "list2",
           list: value,
         });
       },
@@ -132,7 +141,8 @@ export default {
         return this.$store.state.layout.datalist.list3;
       },
       set(value) {
-        this.$store.dispatch("layout/saveList3Position", {
+        this.$store.dispatch("layout/savePositionList", {
+          key: "list3",
           list: value,
         });
       },
@@ -323,12 +333,11 @@ export default {
           v-for="element in availableWidget"
           :key="element"
         >
-          <component :is="element"></component>
           <button
             class="btn btn-info form-control"
             @click="addWidget(selectedList, element)"
           >
-            Tambah Widget
+            {{ element }}
           </button>
           <hr />
         </div>

@@ -41,11 +41,17 @@ export const mutations = {
 
   saveList(state, {key, list}){
     state.datalist[key] = list;
+    if(key == 'list1'){
+      console.log('list1:'+state.datalist[key]);
+      console.log('_list1:'+state.datalist._list1);
+    }
   },
 
   addList(state, {key, item}){
     if (state.datalist[key].indexOf(item) < 0) {
       state.datalist[key].push(item);
+      console.log('list1:'+state.datalist[key]);
+      console.log('_list1:'+state.datalist._list1);
     } else {
       alert('widget sudah ada');
     }
@@ -53,6 +59,8 @@ export const mutations = {
 
   removeList(state, {key, index}){
     state.datalist[key].splice(index, 1);
+    console.log('list1:'+state.datalist[key]);
+    console.log('_list1:'+state.datalist._list1);
   }
 };
 

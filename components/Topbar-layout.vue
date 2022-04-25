@@ -32,22 +32,6 @@ export default {
 
     layoutEditor() {
       this.$store.dispatch("layout/savePositionList", {
-        key: "list1",
-        list: this.$store.state.layout.datalist.list1,
-      });
-      this.$store.dispatch("layout/savePositionList", {
-        key: "list2",
-        list: this.$store.state.layout.datalist.list2,
-      });
-      this.$store.dispatch("layout/savePositionList", {
-        key: "list3",
-        list: this.$store.state.layout.datalist.list3,
-      });
-      this.$store.dispatch("layout/savePositionList", {
-        key: "_list1",
-        list: this.$store.state.layout.datalist.list1,
-      });
-      this.$store.dispatch("layout/savePositionList", {
         key: "_list1",
         list: this.$store.state.layout.datalist.list1,
       });
