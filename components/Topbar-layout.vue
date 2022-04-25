@@ -31,6 +31,38 @@ export default {
     },
 
     layoutEditor() {
+      this.$store.dispatch("layout/saveList1Position", {
+        list: this.$store.state.layout.list1,
+      });
+      this.$store.dispatch("layout/saveList2Position", {
+        list: this.$store.state.layout.list2,
+      });
+      this.$store.dispatch("layout/saveList3Position", {
+        list: this.$store.state.layout.list3,
+      });
+      this.$store.dispatch("layout/saveBeforeListPosition1", {
+        list1: this.$store.state.layout.list1,
+      });
+      this.$store.dispatch("layout/saveBeforeListPosition2", {
+        list2: this.$store.state.layout.list2,
+      });
+      this.$store.dispatch("layout/saveBeforeListPosition3", {
+        list3: this.$store.state.layout.list3,
+      });
+      this.editLayout = !this.editLayout;
+      EventBus.$emit("editLayout", this.editLayout);
+    },
+
+    cancelEdit() {
+      this.$store.dispatch("layout/saveList1Position", {
+        list: this.$store.state.layout._list1,
+      });
+      this.$store.dispatch("layout/saveList2Position", {
+        list: this.$store.state.layout._list2,
+      });
+      this.$store.dispatch("layout/saveList3Position", {
+        list: this.$store.state.layout._list3,
+      });
       this.editLayout = !this.editLayout;
       EventBus.$emit("editLayout", this.editLayout);
     },
@@ -63,7 +95,7 @@ export default {
             background-color: #4bca81;
             font-size: 14px;
           "
-          @click="layoutEditor"
+          @click="cancelEdit"
         >
           Batal
         </button>

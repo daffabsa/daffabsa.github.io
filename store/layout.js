@@ -5,7 +5,13 @@ export const state = () => ({
   leftSidebarSize: "default",
   menuPosition: "fixed",
   topbar: "dark",
-  loader: false
+  loader: false,
+  _list1: ["SkorRoe", "EfisiensiPenagihan"],
+  _list2: ["Maps"],
+  _list3: ["EfisiensiPenagihanSaatIni"],
+  list1: ["SkorRoe", "EfisiensiPenagihan"],
+  list2: ["Maps"],
+  list3: ["EfisiensiPenagihanSaatIni"],
 });
 
 export const mutations = {
@@ -30,6 +36,28 @@ export const mutations = {
   CHANGE_POSITION(state, menuPosition) {
     state.menuPosition = menuPosition;
   },
+
+  saveBeforeList1 (state, list1) {
+    state._list1 = list1;
+  },
+  saveBeforeList2 (state, list2) {
+    state._list2 = list2;
+  },
+  saveBeforeList3 (state, list3) {
+    state._list3 = list3;
+  },
+
+  saveList1 (state, list) {
+    state.list1 = list;
+  },
+
+  saveList2 (state, list) {
+    state.list2 = list;
+  },
+
+  saveList3 (state, list) {
+    state.list3 = list;
+  }
 };
 
 export const actions = {
@@ -59,6 +87,30 @@ export const actions = {
 
   changeMenuPosition({ commit }, { menuPosition }) {
     commit("CHANGE_POSITION", menuPosition);
+  },
+
+  saveList1Position({ commit }, { list }) {
+    commit("saveList1", list);
+  },
+
+  saveList2Position({ commit }, { list }) {
+    commit("saveList2", list);
+  },
+
+  saveList3Position({ commit }, { list }) {
+    commit("saveList3", list);
+  },
+
+  saveBeforeListPosition1({ commit }, { list1 }) {
+    commit("saveBeforeList1", list1);
+  },
+
+  saveBeforeListPosition2({ commit }, { list2 }) {
+    commit("saveBeforeList2", list2);
+  },
+
+  saveBeforeListPosition3({ commit }, { list3 }) {
+    commit("saveBeforeList3", list3);
   }
 };
 

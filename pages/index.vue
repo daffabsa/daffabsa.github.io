@@ -31,9 +31,6 @@ export default {
           active: true,
         },
       ],
-      list1: ["SkorRoe", "EfisiensiPenagihan"],
-      list2: ["Maps"],
-      list3: ["EfisiensiPenagihanSaatIni"],
       availableWidget: ["EfisiensiPenagihanSaatIni", "SkorRoe"],
       drag: false,
       selectedList: "",
@@ -44,6 +41,25 @@ export default {
     EventBus.$on("editLayout", (editLayoutBool) => {
       this.editLayout = editLayoutBool;
     });
+    this.$store.dispatch("layout/saveBeforeListPosition1", {
+      list1: this.list1,
+    });
+    this.$store.dispatch("layout/saveBeforeListPosition2", {
+      list2: this.list2,
+    });
+    this.$store.dispatch("layout/saveBeforeListPosition3", {
+      list3: this.list3,
+    });
+  },
+  watch: {
+    editLayout: {
+      handler: function (value) {
+        console.log("Edit Mode:" + value);
+        if (value == true) {
+        }
+      },
+      deep: true,
+    },
   },
   methods: {
     removeWidget(index, list) {
@@ -60,6 +76,18 @@ export default {
       this.selectedList = item;
       this.$bvModal.show("bv-modal-add-widget");
     },
+
+    handleDrop() {
+      this.$store.dispatch("layout/saveList1Position", {
+        list: this.list1,
+      });
+      this.$store.dispatch("layout/saveList2Position", {
+        list: this.list2,
+      });
+      this.$store.dispatch("layout/saveList3Position", {
+        list: this.list3,
+      });
+    },
   },
   computed: {
     dragOptions() {
@@ -69,6 +97,36 @@ export default {
         disabled: false,
         ghostClass: "ghost",
       };
+    },
+    list1: {
+      get() {
+        return this.$store.state.layout.list1;
+      },
+      set(value) {
+        this.$store.dispatch("layout/saveList1Position", {
+          list: value,
+        });
+      },
+    },
+    list2: {
+      get() {
+        return this.$store.state.layout.list2;
+      },
+      set(value) {
+        this.$store.dispatch("layout/saveList2Position", {
+          list: value,
+        });
+      },
+    },
+    list3: {
+      get() {
+        return this.$store.state.layout.list3;
+      },
+      set(value) {
+        this.$store.dispatch("layout/saveList3Position", {
+          list: value,
+        });
+      },
     },
   },
   middleware: "router-auth",
@@ -89,14 +147,14 @@ export default {
     <div class="row">
       <div class="col-lg-3">
         <draggable
+          v-model="list1"
           class="list-group"
-          :list="list1"
           :disabled="!editLayout"
           group="widgets"
           :empty-insert-threshold="100"
           v-bind="dragOptions"
           @start="drag = true"
-          @end="drag = false"
+          @end="handleDrop"
         >
           <transition-group
             type="transition"
@@ -143,14 +201,15 @@ export default {
 
       <div class="col-lg-6">
         <draggable
+          v-model="list2"
           class="list-group"
-          :list="list2"
           :disabled="!editLayout"
           group="widgets2"
           v-bind="dragOptions"
           @start="drag = true"
-          @end="drag = false"
+          @end="handleDrop"
         >
+          <!-- @end="drag = false" -->
           <transition-group
             type="transition"
             :name="!drag ? 'flip-list' : null"
@@ -195,13 +254,13 @@ export default {
 
       <div class="col-lg-3">
         <draggable
+          v-model="list3"
           class="list-group"
-          :list="list3"
           :disabled="!editLayout"
           group="widgets"
           v-bind="dragOptions"
           @start="drag = true"
-          @end="drag = false"
+          @end="handleDrop"
         >
           <transition-group
             type="transition"
