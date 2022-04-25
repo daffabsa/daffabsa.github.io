@@ -31,37 +31,50 @@ export default {
     },
 
     layoutEditor() {
-      this.$store.dispatch("layout/saveList1Position", {
-        list: this.$store.state.layout.list1,
+      this.$store.dispatch("layout/savePositionList", {
+        key: "list1",
+        list: this.$store.state.layout.datalist.list1,
       });
-      this.$store.dispatch("layout/saveList2Position", {
-        list: this.$store.state.layout.list2,
+      this.$store.dispatch("layout/savePositionList", {
+        key: "list2",
+        list: this.$store.state.layout.datalist.list2,
       });
-      this.$store.dispatch("layout/saveList3Position", {
-        list: this.$store.state.layout.list3,
+      this.$store.dispatch("layout/savePositionList", {
+        key: "list3",
+        list: this.$store.state.layout.datalist.list3,
       });
-      this.$store.dispatch("layout/saveBeforeListPosition1", {
-        list1: this.$store.state.layout.list1,
+      this.$store.dispatch("layout/savePositionList", {
+        key: "_list1",
+        list: this.$store.state.layout.datalist.list1,
       });
-      this.$store.dispatch("layout/saveBeforeListPosition2", {
-        list2: this.$store.state.layout.list2,
+      this.$store.dispatch("layout/savePositionList", {
+        key: "_list1",
+        list: this.$store.state.layout.datalist.list1,
       });
-      this.$store.dispatch("layout/saveBeforeListPosition3", {
-        list3: this.$store.state.layout.list3,
+      this.$store.dispatch("layout/savePositionList", {
+        key: "_list2",
+        list: this.$store.state.layout.datalist.list2,
+      });
+      this.$store.dispatch("layout/savePositionList", {
+        key: "_list3",
+        list: this.$store.state.layout.datalist.list3,
       });
       this.editLayout = !this.editLayout;
       EventBus.$emit("editLayout", this.editLayout);
     },
 
     cancelEdit() {
-      this.$store.dispatch("layout/saveList1Position", {
-        list: this.$store.state.layout._list1,
+      this.$store.dispatch("layout/savePositionList", {
+        key: "list1",
+        list: this.$store.state.layout.datalist._list1,
       });
-      this.$store.dispatch("layout/saveList2Position", {
-        list: this.$store.state.layout._list2,
+      this.$store.dispatch("layout/savePositionList", {
+        key: "list2",
+        list: this.$store.state.layout.datalist._list2,
       });
-      this.$store.dispatch("layout/saveList3Position", {
-        list: this.$store.state.layout._list3,
+      this.$store.dispatch("layout/savePositionList", {
+        key: "list3",
+        list: this.$store.state.layout.datalist._list3,
       });
       this.editLayout = !this.editLayout;
       EventBus.$emit("editLayout", this.editLayout);

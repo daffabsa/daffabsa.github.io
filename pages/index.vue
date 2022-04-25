@@ -41,14 +41,17 @@ export default {
     EventBus.$on("editLayout", (editLayoutBool) => {
       this.editLayout = editLayoutBool;
     });
-    this.$store.dispatch("layout/saveBeforeListPosition1", {
-      list1: this.list1,
+    this.$store.dispatch("layout/savePositionList", {
+      key: "_list1",
+      list: this.list1,
     });
-    this.$store.dispatch("layout/saveBeforeListPosition2", {
-      list2: this.list2,
+    this.$store.dispatch("layout/savePositionList", {
+      key: "_list2",
+      list: this.list2,
     });
-    this.$store.dispatch("layout/saveBeforeListPosition3", {
-      list3: this.list3,
+    this.$store.dispatch("layout/savePositionList", {
+      key: "_list3",
+      list: this.list3,
     });
   },
   watch: {
@@ -63,30 +66,17 @@ export default {
   },
   methods: {
     removeWidget(index, list) {
-      var list_ = list;
-      list_.splice(index, 1);
-      // this.$store.dispatch("layout/saveList1Position", {
-      //   list: this.list_,
-      // });
+      this.$store.dispatch("layout/removeItemList", {
+        key: list,
+        index: index,
+        item: 1,
+      });
     },
     addWidget(list, widget) {
-      if (list.indexOf(widget) < 0) {
-        if (list == this.list1) {
-          this.$store.dispatch("layout/addListData1", {
-            item: widget,
-          });
-        } else if (list == this.list2) {
-          this.$store.dispatch("layout/addListData2", {
-            item: widget,
-          });
-        } else {
-          this.$store.dispatch("layout/addListData3", {
-            item: widget,
-          });
-        }
-      } else {
-        alert("Widget sudah ada");
-      }
+      this.$store.dispatch("layout/addItemList", {
+        key: list,
+        item: widget,
+      });
     },
     showModalAdd(item) {
       this.selectedList = item;
@@ -94,13 +84,16 @@ export default {
     },
 
     handleDrop() {
-      this.$store.dispatch("layout/saveList1Position", {
+      this.$store.dispatch("layout/savePositionList", {
+        key: "list1",
         list: this.list1,
       });
-      this.$store.dispatch("layout/saveList2Position", {
+      this.$store.dispatch("layout/savePositionList", {
+        key: "list2",
         list: this.list2,
       });
-      this.$store.dispatch("layout/saveList3Position", {
+      this.$store.dispatch("layout/savePositionList", {
+        key: "list3",
         list: this.list3,
       });
     },
@@ -116,7 +109,7 @@ export default {
     },
     list1: {
       get() {
-        return this.$store.state.layout.list1;
+        return this.$store.state.layout.datalist.list1;
       },
       set(value) {
         this.$store.dispatch("layout/saveList1Position", {
@@ -126,7 +119,7 @@ export default {
     },
     list2: {
       get() {
-        return this.$store.state.layout.list2;
+        return this.$store.state.layout.datalist.list2;
       },
       set(value) {
         this.$store.dispatch("layout/saveList2Position", {
@@ -136,7 +129,7 @@ export default {
     },
     list3: {
       get() {
-        return this.$store.state.layout.list3;
+        return this.$store.state.layout.datalist.list3;
       },
       set(value) {
         this.$store.dispatch("layout/saveList3Position", {
@@ -184,7 +177,7 @@ export default {
               <button
                 style="position: absolute; right: 0; top: 0; z-index: 1"
                 class="btn btn-link"
-                v-on:click="removeWidget(index, list1)"
+                v-on:click="removeWidget(index, 'list1')"
                 v-if="editLayout == true"
               >
                 x
@@ -198,7 +191,7 @@ export default {
         </draggable>
         <div class="container" v-if="editLayout == true">
           <div class="row">
-            <div @click="showModalAdd(list1)" class="box-add">
+            <div @click="showModalAdd('list1')" class="box-add">
               <div
                 class="d-flex justify-content-center"
                 style="z-index: 5; margin: auto"
@@ -251,7 +244,7 @@ export default {
         </draggable>
         <div class="container" v-if="editLayout == true">
           <div class="row">
-            <div @click="showModalAdd(list2)" class="box-add">
+            <div @click="showModalAdd('list2')" class="box-add">
               <div
                 class="d-flex justify-content-center"
                 style="z-index: 5; margin: auto"
@@ -290,7 +283,7 @@ export default {
               <button
                 style="position: absolute; right: 0; top: 0; z-index: 1"
                 class="btn btn-link"
-                v-on:click="removeWidget(index, list3)"
+                v-on:click="removeWidget(index, 'list3')"
                 v-if="editLayout == true"
               >
                 x
@@ -304,7 +297,7 @@ export default {
         </draggable>
         <div class="container" v-if="editLayout == true">
           <div class="row">
-            <div @click="showModalAdd(list3)" class="box-add">
+            <div @click="showModalAdd('list3')" class="box-add">
               <div
                 class="d-flex justify-content-center"
                 style="z-index: 5; margin: auto"

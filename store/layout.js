@@ -6,12 +6,14 @@ export const state = () => ({
   menuPosition: "fixed",
   topbar: "dark",
   loader: false,
-  _list1: ["SkorRoe", "EfisiensiPenagihan"],
-  _list2: ["Maps"],
-  _list3: ["EfisiensiPenagihanSaatIni"],
-  list1: ["SkorRoe", "EfisiensiPenagihan"],
-  list2: ["Maps"],
-  list3: ["EfisiensiPenagihanSaatIni"],
+  datalist: {
+    _list1: ["SkorRoe", "EfisiensiPenagihan"],
+    _list2: ["Maps"],
+    _list3: ["EfisiensiPenagihanSaatIni"],
+    list1: ["SkorRoe", "EfisiensiPenagihan"],
+    list2: ["Maps"],
+    list3: ["EfisiensiPenagihanSaatIni"],
+  }
 });
 
 export const mutations = {
@@ -37,38 +39,20 @@ export const mutations = {
     state.menuPosition = menuPosition;
   },
 
-  saveBeforeList1 (state, list1) {
-    state._list1 = list1;
-  },
-  saveBeforeList2 (state, list2) {
-    state._list2 = list2;
-  },
-  saveBeforeList3 (state, list3) {
-    state._list3 = list3;
+  saveList(state, {key, list}){
+    state.datalist[key] = list;
   },
 
-  saveList1 (state, list) {
-    state.list1 = list;
+  addList(state, {key, item}){
+    if (state.datalist[key].indexOf(item) < 0) {
+      state.datalist[key].push(item);
+    } else {
+      alert('widget sudah ada');
+    }
   },
 
-  saveList2 (state, list) {
-    state.list2 = list;
-  },
-
-  saveList3 (state, list) {
-    state.list3 = list;
-  },
-
-  addList1(state, item){
-    state.list1.push(item);
-  },
-
-  addList2(state, item){
-    state.list2.push(item);
-  },
-
-  addList3(state, item){
-    state.list3.push(item);
+  removeList(state, {key, index}){
+    state.datalist[key].splice(index, 1);
   }
 };
 
@@ -101,41 +85,17 @@ export const actions = {
     commit("CHANGE_POSITION", menuPosition);
   },
 
-  saveList1Position({ commit }, { list }) {
-    commit("saveList1", list);
+  savePositionList({ commit }, { key, list }) {
+    commit("saveList", {key, list});
   },
 
-  saveList2Position({ commit }, { list }) {
-    commit("saveList2", list);
+  addItemList({ commit }, { key, item }) {
+    commit("addList", {key, item});
   },
 
-  saveList3Position({ commit }, { list }) {
-    commit("saveList3", list);
+  removeItemList({ commit }, { key, index, item }) {
+    commit("removeList", {key, index, item});
   },
-
-  addListData1({ commit }, { item }) {
-    commit("addList1", item);
-  },
-
-  addListData2({ commit }, { item }) {
-    commit("addList2", item);
-  },
-
-  addListData3({ commit }, { item }) {
-    commit("addList3", item);
-  },
-
-  saveBeforeListPosition1({ commit }, { list1 }) {
-    commit("saveBeforeList1", list1);
-  },
-
-  saveBeforeListPosition2({ commit }, { list2 }) {
-    commit("saveBeforeList2", list2);
-  },
-
-  saveBeforeListPosition3({ commit }, { list3 }) {
-    commit("saveBeforeList3", list3);
-  }
 };
 
 // export { state, mutations, actions };
