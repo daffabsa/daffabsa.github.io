@@ -57,6 +57,18 @@ export const mutations = {
 
   saveList3 (state, list) {
     state.list3 = list;
+  },
+
+  addList1(state, item){
+    state.list1.push(item);
+  },
+
+  addList2(state, item){
+    state.list2.push(item);
+  },
+
+  addList3(state, item){
+    state.list3.push(item);
   }
 };
 
@@ -99,6 +111,18 @@ export const actions = {
 
   saveList3Position({ commit }, { list }) {
     commit("saveList3", list);
+  },
+
+  addListData1({ commit }, { item }) {
+    commit("addList1", item);
+  },
+
+  addListData2({ commit }, { item }) {
+    commit("addList2", item);
+  },
+
+  addListData3({ commit }, { item }) {
+    commit("addList3", item);
   },
 
   saveBeforeListPosition1({ commit }, { list1 }) {

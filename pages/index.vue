@@ -63,11 +63,27 @@ export default {
   },
   methods: {
     removeWidget(index, list) {
-      list.splice(index, 1);
+      var list_ = list;
+      list_.splice(index, 1);
+      // this.$store.dispatch("layout/saveList1Position", {
+      //   list: this.list_,
+      // });
     },
     addWidget(list, widget) {
       if (list.indexOf(widget) < 0) {
-        list.push(widget);
+        if (list == this.list1) {
+          this.$store.dispatch("layout/addListData1", {
+            item: widget,
+          });
+        } else if (list == this.list2) {
+          this.$store.dispatch("layout/addListData2", {
+            item: widget,
+          });
+        } else {
+          this.$store.dispatch("layout/addListData3", {
+            item: widget,
+          });
+        }
       } else {
         alert("Widget sudah ada");
       }
