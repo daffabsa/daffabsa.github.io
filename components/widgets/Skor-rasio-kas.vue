@@ -1,5 +1,6 @@
 <script>
 import axios from "~/plugins/axios";
+import { EventBus } from "~/plugins/eventBus.js";
 /**
  * Skor-roe component
  */
@@ -8,6 +9,7 @@ export default {
     return {
       score_roe: {},
       expanded: false,
+      editLayout: false,
     };
   },
   methods: {
@@ -20,27 +22,34 @@ export default {
       this.score_roe = res.data;
     });
   },
+  created() {
+    EventBus.$on("editLayout", (editLayoutBool) => {
+      this.editLayout = editLayoutBool;
+    });
+  },
 };
 </script>
 
 <template>
-  <div class="card container" style="transition: max-height 0.5s">
-    <div style="color: #1b2559" class="row">
-      <div class="col-3 tab-nav">
-        <p>Periode</p>
-      </div>
-      <div class="col-9" style="font-size: 10px">
-        <ul class="nav nav-pills nav-justified">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Hari</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Bulan</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Tahun</a>
-          </li>
-        </ul>
+  <div class="card container">
+    <div style="color: #1b2559; height: 32px">
+      <div v-if="editLayout == false" class="row">
+        <div class="col-3 tab-nav">
+          <p>Periode</p>
+        </div>
+        <div class="col-9" style="font-size: 10px">
+          <ul class="nav nav-pills nav-justified">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Hari</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Bulan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Tahun</a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
     <div class="row">

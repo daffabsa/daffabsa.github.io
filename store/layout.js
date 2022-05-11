@@ -7,10 +7,10 @@ export const state = () => ({
   topbar: "dark",
   loader: false,
   datalist: {
-    _list1: ["SkorRoe", "EfisiensiPenagihan"],
+    _list1: ["EfisiensiPenagihan", "TarifRata", "VolumeAir"],
     _list2: ["Maps"],
     _list3: ["SkorRoe", "SkorRasioKas", "SkorSolvabilitas"],
-    list1: ["SkorRoe", "EfisiensiPenagihan"],
+    list1: ["EfisiensiPenagihan", "TarifRata", "VolumeAir"],
     list2: ["Maps"],
     list3: ["SkorRoe", "SkorRasioKas", "SkorSolvabilitas"],
   }

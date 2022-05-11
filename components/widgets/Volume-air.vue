@@ -7,7 +7,7 @@ import { EventBus } from "~/plugins/eventBus.js";
 export default {
   data() {
     return {
-      score_roe: {},
+      // billing_efficiency: {},
       expanded: false,
       editLayout: false,
     };
@@ -18,9 +18,9 @@ export default {
     },
   },
   beforeMount() {
-    axios.get("/score_roe").then((res) => {
-      this.score_roe = res.data;
-    });
+    // axios.get("/billing_efficiency").then((res) => {
+    //   this.billing_efficiency = res.data;
+    // });
   },
   created() {
     EventBus.$on("editLayout", (editLayoutBool) => {
@@ -60,7 +60,7 @@ export default {
 
         <div class="mt-1">
           <div class="row">
-            <h3 class="heading-text">Skor Solvabilitas</h3>
+            <h3 class="heading-text">Volume Air Terjual Bulan Ini</h3>
           </div>
         </div>
       </div>
@@ -79,11 +79,11 @@ export default {
             </div>
           </div>
           <div class="row">
-            <div class="col-6">
-              <p>Skor Solvabilitas</p>
-              <h2 style="margin-top: -10px">{{ score_roe.roe_score }}</h2>
+            <div class="col-7">
+              <p>Volume Air Terjual Bulan Ini</p>
+              <h2 style="margin-top: -10px; font-size: 22px">928.255 m3</h2>
             </div>
-            <div class="col-6">
+            <div class="col-5">
               <div class="box-value-default">
                 <div class="row">
                   <i class="fas fa-equals box-value-icon"></i>
@@ -92,20 +92,42 @@ export default {
               </div>
             </div>
             <span class="container horirow"></span>
-            <div class="row" style="margin: 10px; 0px;">
-              <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
-                Skor ROE Bulan Lalu
-              </p>
-              <p
-                style="
-                  color: white;
-                  font-weight: bold;
-                  margin-left: 7px;
-                  font-size: 18px;
-                "
-              >
-                2
-              </p>
+            <div class="row" style="margin: 10px; 0px; width:100%">
+              <div class="col-6">
+                <div class="row">
+                  <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
+                    Bulan Lalu
+                    <span
+                      style="
+                        color: white;
+                        font-weight: bold;
+                        margin-left: 7px;
+                        font-size: 14px;
+                      "
+                    >
+                      856.112
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="row">
+                  <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
+                    2 Bulan Lalu
+
+                    <span
+                      style="
+                        color: white;
+                        font-weight: bold;
+                        margin-left: 7px;
+                        font-size: 14px;
+                      "
+                    >
+                      890.110
+                    </span>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -127,68 +149,9 @@ export default {
         class="row"
         style="margin-top: 24px; margin-left: 0px; margin-right: 0px"
       >
-        <p class="alternate-text">Detail Skor</p>
+        <p class="alternate-text">Detail</p>
       </div>
       <div class="row" style="margin-bottom: -20px">
-        <div class="col-9">
-          <p style="color: #1b2559">Laba Setelah Pajak</p>
-        </div>
-        <div class="col-3">
-          <p class="value-text">{{ score_roe.profit_after_tax }}</p>
-          <div class="row" style="float: right; margin-right: 0px">
-            <i
-              class="fa fa-arrow-up"
-              style="font-size: 11px; line-height: 0px; color: #009f68"
-            ></i>
-            <p class="value-plus-text">
-              {{ score_roe.profit_after_tax_accumulatives }}%
-            </p>
-          </div>
-        </div>
-      </div>
-      <hr />
-      <div class="row" style="margin-bottom: -20px">
-        <div class="col-9">
-          <p style="color: #1b2559">Ekuitas</p>
-        </div>
-        <div class="col-3">
-          <p class="value-text">{{ score_roe.equity }}</p>
-          <div class="row" style="float: right; margin-right: 0px">
-            <i
-              class="fa fa-arrow-down"
-              style="font-size: 11px; line-height: 0px; color: #ff4a6d"
-            ></i>
-            <p class="value-minus-text">
-              {{ score_roe.equity_accumulatives }}%
-            </p>
-          </div>
-        </div>
-      </div>
-      <hr />
-      <div class="row" style="margin-bottom: -20px">
-        <div class="col-9">
-          <p style="color: #1b2559">Batas Maksimal</p>
-        </div>
-        <div class="col-3">
-          <p class="value-text">{{ score_roe.max_limit }}</p>
-
-          <p class="value-default-text">
-            {{ score_roe.max_limit_percentage }}%
-          </p>
-        </div>
-      </div>
-      <hr />
-      <div class="row" style="margin-bottom: -20px">
-        <div class="col-9">
-          <p style="color: #1b2559">Nilai Roe</p>
-        </div>
-        <div class="col-3">
-          <p class="value-text">{{ score_roe.roe_value }}</p>
-
-          <p class="value-default-text">
-            {{ score_roe.roe_value_percentage }}%
-          </p>
-        </div>
         <div
           @click="expandWidget()"
           class="d-flex justify-content-center collapse-button"

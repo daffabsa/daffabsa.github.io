@@ -184,14 +184,29 @@ export default {
               v-for="(element, index) in list1"
               :key="element"
             >
-              <button
-                style="position: absolute; right: 0; top: 0; z-index: 1"
-                class="btn btn-link"
-                v-on:click="removeWidget(index, 'list1')"
-                v-if="editLayout == true"
+              <div
+                style="
+                  position: absolute;
+                  right: 0;
+                  top: 0;
+                  z-index: 1;
+                  margin-top: 5px;
+                "
               >
-                x
-              </button>
+                <i
+                  v-on:click="removeWidget(index, 'list1')"
+                  v-if="editLayout == true"
+                  class="fa fa-cog"
+                  style="color: #dfe3e8; margin-right: 20px; cursor: pointer"
+                ></i>
+
+                <i
+                  v-on:click="removeWidget(index, 'list1')"
+                  v-if="editLayout == true"
+                  class="fa fa-times"
+                  style="color: #dfe3e8; margin-right: 20px; cursor: pointer"
+                ></i>
+              </div>
               <component
                 :is="element"
                 :class="{ 'card-moveable': editLayout === true }"
@@ -290,14 +305,29 @@ export default {
               v-for="(element, index) in list3"
               :key="element"
             >
-              <button
-                style="position: absolute; right: 0; top: 0; z-index: 1"
-                class="btn btn-link"
-                v-on:click="removeWidget(index, 'list3')"
-                v-if="editLayout == true"
+              <div
+                style="
+                  position: absolute;
+                  right: 0;
+                  top: 0;
+                  z-index: 1;
+                  margin-top: 5px;
+                "
               >
-                x
-              </button>
+                <i
+                  v-on:click="removeWidget(index, 'list3')"
+                  v-if="editLayout == true"
+                  class="fa fa-cog"
+                  style="color: #dfe3e8; margin-right: 20px; cursor: pointer"
+                ></i>
+
+                <i
+                  v-on:click="removeWidget(index, 'list3')"
+                  v-if="editLayout == true"
+                  class="fa fa-times"
+                  style="color: #dfe3e8; margin-right: 20px; cursor: pointer"
+                ></i>
+              </div>
               <component
                 :is="element"
                 :class="{ 'card-moveable': editLayout === true }"
