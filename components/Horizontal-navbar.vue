@@ -1,6 +1,7 @@
 <script>
 import { menuItems } from "../helpers/horizontal-menu";
 import { mapState } from "vuex";
+import axios from "~/plugins/axios";
 
 /**
  * Horiontal-navbar component
@@ -9,23 +10,15 @@ export default {
   data() {
     return {
       menuItems: menuItems,
-      announcement: [
-        "Sambungan Baru",
-        "Pengaduan Masuk",
-        "Sambungan Baru",
-        "Pengaduan Masuk",
-        "Sambungan Baru",
-        "Pengaduan Masuk",
-        "Sambungan Baru",
-        "Pengaduan Masuk",
-        "Sambungan Baru",
-        "Pengaduan Masuk",
-        "Sambungan Baru",
-        "Pengaduan Masuk",
-      ],
+      announcements: [],
     };
   },
   computed: mapState(["layout"]),
+  beforeMount() {
+    axios.get("/announcements").then((res) => {
+      this.announcements = res.data;
+    });
+  },
   props: {
     type: {
       type: String,
@@ -236,32 +229,15 @@ export default {
               <div class="marquee-parent">
                 <div class="marquee-child">
                   <div
-                    v-for="(message, index) in announcement"
+                    v-for="(announcement, index) in announcements"
                     :key="index"
-                    style="
-                      border-radius: 20px;
-                      background: #e6faf5;
-                      color: #009f68;
-                      padding: 5px 15px;
-                      font-weight: bold;
-                      display: block;
-                      margin: 0px 5px;
-                    "
+                    :class="{
+                      'announcement-box-green': announcement.color === 'green',
+                      'announcement-box-red': announcement.color === 'red',
+                    }"
                   >
-                    <div
-                      style="
-                        border-radius: 20px;
-                        background: #009f68;
-                        color: white;
-                        padding: 0px 5px;
-                        font-weight: bold;
-                        display: inline;
-                        margin-right: 10px;
-                      "
-                    >
-                      +1
-                    </div>
-                    {{ message }}
+                    <div>+{{ announcement.count }}</div>
+                    {{ announcement.message }}
                   </div>
                 </div>
               </div>

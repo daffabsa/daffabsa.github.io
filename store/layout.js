@@ -9,10 +9,10 @@ export const state = () => ({
   datalist: {
     _list1: ["SkorRoe", "EfisiensiPenagihan"],
     _list2: ["Maps"],
-    _list3: ["EfisiensiPenagihanSaatIni"],
+    _list3: ["SkorRoe", "SkorRasioKas", "SkorSolvabilitas"],
     list1: ["SkorRoe", "EfisiensiPenagihan"],
     list2: ["Maps"],
-    list3: ["EfisiensiPenagihanSaatIni"],
+    list3: ["SkorRoe", "SkorRasioKas", "SkorSolvabilitas"],
   }
 });
 

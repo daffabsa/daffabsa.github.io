@@ -8,7 +8,7 @@ export default {};
     <div class="card-body">
       <div id="map-wrap" style="height: 100%">
         <iframe
-          src="https://webgis-simrenas.bappenas.go.id/"
+          src="http://pdambanyumas.net/gis/"
           frameborder="0"
           style="width: 100%; height: 100%"
         ></iframe>

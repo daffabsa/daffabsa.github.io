@@ -51,7 +51,7 @@ export default {
 
         <div class="mt-1">
           <div class="row">
-            <h3 class="heading-text">Skor ROE</h3>
+            <h3 class="heading-text">Skor Rasio Kas</h3>
           </div>
         </div>
       </div>
@@ -71,7 +71,7 @@ export default {
           </div>
           <div class="row">
             <div class="col-6">
-              <p>Skor ROE</p>
+              <p>Skor Rasio Kas</p>
               <h2 style="margin-top: -10px">{{ score_roe.roe_score }}</h2>
             </div>
             <div class="col-6">
