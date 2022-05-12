@@ -113,6 +113,7 @@ export default {
           @click="expandWidget()"
           class="d-flex justify-content-center expand-button"
           v-if="expanded == false"
+          style="cursor: pointer"
         >
           <i
             style="margin-top: 7px"
@@ -192,6 +193,7 @@ export default {
         <div
           @click="expandWidget()"
           class="d-flex justify-content-center collapse-button"
+          style="cursor: pointer"
         >
           <i
             style="margin-top: 7px"
