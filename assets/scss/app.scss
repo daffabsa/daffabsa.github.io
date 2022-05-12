@@ -11,6 +11,7 @@ File: Main Css File (Default Demo)
 //Fonts
 @import "custom/fonts/fonts";
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 
 //Core files
 @import "./node_modules/bootstrap/scss/functions";
@@ -346,4 +347,8 @@ div.badges span {
     color: #1b2559;
     width: 100%;
     margin-bottom: -2px;
+}
+
+.textTitle {
+    font-family: 'Orbitron', sans-serif;
 }
