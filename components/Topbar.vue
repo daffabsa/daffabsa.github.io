@@ -53,6 +53,7 @@ export default {
   >
     <div class="container-fluid">
       <ul class="list-unstyled topnav-menu float-right mb-0">
+        <li></li>
         <b-nav-item-dropdown
           right
           class="notification-list topbar-dropdown"

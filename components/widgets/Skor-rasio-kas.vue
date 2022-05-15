@@ -10,6 +10,10 @@ export default {
       score_roe: {},
       expanded: false,
       editLayout: false,
+      cardBefore: "card-skor-rasio-before",
+      cardAfter: "card-skor-rasio-after",
+      cardTopBefore: "card-top-before",
+      cardTopAfter: "card-top-after",
     };
   },
   methods: {
@@ -30,8 +34,35 @@ export default {
 };
 </script>
 
+<style>
+.card-skor-rasio-before {
+  max-height: 255px;
+  transition: all 500ms ease;
+  overflow: hidden;
+}
+
+.card-skor-rasio-after {
+  max-height: 718px;
+  transition: all 500ms ease;
+  overflow: hidden;
+}
+
+.card-top-before {
+  max-height: 0px;
+  transition: all 500ms ease;
+  margin-bottom: -20px;
+  overflow: hidden;
+}
+
+.card-top-after {
+  max-height: 94px;
+  transition: all 500ms ease;
+  overflow: hidden;
+}
+</style>
+
 <template>
-  <div class="card container">
+  <div class="card container" :class="expanded ? cardAfter : cardBefore">
     <div style="color: #1b2559; height: 32px">
       <div v-if="editLayout == false" class="row">
         <div class="col-3 tab-nav">
@@ -53,7 +84,10 @@ export default {
       </div>
     </div>
     <div class="row">
-      <div class="card-top-border" v-if="expanded == true">
+      <div
+        class="card-top-border"
+        :class="expanded ? cardTopAfter : cardTopBefore"
+      >
         <div class="badges">
           <span>BPPSPAM</span>
         </div>
@@ -123,7 +157,7 @@ export default {
         </div>
       </div>
     </div>
-    <div v-if="expanded == true">
+    <div>
       <div
         class="row"
         style="margin-top: 24px; margin-left: 0px; margin-right: 0px"
