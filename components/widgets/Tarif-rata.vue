@@ -7,11 +7,11 @@ import { EventBus } from "~/plugins/eventBus.js";
 export default {
   data() {
     return {
-      billing_efficiency: {},
+      // billing_efficiency: {},
       expanded: false,
       editLayout: false,
-      cardBefore: "card-efisiensi-before",
-      cardAfter: "card-efisiensi-after",
+      cardBefore: "card-tarif-rata-before",
+      cardAfter: "card-tarif-rata-after",
       cardTopBefore: "card-top-before",
       cardTopAfter: "card-top-after",
     };
@@ -22,9 +22,9 @@ export default {
     },
   },
   beforeMount() {
-    axios.get("/billing_efficiency").then((res) => {
-      this.billing_efficiency = res.data;
-    });
+    // axios.get("/billing_efficiency").then((res) => {
+    //   this.billing_efficiency = res.data;
+    // });
   },
   created() {
     EventBus.$on("editLayout", (editLayoutBool) => {
@@ -33,14 +33,15 @@ export default {
   },
 };
 </script>
+
 <style>
-.card-efisiensi-before {
+.card-tarif-rata-before {
   max-height: 255px;
   transition: all 500ms ease;
   overflow: hidden;
 }
 
-.card-efisiensi-after {
+.card-tarif-rata-after {
   max-height: 406px;
   transition: all 500ms ease;
   overflow: hidden;
@@ -93,7 +94,7 @@ export default {
 
         <div class="mt-1">
           <div class="row">
-            <h3 class="heading-text">Effisiensi Penagihan</h3>
+            <h3 class="heading-text">Tarif Rata-Rata Bulan Ini</h3>
           </div>
         </div>
       </div>
@@ -113,10 +114,8 @@ export default {
           </div>
           <div class="row">
             <div class="col-7">
-              <p>Effisiensi Penagihan</p>
-              <h2 style="margin-top: -10px">
-                {{ billing_efficiency.percentage }}%
-              </h2>
+              <p>Tarif Rata-Rata Bulan Ini</p>
+              <h2 style="margin-top: -10px; font-size: 22px">5.473 Rp/m3</h2>
             </div>
             <div class="col-5">
               <div class="box-value-default">
@@ -128,10 +127,10 @@ export default {
             </div>
             <span class="container horirow"></span>
             <div class="row" style="margin: 10px; 0px; width:100%">
-              <div class="col-8">
+              <div class="col-6">
                 <div class="row">
                   <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
-                    Penerimaan
+                    Bulan Lalu
                     <span
                       style="
                         color: white;
@@ -140,15 +139,15 @@ export default {
                         font-size: 15px;
                       "
                     >
-                      Rp3,4m
+                      5.505
                     </span>
                   </p>
                 </div>
               </div>
-              <div class="col-4">
+              <div class="col-6">
                 <div class="row">
                   <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
-                    DRD
+                    2 Bulan Lalu
 
                     <span
                       style="
@@ -158,7 +157,7 @@ export default {
                         font-size: 15px;
                       "
                     >
-                      Rp 6m
+                      5.493
                     </span>
                   </p>
                 </div>

@@ -69,6 +69,7 @@ export default {
   */
   buildModules: [
     '@nuxt/components',
+    '@nuxtjs/google-fonts',
   ],
   /*
   ** Nuxt.js modules

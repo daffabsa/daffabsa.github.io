@@ -7,12 +7,12 @@ export const state = () => ({
   topbar: "dark",
   loader: false,
   datalist: {
-    _list1: ["SkorRoe", "EfisiensiPenagihan"],
+    _list1: ["EfisiensiPenagihan", "TarifRata", "VolumeAir"],
     _list2: ["Maps"],
-    _list3: ["EfisiensiPenagihanSaatIni"],
-    list1: ["SkorRoe", "EfisiensiPenagihan"],
+    _list3: ["SkorRoe", "SkorRasioKas", "SkorSolvabilitas"],
+    list1: ["EfisiensiPenagihan", "TarifRata", "VolumeAir"],
     list2: ["Maps"],
-    list3: ["EfisiensiPenagihanSaatIni"],
+    list3: ["SkorRoe", "SkorRasioKas", "SkorSolvabilitas"],
   }
 });
 

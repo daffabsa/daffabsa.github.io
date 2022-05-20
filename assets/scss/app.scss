@@ -11,6 +11,7 @@ File: Main Css File (Default Demo)
 //Fonts
 @import "custom/fonts/fonts";
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
 
 //Core files
 @import "./node_modules/bootstrap/scss/functions";
@@ -119,6 +120,8 @@ div.badges {
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
     width: fit-content;
+    background: white;
+    height: 25px;
 }
 
 div.badges span {
@@ -146,6 +149,25 @@ div.badges span {
     margin-left: 10px;
     margin-right: 10px;
     box-shadow: 0 18px 40px 0 rgba(112, 144, 176, 0.12);
+}
+
+.box-card-before {
+    border-radius: 15px;
+    background-image: linear-gradient(to right, #2275ff, #5293ff);
+    width: 100%;
+    // padding: 20px;
+    box-shadow: 0 18px 40px 0 rgba(112, 144, 176, 0.12);
+}
+
+.box-card-before p {
+    color: white; 
+    font-weight: 600; 
+    font-size: 12px;
+}
+
+.box-card-before h2 {
+    color: white; 
+    font-size: 34px;
 }
 
 .box-card p {
@@ -221,4 +243,112 @@ div.badges span {
   100% {
     left: -200% /* same as your text width */
   }
+}
+
+.announcement-box-green{
+    border-radius: 20px;
+    background: #e6faf5;
+    color: #009f68;
+    padding: 5px 15px;
+    font-weight: bold;
+    display: block;
+    margin: 0px 5px;
+}
+
+.announcement-box-red{
+    border-radius: 20px;
+    background: #FDEFED;
+    color: #FF3855;
+    padding: 5px 15px;
+    font-weight: bold;
+    display: block;
+    margin: 0px 5px;
+}
+
+.announcement-box-green div {
+    border-radius: 20px;
+    background: #009f68;
+    color: white;
+    padding: 0px 5px;
+    font-weight: bold;
+    display: inline;
+    margin-right: 10px;
+}
+
+.announcement-box-red div {
+    border-radius: 20px;
+    background: #FF3855;
+    color: white;
+    padding: 0px 5px;
+    font-weight: bold;
+    display: inline;
+    margin-right: 10px;
+}
+
+.tab-nav {
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: bold;
+    margin-bottom: -8px;
+}
+
+.card-top-border {
+    padding: 10px 25px;
+    border-top: 1px solid #e6eaf6;
+    border-radius: 15px 15px 0px 0px;
+    width: 100%;
+}
+
+.box-value-default {
+    border-radius: 50px;
+    background: white;
+    padding: 1px 20px;
+    width: fit-content;
+    height: 25px;
+    float: right;
+    margin-top: 20px;
+    color: #646464 !important;
+}
+
+.box-value-icon {
+    text-align: center;
+    font-size: 11px;
+    vertical-align: baseline;
+    margin-top: 7px;
+    margin-right: 5px;
+}
+
+.box-value-default p{
+    color: #646464;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: baseline;
+    font-weight: bold;
+}
+
+.horirow {
+    background: rgba(255, 255, 255, 0.5);
+    height: 1px;
+    width: 100%;
+    margin: 0px 10px;
+}
+
+.expand-button {
+    border-radius: 0px 0px 15px 15px;
+    background: rgba(0, 0, 0, 0.3);
+    height: 30px;
+    color: white;
+}
+
+.collapse-button {
+    border-radius: 0px 0px 15px 15px;
+    background: rgba(0, 0, 0, 0.1);
+    height: 30px;
+    color: #1b2559;
+    width: 100%;
+    margin-bottom: -2px;
+}
+
+.textTitle {
+    font-family: 'Orbitron', sans-serif;
 }

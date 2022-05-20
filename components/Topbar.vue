@@ -7,6 +7,7 @@ export default {
   data() {
     return {
       editLayout: false,
+      darkmode: false,
     };
   },
   methods: {
@@ -40,9 +41,19 @@ export default {
 
 <template>
   <!-- Topbar Start -->
-  <div class="navbar-custom">
+  <div
+    class="navbar-custom"
+    style="
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -o-user-select: none;
+    "
+  >
     <div class="container-fluid">
       <ul class="list-unstyled topnav-menu float-right mb-0">
+        <li></li>
         <b-nav-item-dropdown
           right
           class="notification-list topbar-dropdown"
@@ -128,28 +139,48 @@ export default {
       </div>
 
       <div style="width: 100%; padding-top: 15px" class="textTitle">
-        <p
-          style="
-            color: #011a3d;
-            text-align: center;
-            font-weight: bold;
-            font-size: 20px;
-            line-height: 10px;
-          "
-        >
-          INTEGRATED COMMAND CENTER
-        </p>
-        <p
-          style="
-            color: #2275ff;
-            text-align: center;
-            font-weight: bold;
-            font-size: 18px;
-            line-height: 10px;
-          "
-        >
-          PERUMDA TIRTA SAIL CRUISE PINK BEACH KOMODO
-        </p>
+        <div class="row">
+          <div class="col-10" style="margin-left: 60px; margin-right: -60px">
+            <p
+              style="
+                color: #011a3d;
+                text-align: center;
+                font-weight: bold;
+                font-size: 20px;
+                line-height: 10px;
+              "
+            >
+              INTEGRATED COMMAND CENTER
+            </p>
+            <p
+              style="
+                color: #2275ff;
+                text-align: center;
+                font-weight: bold;
+                font-size: 18px;
+                line-height: 10px;
+              "
+            >
+              PERUMDA TIRTA SAIL CRUISE PINK BEACH KOMODO
+            </p>
+          </div>
+          <div class="col-2">
+            <div class="custom-control custom-switch" style="margin-top: 10px">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                v-model="darkmode"
+                id="customSwitch1"
+              />
+              <label
+                class="custom-control-label"
+                for="customSwitch1"
+                style="font-family: sans-serif; font-weight: normal"
+                >Dark Mode</label
+              >
+            </div>
+          </div>
+        </div>
       </div>
 
       <ul class="list-unstyled topnav-menu topnav-menu-left m-0">

@@ -7,11 +7,11 @@ import { EventBus } from "~/plugins/eventBus.js";
 export default {
   data() {
     return {
-      billing_efficiency: {},
+      score_roe: {},
       expanded: false,
       editLayout: false,
-      cardBefore: "card-efisiensi-before",
-      cardAfter: "card-efisiensi-after",
+      cardBefore: "card-skor-solvabilitas-before",
+      cardAfter: "card-skor-solvabilitas-after",
       cardTopBefore: "card-top-before",
       cardTopAfter: "card-top-after",
     };
@@ -22,8 +22,8 @@ export default {
     },
   },
   beforeMount() {
-    axios.get("/billing_efficiency").then((res) => {
-      this.billing_efficiency = res.data;
+    axios.get("/score_roe").then((res) => {
+      this.score_roe = res.data;
     });
   },
   created() {
@@ -33,15 +33,16 @@ export default {
   },
 };
 </script>
+
 <style>
-.card-efisiensi-before {
+.card-skor-solvabilitas-before {
   max-height: 255px;
   transition: all 500ms ease;
   overflow: hidden;
 }
 
-.card-efisiensi-after {
-  max-height: 406px;
+.card-skor-solvabilitas-after {
+  max-height: 718px;
   transition: all 500ms ease;
   overflow: hidden;
 }
@@ -93,7 +94,7 @@ export default {
 
         <div class="mt-1">
           <div class="row">
-            <h3 class="heading-text">Effisiensi Penagihan</h3>
+            <h3 class="heading-text">Skor Solvabilitas</h3>
           </div>
         </div>
       </div>
@@ -112,13 +113,11 @@ export default {
             </div>
           </div>
           <div class="row">
-            <div class="col-7">
-              <p>Effisiensi Penagihan</p>
-              <h2 style="margin-top: -10px">
-                {{ billing_efficiency.percentage }}%
-              </h2>
+            <div class="col-6">
+              <p>Skor Solvabilitas</p>
+              <h2 style="margin-top: -10px">{{ score_roe.roe_score }}</h2>
             </div>
-            <div class="col-5">
+            <div class="col-6">
               <div class="box-value-default">
                 <div class="row">
                   <i class="fas fa-equals box-value-icon"></i>
@@ -127,42 +126,20 @@ export default {
               </div>
             </div>
             <span class="container horirow"></span>
-            <div class="row" style="margin: 10px; 0px; width:100%">
-              <div class="col-8">
-                <div class="row">
-                  <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
-                    Penerimaan
-                    <span
-                      style="
-                        color: white;
-                        font-weight: bold;
-                        margin-left: 7px;
-                        font-size: 15px;
-                      "
-                    >
-                      Rp3,4m
-                    </span>
-                  </p>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="row">
-                  <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
-                    DRD
-
-                    <span
-                      style="
-                        color: white;
-                        font-weight: bold;
-                        margin-left: 7px;
-                        font-size: 15px;
-                      "
-                    >
-                      Rp 6m
-                    </span>
-                  </p>
-                </div>
-              </div>
+            <div class="row" style="margin: 10px; 0px;">
+              <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
+                Skor ROE Bulan Lalu
+              </p>
+              <p
+                style="
+                  color: white;
+                  font-weight: bold;
+                  margin-left: 7px;
+                  font-size: 18px;
+                "
+              >
+                2
+              </p>
             </div>
           </div>
         </div>
@@ -185,9 +162,68 @@ export default {
         class="row"
         style="margin-top: 24px; margin-left: 0px; margin-right: 0px"
       >
-        <p class="alternate-text">Detail</p>
+        <p class="alternate-text">Detail Skor</p>
       </div>
       <div class="row" style="margin-bottom: -20px">
+        <div class="col-9">
+          <p style="color: #1b2559">Laba Setelah Pajak</p>
+        </div>
+        <div class="col-3">
+          <p class="value-text">{{ score_roe.profit_after_tax }}</p>
+          <div class="row" style="float: right; margin-right: 0px">
+            <i
+              class="fa fa-arrow-up"
+              style="font-size: 11px; line-height: 0px; color: #009f68"
+            ></i>
+            <p class="value-plus-text">
+              {{ score_roe.profit_after_tax_accumulatives }}%
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row" style="margin-bottom: -20px">
+        <div class="col-9">
+          <p style="color: #1b2559">Ekuitas</p>
+        </div>
+        <div class="col-3">
+          <p class="value-text">{{ score_roe.equity }}</p>
+          <div class="row" style="float: right; margin-right: 0px">
+            <i
+              class="fa fa-arrow-down"
+              style="font-size: 11px; line-height: 0px; color: #ff4a6d"
+            ></i>
+            <p class="value-minus-text">
+              {{ score_roe.equity_accumulatives }}%
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="row" style="margin-bottom: -20px">
+        <div class="col-9">
+          <p style="color: #1b2559">Batas Maksimal</p>
+        </div>
+        <div class="col-3">
+          <p class="value-text">{{ score_roe.max_limit }}</p>
+
+          <p class="value-default-text">
+            {{ score_roe.max_limit_percentage }}%
+          </p>
+        </div>
+      </div>
+      <hr />
+      <div class="row" style="margin-bottom: -20px">
+        <div class="col-9">
+          <p style="color: #1b2559">Nilai Roe</p>
+        </div>
+        <div class="col-3">
+          <p class="value-text">{{ score_roe.roe_value }}</p>
+
+          <p class="value-default-text">
+            {{ score_roe.roe_value_percentage }}%
+          </p>
+        </div>
         <div
           @click="expandWidget()"
           class="d-flex justify-content-center collapse-button"
