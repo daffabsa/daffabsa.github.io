@@ -4,6 +4,13 @@ import { EventBus } from "~/plugins/eventBus.js";
  * Topbar component
  */
 export default {
+  head() {
+    return {
+      bodyAttrs: {
+        class: this.darkmode ? "dark" : "light",
+      },
+    };
+  },
   data() {
     return {
       editLayout: false,
@@ -35,9 +42,22 @@ export default {
       this.editLayout = !this.editLayout;
       EventBus.$emit("editLayout", this.editLayout);
     },
+
+    changeDarkmode() {
+      EventBus.$emit("darkmode", this.darkmode);
+    },
   },
 };
 </script>
+
+<style>
+.dark {
+  background-color: #011a3d;
+}
+.light {
+  background-color: #f3f4f6;
+}
+</style>
 
 <template>
   <!-- Topbar Start -->
@@ -170,6 +190,7 @@ export default {
                 type="checkbox"
                 class="custom-control-input"
                 v-model="darkmode"
+                v-on:change="changeDarkmode"
                 id="customSwitch1"
               />
               <label

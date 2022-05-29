@@ -111,7 +111,8 @@ File: Main Css File (Default Demo)
 // @import "custom/rtl/components-rtl";
 // @import "custom/rtl/pages-rtl";
 
-html, body {
+html,
+body {
     font-family: 'Manrope', sans-serif;
 }
 
@@ -135,7 +136,6 @@ div.badges span {
 }
 
 .heading-text {
-    color: #1b2559;
     font-weight: 500;
     margin: 10px;
     font-size: 20px;
@@ -160,35 +160,35 @@ div.badges span {
 }
 
 .box-card-before p {
-    color: white; 
-    font-weight: 600; 
+    color: white;
+    font-weight: 600;
     font-size: 12px;
 }
 
 .box-card-before h2 {
-    color: white; 
+    color: white;
     font-size: 34px;
 }
 
 .box-card p {
-    color: white; 
-    font-weight: 600; 
+    color: white;
+    font-weight: 600;
     font-size: 12px;
 }
 
 .box-card h2 {
-    color: white; 
+    color: white;
     font-size: 34px;
 }
 
 .alternate-text {
-    color: rgba(163, 174, 208, 1); 
+    color: rgba(163, 174, 208, 1);
     font-size: 12px;
 }
 
 .value-text {
     font-weight: bold;
-    color: #1b2559;
+
     text-align: right;
     font-size: 16px;
 }
@@ -218,34 +218,39 @@ div.badges span {
 }
 
 .marquee-parent {
-  position: relative;
-  width: 120%;
-  overflow: hidden;
-  height: 50px;
-  display: block;
-}
-.marquee-child {
-  display: flex;
-  width: 220%;
-  /* width of your text div */
-  height: auto;
-  /* height of your text div */
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  animation: marquee 30s linear infinite; /* change 5s value to your desired speed */
-}
-@keyframes marquee {
-  0% {
-    left: 100%;
-  }
-  100% {
-    left: -200% /* same as your text width */
-  }
+    position: relative;
+    width: 120%;
+    overflow: hidden;
+    height: 50px;
+    display: block;
 }
 
-.announcement-box-green{
+.marquee-child {
+    display: flex;
+    width: 220%;
+    /* width of your text div */
+    height: auto;
+    /* height of your text div */
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    animation: marquee 30s linear infinite;
+    /* change 5s value to your desired speed */
+}
+
+@keyframes marquee {
+    0% {
+        left: 100%;
+    }
+
+    100% {
+        left: -200%
+            /* same as your text width */
+    }
+}
+
+.announcement-box-green {
     border-radius: 20px;
     background: #e6faf5;
     color: #009f68;
@@ -255,7 +260,7 @@ div.badges span {
     margin: 0px 5px;
 }
 
-.announcement-box-red{
+.announcement-box-red {
     border-radius: 20px;
     background: #FDEFED;
     color: #FF3855;
@@ -294,7 +299,7 @@ div.badges span {
 
 .card-top-border {
     padding: 10px 25px;
-    border-top: 1px solid #e6eaf6;
+    border-top: 1px solid;
     border-radius: 15px 15px 0px 0px;
     width: 100%;
 }
@@ -318,7 +323,7 @@ div.badges span {
     margin-right: 5px;
 }
 
-.box-value-default p{
+.box-value-default p {
     color: #646464;
     font-size: 16px;
     text-align: center;
@@ -342,13 +347,73 @@ div.badges span {
 
 .collapse-button {
     border-radius: 0px 0px 15px 15px;
-    background: rgba(0, 0, 0, 0.1);
     height: 30px;
-    color: #1b2559;
     width: 100%;
     margin-bottom: -2px;
 }
 
+.collapse-button-dark {
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 450ms ease;
+}
+
+.collapse-button-light {
+    background: rgba(0, 0, 0, 0.1);
+    transition: all 450ms ease;
+    color: #1B2559
+}
+
 .textTitle {
     font-family: 'Orbitron', sans-serif;
+}
+
+
+
+.card-dark {
+    transition: all 100ms ease;
+    color: #ffffff !important;
+    border-color: #233753 !important;
+}
+
+.card-light {
+    transition: all 100ms ease;
+    background-color: white;
+    color: #1b2559 !important;
+}
+
+.card-top-border-dark {
+    transition: all 200ms ease;
+    border-color: #43556b !important;
+}
+
+.card-top-border-light {
+    transition: all 200ms ease;
+    border-color: #e6eaf6 !important;
+}
+
+.card-dark .header-card {
+    transition: all 500ms ease;
+    background-color: #233753;
+}
+
+.content-dark {
+    transition: all 500ms ease;
+    background-color: #43556b;
+}
+
+.content-light {
+    transition: all 500ms ease;
+    background-color: white;
+}
+
+.active-dark {
+    background-color: #3f5777;
+    transition: all 200ms ease;
+    color: white !important;
+}
+
+.active-light {
+    background-color: #f2f3f5;
+    transition: all 200ms ease;
+    color: #3380ff !important;
 }

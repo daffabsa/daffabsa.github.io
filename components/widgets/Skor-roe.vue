@@ -14,6 +14,12 @@ export default {
       cardAfter: "card-skor-roe-after",
       cardTopBefore: "card-top-before",
       cardTopAfter: "card-top-after",
+      darkmode: false,
+      cardClass: "card-light",
+      cardTopBorder: "card-top-border-light",
+      contentCard: "content-light",
+      collapseButton: "collapse-button-light",
+      activePeriod: "active-light",
     };
   },
   methods: {
@@ -30,6 +36,26 @@ export default {
     EventBus.$on("editLayout", (editLayoutBool) => {
       this.editLayout = editLayoutBool;
     });
+    EventBus.$on("darkmode", (darkmodeBool) => {
+      this.darkmode = darkmodeBool;
+    });
+  },
+  watch: {
+    darkmode: function (val) {
+      if (val == true) {
+        this.cardClass = "card-dark";
+        this.cardTopBorder = "card-top-border-dark";
+        this.contentCard = "content-dark";
+        this.collapseButton = "collapse-button-dark";
+        this.activePeriod = "active-dark";
+      } else {
+        this.cardClass = "card-light";
+        this.cardTopBorder = "card-top-border-light";
+        this.contentCard = "content-light";
+        this.collapseButton = "collapse-button-light";
+        this.activePeriod = "active-light";
+      }
+    },
   },
 };
 </script>
@@ -62,31 +88,64 @@ export default {
 </style>
 
 <template>
-  <div class="card container" :class="expanded ? cardAfter : cardBefore">
-    <div style="color: #1b2559; height: 32px">
-      <div v-if="editLayout == false" class="row">
+  <div
+    class="card container"
+    :class="[expanded ? cardAfter : cardBefore, cardClass]"
+  >
+    <div style="color: #1b2559; height: 32px; margin-bottom: -1px">
+      <div v-if="editLayout == false" class="row header-card">
         <div class="col-3 tab-nav">
-          <p>Periode</p>
+          <p
+            :style="
+              darkmode
+                ? { color: 'white !important' }
+                : { color: '#1B2559 !important' }
+            "
+          >
+            Periode
+          </p>
         </div>
         <div class="col-9" style="font-size: 10px">
           <ul class="nav nav-pills nav-justified">
             <li class="nav-item">
-              <a class="nav-link active" href="#">Hari</a>
+              <a class="nav-link" :class="activePeriod" href="#">Hari</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Bulan</a>
+              <a
+                class="nav-link"
+                href="#"
+                :style="
+                  darkmode
+                    ? { color: 'white !important' }
+                    : { color: '#1B2559 !important' }
+                "
+                >Bulan</a
+              >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Tahun</a>
+              <a
+                class="nav-link"
+                href="#"
+                :style="
+                  darkmode
+                    ? { color: 'white !important' }
+                    : { color: '#1B2559 !important' }
+                "
+                >Tahun</a
+              >
             </li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="row">
+    <div
+      class="row"
+      :class="contentCard"
+      style="border-radius: 15px 15px 0px 0px"
+    >
       <div
         class="card-top-border"
-        :class="expanded ? cardTopAfter : cardTopBefore"
+        :class="[expanded ? cardTopAfter : cardTopBefore, cardTopBorder]"
       >
         <div class="badges">
           <span>BPPSPAM</span>
@@ -94,7 +153,12 @@ export default {
 
         <div class="mt-1">
           <div class="row">
-            <h3 class="heading-text">Skor ROE</h3>
+            <h3
+              class="heading-text"
+              :style="darkmode ? { color: 'white' } : { color: '#1B2559' }"
+            >
+              Skor ROE
+            </h3>
           </div>
         </div>
       </div>
@@ -157,16 +221,20 @@ export default {
         </div>
       </div>
     </div>
-    <div>
+    <div
+      :class="contentCard"
+      style="margin-right: -20px; margin-left: -20px; padding: 0px 20px"
+    >
       <div
         class="row"
-        style="margin-top: 24px; margin-left: 0px; margin-right: 0px"
+        :class="contentCard"
+        style="padding-top: 24px; padding-left: 12px; padding-right: 20px"
       >
         <p class="alternate-text">Detail Skor</p>
       </div>
       <div class="row" style="margin-bottom: -20px">
         <div class="col-9">
-          <p style="color: #1b2559">Laba Setelah Pajak</p>
+          <p>Laba Setelah Pajak</p>
         </div>
         <div class="col-3">
           <p class="value-text">{{ score_roe.profit_after_tax }}</p>
@@ -184,7 +252,7 @@ export default {
       <hr />
       <div class="row" style="margin-bottom: -20px">
         <div class="col-9">
-          <p style="color: #1b2559">Ekuitas</p>
+          <p>Ekuitas</p>
         </div>
         <div class="col-3">
           <p class="value-text">{{ score_roe.equity }}</p>
@@ -202,7 +270,7 @@ export default {
       <hr />
       <div class="row" style="margin-bottom: -20px">
         <div class="col-9">
-          <p style="color: #1b2559">Batas Maksimal</p>
+          <p>Batas Maksimal</p>
         </div>
         <div class="col-3">
           <p class="value-text">{{ score_roe.max_limit }}</p>
@@ -215,7 +283,7 @@ export default {
       <hr />
       <div class="row" style="margin-bottom: -20px">
         <div class="col-9">
-          <p style="color: #1b2559">Nilai Roe</p>
+          <p>Nilai Roe</p>
         </div>
         <div class="col-3">
           <p class="value-text">{{ score_roe.roe_value }}</p>
@@ -227,6 +295,7 @@ export default {
         <div
           @click="expandWidget()"
           class="d-flex justify-content-center collapse-button"
+          :class="collapseButton"
           style="cursor: pointer"
         >
           <i
