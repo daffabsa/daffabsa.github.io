@@ -232,12 +232,14 @@ export default {
       >
         <p class="alternate-text">Detail Skor</p>
       </div>
-      <div class="row" style="margin-bottom: -20px">
+      <div class="row" style="margin-bottom: -20px; margin-top: -10px">
         <div class="col-9">
           <p>Laba Setelah Pajak</p>
         </div>
         <div class="col-3">
-          <p class="value-text">{{ score_roe.profit_after_tax }}</p>
+          <p class="value-text" style="margin-bottom: 7px">
+            {{ score_roe.profit_after_tax }}
+          </p>
           <div class="row" style="float: right; margin-right: 0px">
             <i
               class="fa fa-arrow-up"
@@ -250,12 +252,14 @@ export default {
         </div>
       </div>
       <hr />
-      <div class="row" style="margin-bottom: -20px">
+      <div class="row" style="margin-bottom: -20px; margin-top: -10px">
         <div class="col-9">
           <p>Ekuitas</p>
         </div>
         <div class="col-3">
-          <p class="value-text">{{ score_roe.equity }}</p>
+          <p class="value-text" style="margin-bottom: 7px">
+            {{ score_roe.equity }}
+          </p>
           <div class="row" style="float: right; margin-right: 0px">
             <i
               class="fa fa-arrow-down"
@@ -268,12 +272,14 @@ export default {
         </div>
       </div>
       <hr />
-      <div class="row" style="margin-bottom: -20px">
+      <div class="row" style="margin-bottom: -20px; margin-top: -10px">
         <div class="col-9">
           <p>Batas Maksimal</p>
         </div>
         <div class="col-3">
-          <p class="value-text">{{ score_roe.max_limit }}</p>
+          <p class="value-text" style="margin-bottom: 7px">
+            {{ score_roe.max_limit }}
+          </p>
 
           <p class="value-default-text">
             {{ score_roe.max_limit_percentage }}%
@@ -281,12 +287,14 @@ export default {
         </div>
       </div>
       <hr />
-      <div class="row" style="margin-bottom: -20px">
+      <div class="row" style="margin-bottom: -20px; margin-top: -10px">
         <div class="col-9">
           <p>Nilai Roe</p>
         </div>
         <div class="col-3">
-          <p class="value-text">{{ score_roe.roe_value }}</p>
+          <p class="value-text" style="margin-bottom: 7px">
+            {{ score_roe.roe_value }}
+          </p>
 
           <p class="value-default-text">
             {{ score_roe.roe_value_percentage }}%
