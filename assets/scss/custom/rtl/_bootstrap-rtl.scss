@@ -149,6 +149,8 @@ ul {
         &::after {
             transform: translateX(#{-($custom-switch-width - $custom-control-indicator-size)});
         }
+
+        background-color: red;
     }
 }
 

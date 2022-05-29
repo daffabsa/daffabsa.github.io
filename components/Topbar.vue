@@ -15,6 +15,7 @@ export default {
     return {
       editLayout: false,
       darkmode: false,
+      headerColor: "topbar-light",
     };
   },
   methods: {
@@ -44,6 +45,11 @@ export default {
     },
 
     changeDarkmode() {
+      if (this.darkmode == true) {
+        this.headerColor = "topbar-dark";
+      } else {
+        this.headerColor = "topbar-light";
+      }
       EventBus.$emit("darkmode", this.darkmode);
     },
   },
@@ -51,11 +57,12 @@ export default {
 </script>
 
 <style>
-.dark {
-  background-color: #011a3d;
+.topbar-dark {
+  background-color: #233753;
+  color: white !important;
 }
-.light {
-  background-color: #f3f4f6;
+.topbar-light {
+  background-color: white;
 }
 </style>
 
@@ -70,6 +77,7 @@ export default {
       user-select: none;
       -o-user-select: none;
     "
+    :class="headerColor"
   >
     <div class="container-fluid">
       <ul class="list-unstyled topnav-menu float-right mb-0">
@@ -88,7 +96,14 @@ export default {
                 class="rounded-circle"
               />
 
-              <span class="pro-user-name ml-1">
+              <span
+                class="pro-user-name ml-1"
+                :style="
+                  darkmode
+                    ? { color: 'white !important' }
+                    : { color: 'rgb(100,100,100) !important' }
+                "
+              >
                 {{ $t("navbar.dropdown.name.text") }}
                 <i class="mdi mdi-chevron-down"></i>
               </span>
@@ -163,22 +178,30 @@ export default {
           <div class="col-10" style="margin-left: 60px; margin-right: -60px">
             <p
               style="
-                color: #011a3d;
                 text-align: center;
                 font-weight: bold;
                 font-size: 20px;
                 line-height: 10px;
+              "
+              :style="
+                darkmode
+                  ? { color: 'white !important' }
+                  : { color: '#011a3d !important' }
               "
             >
               INTEGRATED COMMAND CENTER
             </p>
             <p
               style="
-                color: #2275ff;
                 text-align: center;
                 font-weight: bold;
                 font-size: 18px;
                 line-height: 10px;
+              "
+              :style="
+                darkmode
+                  ? { color: 'white !important' }
+                  : { color: '#2275ff !important' }
               "
             >
               PERUMDA TIRTA SAIL CRUISE PINK BEACH KOMODO
