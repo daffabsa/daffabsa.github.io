@@ -60,7 +60,6 @@ export default {
         </div>
       </div>
       <!-- content -->
-      <Footer />
     </div>
     <!-- ============================================================== -->
     <!-- End Page content -->
