@@ -1,13 +1,18 @@
 <script>
 import axios from "~/plugins/axios";
 import { EventBus } from "~/plugins/eventBus.js";
+import lottie from "vue-lottie/src/lottie.vue";
+import * as addWidgetAnim from "~/assets/lottie/add-widget.json";
 /**
  * Skor-roe component
  */
 export default {
+  components: {
+    lottie,
+  },
   data() {
     return {
-      billing_efficiency: {},
+      billing_efficiency: null,
       expanded: false,
       editLayout: false,
       cardBefore: "card-efisiensi-before",
@@ -20,17 +25,36 @@ export default {
       contentCard: "content-light",
       collapseButton: "collapse-button-light",
       activePeriod: "active-light",
+      anim: null,
+      lottieOptions: {
+        animationData: addWidgetAnim.default,
+        autoplay: true,
+      },
     };
   },
   methods: {
     expandWidget() {
       this.expanded = !this.expanded;
     },
+    handleAnimation(anim) {
+      this.anim = anim;
+    },
+    stop() {
+      this.anim.stop();
+    },
+    play() {
+      this.anim.play();
+    },
+    pause() {
+      this.anim.pause();
+    },
   },
   beforeMount() {
-    axios.get("/billing_efficiency").then((res) => {
-      this.billing_efficiency = res.data;
-    });
+    setTimeout(() => {
+      axios.get("/billing_efficiency").then((res) => {
+        this.billing_efficiency = res.data;
+      });
+    }, 5000);
   },
   created() {
     EventBus.$on("editLayout", (editLayoutBool) => {
@@ -91,182 +115,192 @@ export default {
     class="card container"
     :class="[expanded ? cardAfter : cardBefore, cardClass]"
   >
-    <div style="color: #1b2559; height: 32px">
-      <div v-if="editLayout == false" class="row header-card">
-        <div class="col-3 tab-nav">
-          <p
-            :style="
-              darkmode
-                ? { color: 'white !important' }
-                : { color: '#1B2559 !important' }
-            "
-          >
-            Periode
-          </p>
-        </div>
-        <div class="col-9" style="font-size: 10px">
-          <ul class="nav nav-pills nav-justified">
-            <li class="nav-item">
-              <a class="nav-link" :class="activePeriod" href="#">Hari</a>
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="#"
-                :style="
-                  darkmode
-                    ? { color: 'white !important' }
-                    : { color: '#1B2559 !important' }
-                "
-                >Bulan</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
-                href="#"
-                :style="
-                  darkmode
-                    ? { color: 'white !important' }
-                    : { color: '#1B2559 !important' }
-                "
-                >Tahun</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
+    <div style="margin: 20px 0px" v-if="billing_efficiency == null">
+      <lottie
+        :width="250"
+        :options="lottieOptions"
+        @animCreated="handleAnimation"
+      />
     </div>
-    <div
-      class="row"
-      :class="contentCard"
-      style="border-radius: 15px 15px 0px 0px"
-    >
-      <div
-        class="card-top-border"
-        :class="[expanded ? cardTopAfter : cardTopBefore, cardTopBorder]"
-      >
-        <div class="badges">
-          <span>BPPSPAM</span>
-        </div>
 
-        <div class="mt-1">
-          <div class="row">
-            <h3
-              class="heading-text"
-              :style="darkmode ? { color: 'white' } : { color: '#1B2559' }"
+    <div v-else>
+      <div style="color: #1b2559; height: 32px">
+        <div v-if="editLayout == false" class="row header-card">
+          <div class="col-3 tab-nav">
+            <p
+              :style="
+                darkmode
+                  ? { color: 'white !important' }
+                  : { color: '#1B2559 !important' }
+              "
             >
-              Effisiensi Penagihan
-            </h3>
+              Periode
+            </p>
+          </div>
+          <div class="col-9" style="font-size: 10px">
+            <ul class="nav nav-pills nav-justified">
+              <li class="nav-item">
+                <a class="nav-link" :class="activePeriod" href="#">Hari</a>
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  :style="
+                    darkmode
+                      ? { color: 'white !important' }
+                      : { color: '#1B2559 !important' }
+                  "
+                  >Bulan</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  href="#"
+                  :style="
+                    darkmode
+                      ? { color: 'white !important' }
+                      : { color: '#1B2559 !important' }
+                  "
+                  >Tahun</a
+                >
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-      <div class="box-card-before">
-        <div style="padding: 20px 20px 0px 20px">
-          <div class="row">
-            <div class="col-5">
-              <div class="badges">
-                <span>BPPSPAM</span>
-              </div>
-            </div>
-            <div class="col-7">
-              <p style="font-size: 10px; margin-top: 5px; float: right">
-                Last Updated: 09.15 WITA
-              </p>
-            </div>
+      <div
+        class="row"
+        :class="contentCard"
+        style="border-radius: 15px 15px 0px 0px"
+      >
+        <div
+          class="card-top-border"
+          :class="[expanded ? cardTopAfter : cardTopBefore, cardTopBorder]"
+        >
+          <div class="badges">
+            <span>BPPSPAM</span>
           </div>
-          <div class="row">
-            <div class="col-7">
-              <p>Effisiensi Penagihan</p>
-              <h2 style="margin-top: -10px">
-                {{ billing_efficiency.percentage }}%
-              </h2>
-            </div>
-            <div class="col-5">
-              <div class="box-value-default">
-                <div class="row">
-                  <i class="fas fa-equals box-value-icon"></i>
-                  <p class="box-value-text">0</p>
-                </div>
-              </div>
-            </div>
-            <span class="container horirow"></span>
-            <div class="row" style="margin: 10px; 0px; width:100%">
-              <div class="col-8">
-                <div class="row">
-                  <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
-                    Penerimaan
-                    <span
-                      style="
-                        color: white;
-                        font-weight: bold;
-                        margin-left: 7px;
-                        font-size: 15px;
-                      "
-                    >
-                      Rp3,4m
-                    </span>
-                  </p>
-                </div>
-              </div>
-              <div class="col-4">
-                <div class="row">
-                  <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
-                    DRD
 
-                    <span
-                      style="
-                        color: white;
-                        font-weight: bold;
-                        margin-left: 7px;
-                        font-size: 15px;
-                      "
-                    >
-                      Rp 6m
-                    </span>
-                  </p>
-                </div>
-              </div>
+          <div class="mt-1">
+            <div class="row">
+              <h3
+                class="heading-text"
+                :style="darkmode ? { color: 'white' } : { color: '#1B2559' }"
+              >
+                Effisiensi Penagihan
+              </h3>
             </div>
           </div>
         </div>
+        <div class="box-card-before">
+          <div style="padding: 20px 20px 0px 20px">
+            <div class="row">
+              <div class="col-5">
+                <div class="badges">
+                  <span>BPPSPAM</span>
+                </div>
+              </div>
+              <div class="col-7">
+                <p style="font-size: 10px; margin-top: 5px; float: right">
+                  Last Updated: 09.15 WITA
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-7">
+                <p>Effisiensi Penagihan</p>
+                <h2 style="margin-top: -10px">
+                  {{ billing_efficiency.percentage }}%
+                </h2>
+              </div>
+              <div class="col-5">
+                <div class="box-value-default">
+                  <div class="row">
+                    <i class="fas fa-equals box-value-icon"></i>
+                    <p class="box-value-text">0</p>
+                  </div>
+                </div>
+              </div>
+              <span class="container horirow"></span>
+              <div class="row" style="margin: 10px; 0px; width:100%">
+                <div class="col-8">
+                  <div class="row">
+                    <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
+                      Penerimaan
+                      <span
+                        style="
+                          color: white;
+                          font-weight: bold;
+                          margin-left: 7px;
+                          font-size: 15px;
+                        "
+                      >
+                        Rp3,4m
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="row">
+                    <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
+                      DRD
+
+                      <span
+                        style="
+                          color: white;
+                          font-weight: bold;
+                          margin-left: 7px;
+                          font-size: 15px;
+                        "
+                      >
+                        Rp 6m
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            @click="expandWidget()"
+            class="d-flex justify-content-center expand-button"
+            v-if="expanded == false"
+            style="cursor: pointer"
+          >
+            <i
+              style="margin-top: 7px"
+              class="fa fa-angle-double-down"
+              aria-hidden="true"
+            ></i>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="row"
+        :class="contentCard"
+        style="padding-top: 24px; padding-left: 20px; padding-right: 20px"
+      >
+        <p class="alternate-text">Detail</p>
+      </div>
+      <div class="row">
         <div
           @click="expandWidget()"
-          class="d-flex justify-content-center expand-button"
-          v-if="expanded == false"
+          class="d-flex justify-content-center collapse-button"
+          :class="collapseButton"
           style="cursor: pointer"
         >
           <i
             style="margin-top: 7px"
-            class="fa fa-angle-double-down"
+            class="fa fa-angle-double-up"
             aria-hidden="true"
           ></i>
         </div>
       </div>
+      <br />
     </div>
-
-    <div
-      class="row"
-      :class="contentCard"
-      style="padding-top: 24px; padding-left: 20px; padding-right: 20px"
-    >
-      <p class="alternate-text">Detail</p>
-    </div>
-    <div class="row">
-      <div
-        @click="expandWidget()"
-        class="d-flex justify-content-center collapse-button"
-        :class="collapseButton"
-        style="cursor: pointer"
-      >
-        <i
-          style="margin-top: 7px"
-          class="fa fa-angle-double-up"
-          aria-hidden="true"
-        ></i>
-      </div>
-    </div>
-    <br />
 
     <!-- end card-body -->
   </div>

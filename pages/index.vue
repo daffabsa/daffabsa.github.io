@@ -74,15 +74,29 @@ export default {
   },
   methods: {
     removeWidget(index, list) {
-      this.$store.dispatch("layout/removeItemList", {
+      this.$store.dispatch("layout/updateItemList", {
         key: list,
+        item: 'DeletingWidget',
         index: index,
       });
+      setTimeout(() => {
+        this.$store.dispatch("layout/removeItemList", {
+          key: list,
+          index: index,
+        });
+      }, 5000);
     },
     addWidget(list, widget) {
       this.$store.dispatch("layout/addItemList", {
         key: list,
         item: widget,
+      });
+    },
+    updateWidget(list, index, widget){
+      this.$store.dispatch("layout/updateItemList", {
+        key: list,
+        item: widget,
+        index: index,
       });
     },
     showModalAdd(item) {

@@ -57,6 +57,10 @@ export const mutations = {
     }
   },
 
+  updateList(state, {key, item, index}){
+    state.datalist[key][index] = item;
+  },
+
   removeList(state, {key, index}){
     state.datalist[key].splice(index, 1);
     console.log('list1:'+state.datalist[key]);
@@ -99,6 +103,10 @@ export const actions = {
 
   addItemList({ commit }, { key, item }) {
     commit("addList", {key, item});
+  },
+
+  updateItemList({ commit }, { key, index, item }) {
+    commit("updateList", {key, item, index});
   },
 
   removeItemList({ commit }, { key, index, item }) {
