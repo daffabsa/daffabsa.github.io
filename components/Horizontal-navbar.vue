@@ -224,7 +224,11 @@ export default {
 
 <template>
   <div>
-    <div class="topnav" :class="sliderColor">
+    <div
+      class="topnav"
+      :class="sliderColor"
+      style="-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none"
+    >
       <div class="container-fluid">
         <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
           <div class="collapse navbar-collapse" id="topnav-menu-content">

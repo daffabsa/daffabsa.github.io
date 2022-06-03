@@ -51,14 +51,17 @@ export default {
 
 <template>
   <div class="card" style="height: 480px; width: 100%" :class="cardClass">
-    <div class="card-body">
-      <div id="map-wrap" style="height: 100%">
+    <!-- <div class="card-body"> -->
+    <div style="background-color: white; padding: 10px; border-radius: 15px">
+      <div id="map-wrap">
         <iframe
           src="http://pdambanyumas.net/gis/"
           frameborder="0"
           style="width: 100%; height: 100%"
         ></iframe>
-        <!-- <client-only>
+      </div>
+
+      <!-- <client-only>
           <l-map
             :zoom="15"
             :center="[-8.6730163, 115.1542327]"
@@ -70,7 +73,7 @@ export default {
             <l-marker :lat-lng="[-8.6730163, 115.1542327]"></l-marker>
           </l-map>
         </client-only> -->
-      </div>
+      <!-- </div> -->
     </div>
   </div>
 </template>

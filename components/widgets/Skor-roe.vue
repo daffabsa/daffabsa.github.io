@@ -54,7 +54,7 @@ export default {
       axios.get("/score_roe").then((res) => {
         this.score_roe = res.data;
       });
-    }, 2000);
+    }, 10000);
   },
   created() {
     EventBus.$on("editLayout", (editLayoutBool) => {
