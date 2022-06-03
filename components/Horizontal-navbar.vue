@@ -2,6 +2,7 @@
 import { menuItems } from "../helpers/horizontal-menu";
 import { mapState } from "vuex";
 import axios from "~/plugins/axios";
+import { EventBus } from "~/plugins/eventBus.js";
 
 /**
  * Horiontal-navbar component
@@ -11,6 +12,8 @@ export default {
     return {
       menuItems: menuItems,
       announcements: [],
+      darkmode: false,
+      sliderColor: "slider-light",
     };
   },
   computed: mapState(["layout"]),
@@ -34,6 +37,13 @@ export default {
     },
   },
   watch: {
+    darkmode: function (val) {
+      if (val == true) {
+        this.sliderColor = "slider-dark";
+      } else {
+        this.sliderColor = "slider-light";
+      }
+    },
     type: {
       immediate: true,
       handler(newVal, oldVal) {
@@ -194,12 +204,31 @@ export default {
       return false;
     },
   },
+  created() {
+    EventBus.$on("darkmode", (darkmodeBool) => {
+      this.darkmode = darkmodeBool;
+    });
+  },
 };
 </script>
 
+<style>
+.slider-dark {
+  background-color: #233753;
+}
+
+.slider-light {
+  background-color: white;
+}
+</style>
+
 <template>
   <div>
-    <div class="topnav">
+    <div
+      class="topnav"
+      :class="sliderColor"
+      style="-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none"
+    >
       <div class="container-fluid">
         <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
           <div class="collapse navbar-collapse" id="topnav-menu-content">

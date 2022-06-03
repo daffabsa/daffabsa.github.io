@@ -67,7 +67,6 @@ export default {
           <Nuxt />
         </div>
       </div>
-      <Footer />
     </div>
   </div>
 </template>

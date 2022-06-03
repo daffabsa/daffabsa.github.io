@@ -4,10 +4,18 @@ import { EventBus } from "~/plugins/eventBus.js";
  * Topbar component
  */
 export default {
+  head() {
+    return {
+      bodyAttrs: {
+        class: this.darkmode ? "dark" : "light",
+      },
+    };
+  },
   data() {
     return {
       editLayout: false,
       darkmode: false,
+      headerColor: "topbar-light",
     };
   },
   methods: {
@@ -35,9 +43,28 @@ export default {
       this.editLayout = !this.editLayout;
       EventBus.$emit("editLayout", this.editLayout);
     },
+
+    changeDarkmode() {
+      if (this.darkmode == true) {
+        this.headerColor = "topbar-dark";
+      } else {
+        this.headerColor = "topbar-light";
+      }
+      EventBus.$emit("darkmode", this.darkmode);
+    },
   },
 };
 </script>
+
+<style>
+.topbar-dark {
+  background-color: #233753;
+  color: white !important;
+}
+.topbar-light {
+  background-color: white;
+}
+</style>
 
 <template>
   <!-- Topbar Start -->
@@ -50,6 +77,7 @@ export default {
       user-select: none;
       -o-user-select: none;
     "
+    :class="headerColor"
   >
     <div class="container-fluid">
       <ul class="list-unstyled topnav-menu float-right mb-0">
@@ -68,7 +96,14 @@ export default {
                 class="rounded-circle"
               />
 
-              <span class="pro-user-name ml-1">
+              <span
+                class="pro-user-name ml-1"
+                :style="
+                  darkmode
+                    ? { color: 'white !important' }
+                    : { color: 'rgb(100,100,100) !important' }
+                "
+              >
                 {{ $t("navbar.dropdown.name.text") }}
                 <i class="mdi mdi-chevron-down"></i>
               </span>
@@ -143,22 +178,30 @@ export default {
           <div class="col-10" style="margin-left: 60px; margin-right: -60px">
             <p
               style="
-                color: #011a3d;
                 text-align: center;
                 font-weight: bold;
                 font-size: 20px;
                 line-height: 10px;
+              "
+              :style="
+                darkmode
+                  ? { color: 'white !important' }
+                  : { color: '#011a3d !important' }
               "
             >
               INTEGRATED COMMAND CENTER
             </p>
             <p
               style="
-                color: #2275ff;
                 text-align: center;
                 font-weight: bold;
                 font-size: 18px;
                 line-height: 10px;
+              "
+              :style="
+                darkmode
+                  ? { color: 'white !important' }
+                  : { color: '#2275ff !important' }
               "
             >
               PERUMDA TIRTA SAIL CRUISE PINK BEACH KOMODO
@@ -170,6 +213,7 @@ export default {
                 type="checkbox"
                 class="custom-control-input"
                 v-model="darkmode"
+                v-on:change="changeDarkmode"
                 id="customSwitch1"
               />
               <label
