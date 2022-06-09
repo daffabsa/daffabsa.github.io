@@ -57,7 +57,7 @@ export default {
         <iframe
           src="http://pdambanyumas.net/gis/"
           frameborder="0"
-          style="width: 100%; height: 100%"
+          style="width: 100%; height: 480px"
         ></iframe>
       </div>
 

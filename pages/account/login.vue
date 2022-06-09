@@ -88,26 +88,40 @@ export default {
 };
 </script>
 
-<template>
-  <div class="row justify-content-center">
-    <div class="col-md-8 col-lg-6 col-xl-5">
-      <div class="row mb-3 p-2">
-        <div class="auth-logo">
-          <nuxt-link to="/" class="logo logo-dark">
-            <span class="logo-lg">
-              <img src="~/assets/images/logo-dark.png" alt="SmartHRIS" />
-            </span>
-          </nuxt-link>
+<style>
+.login-button {
+  width: 520px;
+  height: 64px;
+  background-color: #2275ff !important;
+  border-radius: 15px;
+  border: 0px;
+  color: white;
+}
+</style>
 
-          <nuxt-link to="/" class="logo logo-light">
-            <span class="logo-lg">
-              <img src="~/assets/images/logo-dark.png" alt="SmartHRIS" />
-            </span>
-          </nuxt-link>
-        </div>
-      </div>
-      <h3></h3>
-      <div class="card">
+<template>
+  <div class="row">
+    <div class="col-md-6">
+      <img
+        src="~/assets/images/authentication/background.png"
+        style="width: 650px"
+      />
+    </div>
+    <div class="col-md-6">
+      <div style="background-color: white; padding: 200px 50px">
+        <p
+          class="textTitle ml-4"
+          style="
+            font-style: normal;
+            font-weight: 700;
+            font-size: 28px;
+            line-height: 28px;
+            letter-spacing: 0.15px;
+            color: #1b2559;
+          "
+        >
+          Silakan login ke ICC
+        </p>
         <div class="card-body p-4">
           <form action="#" @submit.prevent="tryToLogIn">
             <b-alert
@@ -127,14 +141,14 @@ export default {
               dismissible
               >{{ authError }}</b-alert
             >
-            <div class="form-group mb-3">
-              <label for="emailaddress">Email address</label>
+            <div class="form-group mb-3" style="width: 520px">
+              <label for="emailaddress">Email</label>
               <input
                 class="form-control"
                 v-model="email"
                 type="email"
                 id="emailaddress"
-                placeholder="Enter your email"
+                placeholder="Masukkan Email Anda"
                 :class="{ 'is-invalid': submitted && $v.email.$error }"
               />
               <div v-if="submitted && $v.email.$error" class="invalid-feedback">
@@ -143,7 +157,7 @@ export default {
               </div>
             </div>
 
-            <div class="form-group mb-3">
+            <div class="form-group mb-3" style="width: 520px">
               <label for="password">Password</label>
               <div class="input-group input-group-merge">
                 <input
@@ -151,7 +165,7 @@ export default {
                   type="password"
                   id="password"
                   class="form-control"
-                  placeholder="Enter your password"
+                  placeholder="Masukkan Password Anda"
                   :class="{ 'is-invalid': submitted && $v.password.$error }"
                 />
 
@@ -169,83 +183,25 @@ export default {
               </div>
             </div>
 
-            <!-- <div class="form-group mb-3">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="checkbox-signin" checked />
-                <label class="custom-control-label" for="checkbox-signin">Remember me</label>
-              </div>
-            </div> -->
+            <div class="form-group mb-0 text-center mt-5 mr-1">
+              <button class="login-button" type="submit">Masuk</button>
+            </div>
 
-            <div class="form-group mb-0 text-center">
+            <div class="form-group mb-0 text-center mt-4">
               <p>
-                <nuxt-link to="/account/forgot-password" class="text-muted ml-1"
-                  >Forgot your password?</nuxt-link
+                <nuxt-link
+                  to="/account/forgot-password"
+                  class="ml-1"
+                  style="color: #2275ff"
+                  >Lupa password?</nuxt-link
                 >
               </p>
             </div>
-            <div class="form-group mb-0 text-center">
-              <button class="btn btn-primary btn-block" type="submit">
-                Log In
-              </button>
-            </div>
           </form>
-
-          <div class="text-center">
-            <h5 class="mt-3 text-muted">Sign in with</h5>
-            <ul class="social-list list-inline mt-3 mb-0">
-              <li class="list-inline-item">
-                <a
-                  href="javascript: void(0);"
-                  class="social-list-item border-purple text-purple"
-                >
-                  <i class="mdi mdi-facebook"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a
-                  href="javascript: void(0);"
-                  class="social-list-item border-danger text-danger"
-                >
-                  <i class="mdi mdi-google"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a
-                  href="javascript: void(0);"
-                  class="social-list-item border-info text-info"
-                >
-                  <i class="mdi mdi-twitter"></i>
-                </a>
-              </li>
-              <!-- <li class="list-inline-item">
-                <a
-                  href="javascript: void(0);"
-                  class="social-list-item border-secondary text-secondary"
-                >
-                  <i class="mdi mdi-github"></i>
-                </a>
-              </li> -->
-            </ul>
-          </div>
         </div>
         <!-- end card-body -->
       </div>
       <!-- end card -->
-
-      <div class="row mt-3">
-        <div class="col-12 text-center">
-          <p class="text-muted">
-            Don't have an account?
-            <nuxt-link
-              to="/account/register"
-              class="text-primary font-weight-medium ml-1"
-              >Sign Up</nuxt-link
-            >
-          </p>
-        </div>
-        <!-- end col -->
-      </div>
-      <!-- end row -->
     </div>
     <!-- end col -->
   </div>
