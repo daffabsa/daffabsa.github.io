@@ -7,19 +7,20 @@ import { required, email } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
-      email: "",
+      password: "123456",
+      confirm_password: "123456",
       submitted: false,
       error: null,
       tryingToReset: false,
       isResetError: false,
     };
   },
-  validations: {
-    email: {
-      required,
-      email,
-    },
-  },
+  // validations: {
+  //   email: {
+  //     required,
+  //     email,
+  //   },
+  // },
   methods: {
     goToPrev() {
       this.$router.go(-1);
@@ -84,13 +85,6 @@ export default {
         "
       >
         <p
-          @click="goToPrev()"
-          style="margin: 0px 35px; cursor: pointer; color: #8692a6"
-        >
-          <i class="fa fa-angle-left" style="margin-right: 10px"></i>
-          Kembali
-        </p>
-        <p
           class="textTitle ml-4"
           style="
             font-style: normal;
@@ -102,22 +96,7 @@ export default {
             margin-top: 150px;
           "
         >
-          Lupa Password Anda?
-        </p>
-        <p
-          style="
-            font-family: 'Manrope';
-            font-style: normal;
-            font-weight: 400;
-            font-size: 16px;
-            line-height: 22px;
-            align-items: center;
-            color: #76818c;
-            margin: 10px 35px;
-          "
-        >
-          Masukkan email Anda yang telah terdaftar dan Kami akan mengirimkan
-          link reset password.
+          Reset Password
         </p>
         <div class="card-body p-4">
           <form action="#" @submit.prevent="tryToReset">
@@ -128,19 +107,55 @@ export default {
               dismissible
               >{{ error }}</b-alert
             >
-            <div class="form-group mb-3">
-              <label for="emailaddress">Email</label>
-              <input
-                v-model="email"
-                class="form-control"
-                type="email"
-                id="emailaddress"
-                :class="{ 'is-invalid': submitted && $v.email.$error }"
-                placeholder="Write your email"
-              />
-              <div v-if="submitted && $v.email.$error" class="invalid-feedback">
-                <span v-if="!$v.email.required">Email is required.</span>
-                <span v-if="!$v.email.email">Please enter valid email.</span>
+            <div class="form-group mb-3" style="width: 520px">
+              <label for="password">Password Baru</label>
+              <div class="input-group input-group-merge">
+                <input
+                  v-model="password"
+                  type="password"
+                  id="password"
+                  class="form-control"
+                  placeholder="Masukkan Password Anda"
+                  :class="{ 'is-invalid': submitted && $v.password.$error }"
+                />
+
+                <div class="input-group-append" data-password="false">
+                  <div class="input-group-text">
+                    <span class="password-eye"></span>
+                  </div>
+                </div>
+                <div
+                  v-if="submitted && !$v.password.required"
+                  class="invalid-feedback"
+                >
+                  Password is required.
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group mb-3" style="width: 520px">
+              <label for="password">Konfirmasi Password Baru</label>
+              <div class="input-group input-group-merge">
+                <input
+                  v-model="confirm_password"
+                  type="password"
+                  id="password"
+                  class="form-control"
+                  placeholder="Masukkan Password Anda"
+                  :class="{ 'is-invalid': submitted && $v.password.$error }"
+                />
+
+                <div class="input-group-append" data-password="false">
+                  <div class="input-group-text">
+                    <span class="password-eye"></span>
+                  </div>
+                </div>
+                <div
+                  v-if="submitted && !$v.password.required"
+                  class="invalid-feedback"
+                >
+                  Password is required.
+                </div>
               </div>
             </div>
 
@@ -151,12 +166,6 @@ export default {
             >
               Reset Password
             </button>
-            <nuxt-link
-              to="/account/reset-password"
-              class="ml-1"
-              style="color: #2275ff"
-              >bypass</nuxt-link
-            >
           </form>
         </div>
         <!-- end card-body -->

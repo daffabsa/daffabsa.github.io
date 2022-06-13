@@ -100,7 +100,10 @@ export default {
 </style>
 
 <template>
-  <div class="row">
+  <div
+    class="row"
+    style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
+  >
     <div class="col-md-6">
       <img
         src="~/assets/images/authentication/background.png"
@@ -108,7 +111,15 @@ export default {
       />
     </div>
     <div class="col-md-6">
-      <div style="background-color: white; padding: 200px 50px">
+      <div
+        style="
+          background-color: white;
+          padding: 200px 50px;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+        "
+      >
         <p
           class="textTitle ml-4"
           style="
