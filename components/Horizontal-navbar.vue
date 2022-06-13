@@ -3,17 +3,20 @@ import { menuItems } from "../helpers/horizontal-menu";
 import { mapState } from "vuex";
 import axios from "~/plugins/axios";
 import { EventBus } from "~/plugins/eventBus.js";
-
+import FlipCountdown from "vue2-flip-countdown";
+import moment from "moment";
 /**
  * Horiontal-navbar component
  */
 export default {
+  components: { FlipCountdown },
   data() {
     return {
       menuItems: menuItems,
       announcements: [],
       darkmode: false,
       sliderColor: "slider-light",
+      today: "",
     };
   },
   computed: mapState(["layout"]),
@@ -21,6 +24,8 @@ export default {
     axios.get("/announcements").then((res) => {
       this.announcements = res.data;
     });
+    moment.locale("id");
+    this.today = moment(Date()).format("dddd, Do MMMM YYYY");
   },
   props: {
     type: {
@@ -241,17 +246,31 @@ export default {
                   padding-right: 20px;
                 "
               >
-                <p
-                  style="
-                    color: white;
-                    text-align: center;
-                    vertical-align: baseline;
-                    padding-top: 17px;
-                    padding-bottom: 17px;
-                  "
-                >
-                  Selasa, 19 April 2022 15.00 WITA
-                </p>
+                <div class="row">
+                  <div class="col-md-5">
+                    <p
+                      style="
+                        color: white;
+                        text-align: left;
+                        vertical-align: baseline;
+                        padding-top: 17px;
+                        padding-bottom: 17px;
+                        width: 200px;
+                      "
+                    >
+                      {{ today }}
+                      <!-- Selasa, 19 September 2022 -->
+                    </p>
+                  </div>
+                  <div class="col-md-7">
+                    <div style="width: 220px; margin-top: 10px">
+                      <flip-countdown
+                        deadline="2052-12-25 00:00:00"
+                        :showDays="false"
+                      ></flip-countdown>
+                    </div>
+                  </div>
+                </div>
               </div>
             </ul>
             <div style="width: 80%">
