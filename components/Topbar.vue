@@ -95,7 +95,7 @@ export default {
               "
               >Dark Mode</label
             >
-            <label class="switch" style="margin-left: 20px">
+            <label class="switch" style="margin-left: 15px">
               <input
                 type="checkbox"
                 v-model="darkmode"
