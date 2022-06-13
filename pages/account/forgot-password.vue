@@ -1,8 +1,5 @@
 <script>
-import {
-  required,
-  email
-} from "vuelidate/lib/validators";
+import { required, email } from "vuelidate/lib/validators";
 
 /**
  * Forgot-password component
@@ -14,16 +11,19 @@ export default {
       submitted: false,
       error: null,
       tryingToReset: false,
-      isResetError: false
-    }
+      isResetError: false,
+    };
   },
   validations: {
     email: {
       required,
-      email
-    }
+      email,
+    },
   },
   methods: {
+    goToPrev() {
+      this.$router.go(-1);
+    },
     // Try to register the user in with the email, fullname
     // and password they provided.
     tryToReset() {
@@ -39,15 +39,16 @@ export default {
           // Reset the authError if it existed.
           this.error = null;
           return (
-            this.$store.dispatch('auth/resetPassword', {
-              email: this.email
-            })
+            this.$store
+              .dispatch("auth/resetPassword", {
+                email: this.email,
+              })
               // eslint-disable-next-line no-unused-vars
-              .then(token => {
+              .then((token) => {
                 this.tryingToReset = false;
                 this.isResetError = false;
               })
-              .catch(error => {
+              .catch((error) => {
                 this.tryingToReset = false;
                 this.error = error ? error : "";
                 this.isResetError = true;
@@ -55,47 +56,87 @@ export default {
           );
         }
       }
-    }
+    },
   },
-  layout: 'auth'
-}
+  layout: "auth",
+};
 </script>
 
 <template>
-  <div class="row justify-content-center">
-    <div class="col-md-8 col-lg-6 col-xl-5">
-      <div class="card">
+  <div
+    class="row"
+    style="position: absolute; top: 0; bottom: 0; left: 0; right: 0"
+  >
+    <div class="col-md-6">
+      <img
+        src="~/assets/images/authentication/background.png"
+        style="width: 650px"
+      />
+    </div>
+    <div class="col-md-6">
+      <div
+        style="
+          background-color: white;
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          padding: 55px 50px;
+        "
+      >
+        <p
+          @click="goToPrev()"
+          style="margin: 0px 35px; cursor: pointer; color: #8692a6"
+        >
+          <i class="fa fa-angle-left" style="margin-right: 10px"></i>
+          Kembali
+        </p>
+        <p
+          class="textTitle ml-4"
+          style="
+            font-style: normal;
+            font-weight: 700;
+            font-size: 28px;
+            line-height: 28px;
+            letter-spacing: 0.15px;
+            color: #1b2559;
+            margin-top: 150px;
+          "
+        >
+          Lupa Password Anda?
+        </p>
+        <p
+          style="
+            font-family: 'Manrope';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 22px;
+            align-items: center;
+            color: #76818c;
+            margin: 10px 35px;
+          "
+        >
+          Masukkan email Anda yang telah terdaftar dan Kami akan mengirimkan
+          link reset password.
+        </p>
         <div class="card-body p-4">
-          <div class="text-center w-75 m-auto">
-            <div class="auth-logo">
-              <nuxt-link to="/" class="logo logo-dark text-center">
-                <span class="logo-lg">
-                  <img src="~/assets/images/logo-dark.png" alt="logo" />
-                </span>
-              </nuxt-link>
-
-              <nuxt-link to="/" class="logo logo-light text-center">
-                <span class="logo-lg">
-                  <img src="~/assets/images/logo-light.png" alt="logo" />
-                </span>
-              </nuxt-link>
-            </div>
-            <p
-              class="text-muted mb-4 mt-3"
-            >Enter your email address and we'll send you an email with instructions to reset your password.</p>
-          </div>
-
           <form action="#" @submit.prevent="tryToReset">
-            <b-alert v-model="isResetError" class="mb-4" variant="danger" dismissible>{{ error }}</b-alert>
+            <b-alert
+              v-model="isResetError"
+              class="mb-4"
+              variant="danger"
+              dismissible
+              >{{ error }}</b-alert
+            >
             <div class="form-group mb-3">
-              <label for="emailaddress">Email address</label>
+              <label for="emailaddress">Email</label>
               <input
                 v-model="email"
                 class="form-control"
                 type="email"
                 id="emailaddress"
                 :class="{ 'is-invalid': submitted && $v.email.$error }"
-                placeholder="Enter your email"
+                placeholder="Write your email"
               />
               <div v-if="submitted && $v.email.$error" class="invalid-feedback">
                 <span v-if="!$v.email.required">Email is required.</span>
@@ -103,25 +144,18 @@ export default {
               </div>
             </div>
 
-            <div class="form-group mb-0 text-center">
-              <button class="btn btn-primary btn-block" type="submit">Reset Password</button>
-            </div>
+            <button
+              style="margin-top: 50px; width: 100%"
+              class="login-button"
+              type="submit"
+            >
+              Reset Password
+            </button>
           </form>
         </div>
         <!-- end card-body -->
       </div>
       <!-- end card -->
-
-      <div class="row mt-3">
-        <div class="col-12 text-center">
-          <p class="text-muted">
-            Back to
-            <nuxt-link to="/account/login" class="text-primary font-weight-medium ml-1">Log in</nuxt-link>
-          </p>
-        </div>
-        <!-- end col -->
-      </div>
-      <!-- end row -->
     </div>
     <!-- end col -->
   </div>
