@@ -52,12 +52,12 @@ export default {
 <template>
   <div class="card" style="height: 480px; width: 100%" :class="cardClass">
     <!-- <div class="card-body"> -->
-    <div style="background-color: white; padding: 10px; border-radius: 15px">
+    <!-- <div style="background-color: white; padding: 10px; border-radius: 15px"> -->
       <div id="map-wrap">
         <iframe
-          src="http://pdambanyumas.net/gis/"
+          src="http://gis.pdampintar.id/map/kota-jayapura"
           frameborder="0"
-          style="width: 100%; height: 480px"
+          style="width: 100%; height: 520px; border-radius: 15px"
         ></iframe>
       </div>
 
@@ -75,5 +75,4 @@ export default {
         </client-only> -->
       <!-- </div> -->
     </div>
-  </div>
 </template>

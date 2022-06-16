@@ -186,10 +186,18 @@ export default {
           </span>
           <span class="logo-lg">
             <img
+              src="~/assets/images/pdam_pintar_white.png"
+              alt
+              height="25"
+              style="margin-right: 20px"
+              v-if="darkmode"
+            />  
+            <img
               src="~/assets/images/pdam_pintar.png"
               alt
               height="25"
               style="margin-right: 20px"
+              v-else
             />
             <img src="~/assets/images/tirta.png" alt height="25" />
           </span>
@@ -214,10 +222,13 @@ export default {
         </p>
         <p
           style="
+            font-family: 'Manrope';
             text-align: center;
-            font-weight: bold;
+            font-style: normal;
+            font-weight: 600;
             font-size: 18px;
             line-height: 10px;
+            letter-spacing: 0.5px;
           "
           :style="
             darkmode
