@@ -81,7 +81,30 @@ export default {
   >
     <div class="container-fluid">
       <ul class="list-unstyled topnav-menu float-right mb-0">
-        <li></li>
+        <li>
+          <div
+            style="margin-top: 25px; margin-right: 20px; margin-left: -110px"
+          >
+            <label
+              style="
+                font-family: sans-serif;
+                font-weight: normal;
+                font-size: 12px;
+                float: left;
+                margin-top: 2px;
+              "
+              >Dark Mode</label
+            >
+            <label class="switch" style="margin-left: 15px">
+              <input
+                type="checkbox"
+                v-model="darkmode"
+                v-on:change="changeDarkmode"
+              />
+              <span class="slider round"></span>
+            </label>
+          </div>
+        </li>
         <b-nav-item-dropdown
           right
           class="notification-list topbar-dropdown"
@@ -163,10 +186,18 @@ export default {
           </span>
           <span class="logo-lg">
             <img
+              src="~/assets/images/pdam_pintar_white.png"
+              alt
+              height="25"
+              style="margin-right: 20px"
+              v-if="darkmode"
+            />  
+            <img
               src="~/assets/images/pdam_pintar.png"
               alt
               height="25"
               style="margin-right: 20px"
+              v-else
             />
             <img src="~/assets/images/tirta.png" alt height="25" />
           </span>
@@ -174,57 +205,39 @@ export default {
       </div>
 
       <div style="width: 100%; padding-top: 15px" class="textTitle">
-        <div class="row">
-          <div class="col-10" style="margin-left: 60px; margin-right: -60px">
-            <p
-              style="
-                text-align: center;
-                font-weight: bold;
-                font-size: 20px;
-                line-height: 10px;
-              "
-              :style="
-                darkmode
-                  ? { color: 'white !important' }
-                  : { color: '#011a3d !important' }
-              "
-            >
-              INTEGRATED COMMAND CENTER
-            </p>
-            <p
-              style="
-                text-align: center;
-                font-weight: bold;
-                font-size: 18px;
-                line-height: 10px;
-              "
-              :style="
-                darkmode
-                  ? { color: 'white !important' }
-                  : { color: '#2275ff !important' }
-              "
-            >
-              PERUMDA TIRTA SAIL CRUISE PINK BEACH KOMODO
-            </p>
-          </div>
-          <div class="col-2">
-            <div class="custom-control custom-switch" style="margin-top: 10px">
-              <input
-                type="checkbox"
-                class="custom-control-input"
-                v-model="darkmode"
-                v-on:change="changeDarkmode"
-                id="customSwitch1"
-              />
-              <label
-                class="custom-control-label"
-                for="customSwitch1"
-                style="font-family: sans-serif; font-weight: normal"
-                >Dark Mode</label
-              >
-            </div>
-          </div>
-        </div>
+        <p
+          style="
+            text-align: center;
+            font-weight: bold;
+            font-size: 20px;
+            line-height: 10px;
+          "
+          :style="
+            darkmode
+              ? { color: 'white !important' }
+              : { color: '#011a3d !important' }
+          "
+        >
+          INTEGRATED COMMAND CENTER
+        </p>
+        <p
+          style="
+            font-family: 'Manrope';
+            text-align: center;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 18px;
+            line-height: 10px;
+            letter-spacing: 0.5px;
+          "
+          :style="
+            darkmode
+              ? { color: 'white !important' }
+              : { color: '#2275ff !important' }
+          "
+        >
+          PERUMDA TIRTA SAIL CRUISE PINK BEACH KOMODO
+        </p>
       </div>
 
       <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
