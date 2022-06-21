@@ -2,7 +2,7 @@
 import axios from "~/plugins/axios";
 import { EventBus } from "~/plugins/eventBus.js";
 import lottie from "vue-lottie/src/lottie.vue";
-import * as addWidgetAnim from "~/assets/lottie/add-widget.json";
+import * as addWidgetAnim from "~/assets/lottie/loading-widget.json";
 /**
  * Skor-roe component
  */
@@ -149,7 +149,7 @@ export default {
                   href="#"
                   :style="
                     darkmode
-                      ? { color: 'white !important' }
+                      ? { color: '#9E9E9E !important' }
                       : { color: '#1B2559 !important' }
                   "
                   >Bulan</a
@@ -161,7 +161,7 @@ export default {
                   href="#"
                   :style="
                     darkmode
-                      ? { color: 'white !important' }
+                      ? { color: '#9E9E9E !important' }
                       : { color: '#1B2559 !important' }
                   "
                   >Tahun</a
