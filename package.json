@@ -1,16 +1,13 @@
 {
   "name": "icc",
   "version": "1.0.0",
-  "description": "ICC Dashboard",
+  "description": "ICC Dashboards",
   "private": true,
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate"
-  },
-  "engines": {
-    "node": "14.19.0"
   },
   "author": "bsatech",
   "dependencies": {
