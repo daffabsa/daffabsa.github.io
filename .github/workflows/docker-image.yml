@@ -38,4 +38,4 @@ jobs:
           context: ./app
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.REGISTRY_URL }}/smart-hris/smart-hris-admin:${{ steps.get_version.outputs.VERSION }}-staging
+          tags: ${{ secrets.REGISTRY_URL }}/sibs-v2/icc-dashboard:${{ steps.get_version.outputs.VERSION }}-staging
