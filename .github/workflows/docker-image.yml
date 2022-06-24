@@ -35,7 +35,7 @@ jobs:
       - name: Build & push Docker images
         uses: docker/build-push-action@v2
         with:
-          context: ./app
+          context: ./
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.REGISTRY_URL }}/sibs-v2/icc-dashboard:${{ steps.get_version.outputs.VERSION }}-staging
