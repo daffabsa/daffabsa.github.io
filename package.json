@@ -9,9 +9,6 @@
     "start": "nuxt start",
     "generate": "nuxt generate"
   },
-  "engines": {
-    "node": "14.19.0"
-  },
   "author": "bsatech",
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^22.0.0",
