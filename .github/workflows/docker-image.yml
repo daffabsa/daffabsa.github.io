@@ -44,14 +44,17 @@ jobs:
         uses: google-github-actions/setup-gcloud@v0.2.1
         with:
           version: "290.0.1"
+          
       - name: Setup Kubeconfig
         run: |
           cat >> ./kubeconfig_icc <<END 
           ${{ secrets.KUBECONFIG_RARA }}
           END
+          
       - name: Deploy
         run: |
           kubectl --kubeconfig ./kubeconfig_icc -n icc set image deployment/icc-fe icc-fe=pelabuhan.alterra.dev/sibs-v2/icc-dashboard:${{ steps.vars.outputs.version }} --record
+          
       - name: Clean
         run: |
           rm -rf ./kubeconfig_icc
