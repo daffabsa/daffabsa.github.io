@@ -12,7 +12,6 @@ jobs:
     # runs-on: ubuntu-latest
     runs-on: [self-hosted, ubuntu-runner-1]
     # needs: test
-    if: github.event_name == 'push'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
