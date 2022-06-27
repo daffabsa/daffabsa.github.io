@@ -71,7 +71,6 @@ export default {
   <!-- Topbar Start -->
   <div class="navbar-custom-layout">
     <div
-      class="container-fluid"
       style="padding-top: 15px; padding-bottom: 15px"
     >
       <p

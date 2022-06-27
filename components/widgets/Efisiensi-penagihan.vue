@@ -12,7 +12,7 @@ export default {
   },
   data() {
     return {
-      billing_efficiency: null,
+      efektivitas_penagihan: null,
       expanded: false,
       editLayout: false,
       cardBefore: "card-efisiensi-before",
@@ -25,6 +25,7 @@ export default {
       contentCard: "content-light",
       collapseButton: "collapse-button-light",
       activePeriod: "active-light",
+      boxValueColor: "box-value-default",
       anim: null,
       lottieOptions: {
         animationData: addWidgetAnim.default,
@@ -51,10 +52,15 @@ export default {
   },
   beforeMount() {
     setTimeout(() => {
-      axios.get("/billing_efficiency").then((res) => {
-        this.billing_efficiency = res.data;
+      axios.get("icc-efektivitaspenagihan/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48/2022/rekap").then((res) => {
+        this.efektivitas_penagihan = res.data;
+        if(this.efektivitas_penagihan.data.presentase.includes('-')){
+          this.boxValueColor = "box-value-red";
+        } else {
+          this.boxValueColor = "box-value-green";
+        }
       });
-    }, 5000);
+    }, 2000);
   },
   created() {
     EventBus.$on("editLayout", (editLayoutBool) => {
@@ -115,7 +121,7 @@ export default {
     class="card container"
     :class="[expanded ? cardAfter : cardBefore, cardClass]"
   >
-    <div style="margin: 20px 0px" v-if="billing_efficiency == null">
+    <div style="margin: 20px 0px" v-if="efektivitas_penagihan == null">
       <lottie
         :width="250"
         :options="lottieOptions"
@@ -189,7 +195,7 @@ export default {
                 class="heading-text"
                 :style="darkmode ? { color: 'white' } : { color: '#1B2559' }"
               >
-                Effisiensi Penagihan
+                Efektivitas Penagihan
               </h3>
             </div>
           </div>
@@ -210,16 +216,18 @@ export default {
             </div>
             <div class="row">
               <div class="col-7">
-                <p>Effisiensi Penagihan</p>
+                <p>Efektivitas Penagihan</p>
                 <h2 style="margin-top: -10px">
-                  {{ billing_efficiency.percentage }}%
+                  {{ efektivitas_penagihan.data.efektifitaspenagihan }}%
                 </h2>
               </div>
               <div class="col-5">
-                <div class="box-value-default">
+                <div :class="boxValueColor">
                   <div class="row">
-                    <i class="fas fa-equals box-value-icon"></i>
-                    <p class="box-value-text">0</p>
+                    <i class="fas fa-arrow-down box-value-icon" v-if="boxValueColor == 'box-value-red'"></i>
+                    <i class="fas fa-arrow-up box-value-icon" v-else-if="boxValueColor == 'box-value-green'"></i>
+                    <i class="fas fa-equals box-value-icon" v-else></i>
+                    <p class="box-value-text">{{ efektivitas_penagihan.data.presentase}}</p>
                   </div>
                 </div>
               </div>
@@ -237,7 +245,7 @@ export default {
                           font-size: 15px;
                         "
                       >
-                        Rp3,4m
+                        Rp{{ efektivitas_penagihan.data.penerimaanair }}
                       </span>
                     </p>
                   </div>
@@ -255,7 +263,7 @@ export default {
                           font-size: 15px;
                         "
                       >
-                        Rp 6m
+                        Rp {{ efektivitas_penagihan.data.rekeningair }}
                       </span>
                     </p>
                   </div>

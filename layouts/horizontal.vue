@@ -55,9 +55,7 @@ export default {
     <!-- ============================================================== -->
     <div class="content-page">
       <div class="content">
-        <div class="container-fluid">
           <Nuxt />
-        </div>
       </div>
       <!-- content -->
     </div>

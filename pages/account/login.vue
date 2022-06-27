@@ -7,8 +7,8 @@ import { required, email } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
-      email: "hris@bsa.id",
-      password: "123456",
+      email: "", //iccdash@bsa.id
+      password: "", //BSA2022@icc
       submitted: false,
       authError: null,
       tryingToLogIn: false,

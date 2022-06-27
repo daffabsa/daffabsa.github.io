@@ -315,6 +315,28 @@ div.badges span {
     color: #646464 !important;
 }
 
+.box-value-green {
+    border-radius: 50px;
+    background: #338D5D;
+    padding: 1px 20px;
+    width: fit-content;
+    height: 25px;
+    float: right;
+    margin-top: 20px;
+    color: white !important;
+}
+
+.box-value-red {
+    border-radius: 50px;
+    background: #FF4A6D;
+    padding: 1px 20px;
+    width: fit-content;
+    height: 25px;
+    float: right;
+    margin-top: 20px;
+    color: white !important;
+}
+
 .box-value-icon {
     text-align: center;
     font-size: 11px;
@@ -325,6 +347,22 @@ div.badges span {
 
 .box-value-default p {
     color: #646464;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: baseline;
+    font-weight: bold;
+}
+
+.box-value-green p {
+    color: white;
+    font-size: 16px;
+    text-align: center;
+    vertical-align: baseline;
+    font-weight: bold;
+}
+
+.box-value-red p {
+    color: white;
     font-size: 16px;
     text-align: center;
     vertical-align: baseline;

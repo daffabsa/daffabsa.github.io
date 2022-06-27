@@ -63,8 +63,6 @@ export const mutations = {
 
   removeList(state, {key, index}){
     state.datalist[key].splice(index, 1);
-    console.log('list1:'+state.datalist[key]);
-    console.log('_list1:'+state.datalist._list1);
   }
 };
 

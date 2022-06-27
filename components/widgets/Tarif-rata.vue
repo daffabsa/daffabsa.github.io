@@ -12,7 +12,7 @@ export default {
   },
   data() {
     return {
-      score_roe: null,
+      tarif_rata: null,
       expanded: false,
       editLayout: false,
       cardBefore: "card-tarif-rata-before",
@@ -25,6 +25,7 @@ export default {
       contentCard: "content-light",
       collapseButton: "collapse-button-light",
       activePeriod: "active-light",
+      boxValueColor: "box-value-default",
       anim: null,
       lottieOptions: {
         animationData: addWidgetAnim.default,
@@ -51,10 +52,16 @@ export default {
   },
   beforeMount() {
     setTimeout(() => {
-      axios.get("/score_roe").then((res) => {
-        this.score_roe = res.data;
+      axios.get("icc-tarifrata/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48/2022-06-01/all").then((res) => {
+        this.tarif_rata = res.data;
+        if(this.tarif_rata.data.presentase.includes('-')){
+          this.boxValueColor = "box-value-red";
+        } else {
+          this.boxValueColor = "box-value-green";
+        }
+        // console.log(res.data);
       });
-    }, 5000);
+    }, 2000);
   },
   created() {
     EventBus.$on("editLayout", (editLayoutBool) => {
@@ -116,7 +123,7 @@ export default {
     class="card container"
     :class="[expanded ? cardAfter : cardBefore, cardClass]"
   >
-    <div style="margin: 20px 0px" v-if="score_roe == null">
+    <div style="margin: 20px 0px" v-if="tarif_rata == null">
       <lottie
         :width="250"
         :options="lottieOptions"
@@ -212,13 +219,15 @@ export default {
             <div class="row">
               <div class="col-7">
                 <p>Tarif Rata-Rata Bulan Ini</p>
-                <h2 style="margin-top: -10px; font-size: 22px">5.473 Rp/m3</h2>
+                <h2 style="margin-top: -10px; font-size: 22px">{{ tarif_rata.data.tarifbi }} Rp/m3</h2>
               </div>
               <div class="col-5">
-                <div class="box-value-default">
+                <div :class="boxValueColor">
                   <div class="row">
-                    <i class="fas fa-equals box-value-icon"></i>
-                    <p class="box-value-text">0</p>
+                    <i class="fas fa-arrow-down box-value-icon" v-if="boxValueColor == 'box-value-red'"></i>
+                    <i class="fas fa-arrow-up box-value-icon" v-else-if="boxValueColor == 'box-value-green'"></i>
+                    <i class="fas fa-equals box-value-icon" v-else></i>
+                    <p class="box-value-text">{{ tarif_rata.data.presentase}}</p>
                   </div>
                 </div>
               </div>
@@ -236,7 +245,7 @@ export default {
                           font-size: 15px;
                         "
                       >
-                        5.505
+                        {{ tarif_rata.data.tarifbl }}
                       </span>
                     </p>
                   </div>
@@ -254,7 +263,7 @@ export default {
                           font-size: 15px;
                         "
                       >
-                        5.493
+                        {{ tarif_rata.data.tarif2bl }}
                       </span>
                     </p>
                   </div>
