@@ -1,19 +1,18 @@
 name: Build FE Staging
 on:
-  workflow_dispatch:
-    inputs:
-      version:
-        description: "input version ( eg: v1.0.0)"
-        required: true
-  release:
-    types:
-      - prereleased
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: 
+      - master
+
 jobs:
   build-prereleased:
     # runs-on: ubuntu-latest
     runs-on: [self-hosted, ubuntu-runner-1]
     # needs: test
-    if: github.event.inputs.version == ''
+    if: github.event_name == 'push'
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -39,7 +38,16 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: ${{ secrets.REGISTRY_URL }}/sibs-v2/icc-dashboard:${{ steps.get_version.outputs.VERSION }}
-          
+          build-args: |
+            VUE_APP_DEFAULT_AUTH=${{ secrets.VUE_APP_DEFAULT_AUTH_STAGING }}
+            VUE_APP_APIKEY=${{ secrets.VUE_APP_APIKEY_STAGING }}
+            VUE_APP_AUTHDOMAIN=${{ secrets.VUE_APP_AUTHDOMAIN_STAGING }}
+            VUE_APP_DATABASEURL=${{ secrets.VUE_APP_DATABASEURL_STAGING }}
+            VUE_APP_PROJECTId=${{ secrets.VUE_APP_PROJECTId_STAGING }}
+            VUE_APP_STORAGEBUCKET=${{ secrets.VUE_APP_STORAGEBUCKET_STAGING }}
+            VUE_APP_MESSAGINGSENDERID=${{ secrets.VUE_APP_MESSAGINGSENDERID_STAGING }}
+            VUE_APP_APPId=${{ secrets.VUE_APP_APPId_STAGING }}
+            VUE_APP_MEASUREMENTID=${{ secrets.VUE_APP_MEASUREMENTID_STAGING }}
       - name: Setup GCP / Kubectl
         uses: google-github-actions/setup-gcloud@v0.2.1
         with:
