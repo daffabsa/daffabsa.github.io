@@ -18,6 +18,7 @@ export default {
   },
   data() {
     return {
+      darkmode: false,
       title: "ICC",
       items: [
         {
@@ -52,6 +53,9 @@ export default {
   created() {
     EventBus.$on("editLayout", (editLayoutBool) => {
       this.editLayout = editLayoutBool;
+    });
+    EventBus.$on("darkmode", (darkmodeBool) => {
+      this.darkmode = darkmodeBool;
     });
     // this.$store.dispatch("layout/savePositionList", {
     //   key: "_list1",
@@ -252,7 +256,7 @@ export default {
       </div>
 
     <Transition name="fade" :duration="550"> 
-      <div v-if="perbesar == false" class="col-lg-6">
+      <div :class="perbesar == false ? 'col-lg-6' : 'col-lg-12'">
         <draggable
           v-model="list2"
           class="list-group"
@@ -274,6 +278,7 @@ export default {
             >
               <a
                 @click=fullscreenGis
+                :style="darkmode ? 'background: #233753; color: white' : 'background: #FFFFFF;color: #2275FF'"
                 style="
                 z-index: 1; 
                 display: flex;
@@ -291,7 +296,7 @@ export default {
                 font-weight: 600;
                 font-size: 14px;
                 line-height: 20px;
-                color: #2275FF;
+                
                 cursor: pointer;
                 "
               >
@@ -324,78 +329,7 @@ export default {
           </div>
         </div>
       </div>
-      <div v-else class="col-lg-12">
-        <draggable
-          v-model="list2"
-          class="list-group"
-          :disabled="!editLayout"
-          group="widgets2"
-          v-bind="dragOptions"
-          @start="drag = true"
-          @end="handleDrop"
-        >
-          <!-- @end="drag = false" -->
-          <transition-group
-            type="transition"
-            :name="!drag ? 'flip-list' : null"
-          >
-            <div
-              style="position: relative"
-              v-for="element in list2"
-              :key="element"
-            >
-              <a
-                @click=fullscreenGis
-                style="
-                z-index: 1; 
-                display: flex;
-                flex-direction: row;
-                align-items: flex-start;
-                padding: 12px;
-                gap: 10px;
-                position: absolute;
-                height: 44px;
-                right: 30px;
-                top: 30px;
-                background: #FFFFFF;
-                box-shadow: 0px 4px 24px rgba(69, 68, 68, 0.25);
-                border-radius: 8px;
-                font-weight: 600;
-                font-size: 14px;
-                line-height: 20px;
-                color: #2275FF;
-                cursor: pointer;
-                "
-              >
-              <i class="fas fa-expand" style="margin-top:3px;" v-if="perbesar==false"></i>
-              <i class="fas fa-compress" style="margin-top:3px;" v-else></i>
-                {{ perbesar == false ? 'Perbesar' : 'Perkecil' }}
-              </a>
-              <component
-                :is="element"
-                :class="{ 'card-moveable': editLayout === true }"
-              ></component>
-            </div>
-          </transition-group>
-        </draggable>
-        <div class="container" v-if="editLayout == true">
-          <div class="row">
-            <div @click="showModalAdd('list2')" class="box-add">
-              <div
-                class="d-flex justify-content-center"
-                style="z-index: 5; margin: auto"
-              >
-                <i
-                  style="font-size: 19px"
-                  class="fa fa-plus"
-                  aria-hidden="true"
-                ></i>
-                &nbsp; &nbsp;Tambah Card
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </Transition> 
 
       <div class="col-lg-3" :style="perbesar == false ?'display:block' : 'display:none'">
