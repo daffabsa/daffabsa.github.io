@@ -79,7 +79,7 @@ export default {
     "
     :class="headerColor"
   >
-    <div class="container-fluid">
+    
       <ul class="list-unstyled topnav-menu float-right mb-0">
         <li>
           <div
@@ -236,7 +236,7 @@ export default {
               : { color: '#2275ff !important' }
           "
         >
-          PERUMDA TIRTA SAIL CRUISE PINK BEACH KOMODO
+          PERUMDA AIR MINUM TIRTA SANJIWANI
         </p>
       </div>
 
@@ -268,7 +268,6 @@ export default {
         </li>
       </ul>
       <div class="clearfix"></div>
-    </div>
   </div>
   <!-- end Topbar -->
 </template>

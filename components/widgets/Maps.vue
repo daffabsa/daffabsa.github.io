@@ -50,14 +50,15 @@ export default {
 </style>
 
 <template>
-  <div class="card" style="height: 480px; width: 100%" :class="cardClass">
+  <div class="card" style="height: 80vh; width: 100%" :class="cardClass">
     <!-- <div class="card-body"> -->
     <!-- <div style="background-color: white; padding: 10px; border-radius: 15px"> -->
       <div id="map-wrap">
         <iframe
           src="https://gis.pdampintar.id/map/kabupaten-gianyar?icc=eyJ1c2VybmFtZSI6ImljY09QUzAxIiwicGFzc3dvcmQiOiJpY2NQQHNzMDEifQ=="
           frameborder="0"
-          style="width: 100%; height: 520px; border-radius: 15px; border: solid 5px white"
+          style="width: 100%; height:80vh; border-radius: 15px;"
+          :style="darkmode ? 'border: solid 5px #233753' : 'border: solid 5px white'"
         ></iframe>
       </div>
 

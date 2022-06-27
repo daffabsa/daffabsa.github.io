@@ -51,10 +51,10 @@ export default {
   },
   beforeMount() {
     setTimeout(() => {
-      axios.get("/score_roe").then((res) => {
+      axios.get("akuntansi-kinerja/7ba03428662358ed0af5d09749615f141eacd13f/2022-06-23.16:37:57/2022").then((res) => {
         this.score_roe = res.data;
       });
-    }, 5000);
+    }, 2000);
   },
   created() {
     EventBus.$on("editLayout", (editLayoutBool) => {
@@ -212,7 +212,7 @@ export default {
             <div class="row">
               <div class="col-6">
                 <p>Skor Rasio Kas</p>
-                <h2 style="margin-top: -10px">{{ score_roe.roe_score }}</h2>
+                <h2 style="margin-top: -10px">{{ score_roe.data.skorrasiokas }}</h2>
               </div>
               <div class="col-6">
                 <div class="box-value-default">

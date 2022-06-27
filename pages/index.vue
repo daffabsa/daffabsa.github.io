@@ -18,6 +18,7 @@ export default {
   },
   data() {
     return {
+      darkmode: false,
       title: "ICC",
       items: [
         {
@@ -43,11 +44,18 @@ export default {
       drag: false,
       selectedList: "",
       editLayout: false,
+      perbesar: false,
+      list1: ["EfisiensiPenagihan", "TarifRata", "VolumeAir"],
+      list2: ["Maps"],
+      list3: ["SkorRoe", "SkorRasioKas", "SkorSolvabilitas"],
     };
   },
   created() {
     EventBus.$on("editLayout", (editLayoutBool) => {
       this.editLayout = editLayoutBool;
+    });
+    EventBus.$on("darkmode", (darkmodeBool) => {
+      this.darkmode = darkmodeBool;
     });
     // this.$store.dispatch("layout/savePositionList", {
     //   key: "_list1",
@@ -71,6 +79,34 @@ export default {
       },
       deep: true,
     },
+    '$store.state.layout.datalist.list1': {
+      immediate: true,
+      handler() {
+          this.list1 = this.$store.state.layout.datalist.list1;
+      }
+    },
+    list2: {
+      get() {
+        return this.$store.state.layout.datalist.list2;
+      },
+      set(value) {
+        this.$store.dispatch("layout/savePositionList", {
+          key: "list2",
+          list: value,
+        });
+      },
+    },
+    list3: {
+      get() {
+        return this.$store.state.layout.datalist.list3;
+      },
+      set(value) {
+        this.$store.dispatch("layout/savePositionList", {
+          key: "list3",
+          list: value,
+        });
+      },
+    },
   },
   methods: {
     removeWidget(index, list) {
@@ -79,12 +115,14 @@ export default {
         item: 'DeletingWidget',
         index: index,
       });
-      setTimeout(() => {
-        this.$store.dispatch("layout/removeItemList", {
-          key: list,
-          index: index,
-        });
-      }, 5000);
+      this.list1[index] = 'DeletingWidget';
+      console.log(this.list1[index]);
+      // setTimeout(() => {
+      //   this.$store.dispatch("layout/removeItemList", {
+      //     key: list,
+      //     index: index,
+      //   });
+      // }, 5000);
     },
     addWidget(list, widget) {
       this.$store.dispatch("layout/addItemList", {
@@ -102,6 +140,10 @@ export default {
     showModalAdd(item) {
       this.selectedList = item;
       this.$bvModal.show("bv-modal-add-widget");
+    },
+
+    fullscreenGis(){
+      this.perbesar = !this.perbesar;
     },
 
     handleDrop() {
@@ -128,39 +170,6 @@ export default {
         ghostClass: "ghost",
       };
     },
-    list1: {
-      get() {
-        return this.$store.state.layout.datalist.list1;
-      },
-      set(value) {
-        this.$store.dispatch("layout/savePositionList", {
-          key: "list1",
-          list: value,
-        });
-      },
-    },
-    list2: {
-      get() {
-        return this.$store.state.layout.datalist.list2;
-      },
-      set(value) {
-        this.$store.dispatch("layout/savePositionList", {
-          key: "list2",
-          list: value,
-        });
-      },
-    },
-    list3: {
-      get() {
-        return this.$store.state.layout.datalist.list3;
-      },
-      set(value) {
-        this.$store.dispatch("layout/savePositionList", {
-          key: "list3",
-          list: value,
-        });
-      },
-    },
   },
   middleware: "router-auth",
 };
@@ -178,7 +187,7 @@ export default {
     class="mt-2"
   >
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-3" :style="perbesar == false ? 'display:block' : 'display:none'">
         <draggable
           v-model="list1"
           class="list-group"
@@ -208,7 +217,6 @@ export default {
                 "
               >
                 <i
-                  v-on:click="removeWidget(index, 'list1')"
                   v-if="editLayout == true"
                   class="fa fa-cog"
                   style="color: #dfe3e8; margin-right: 20px; cursor: pointer"
@@ -247,7 +255,8 @@ export default {
         </div>
       </div>
 
-      <div class="col-lg-6">
+    <Transition name="fade" :duration="550"> 
+      <div :class="perbesar == false ? 'col-lg-6' : 'col-lg-12'">
         <draggable
           v-model="list2"
           class="list-group"
@@ -267,13 +276,34 @@ export default {
               v-for="element in list2"
               :key="element"
             >
-              <!-- <button
-                style="position: absolute; right: 0; top: 0; z-index: 1"
-                class="btn btn-link"
-                v-on:click="removeWidget(index, list2)"
+              <a
+                @click=fullscreenGis
+                :style="darkmode ? 'background: #233753; color: white' : 'background: #FFFFFF;color: #2275FF'"
+                style="
+                z-index: 1; 
+                display: flex;
+                flex-direction: row;
+                align-items: flex-start;
+                padding: 12px;
+                gap: 10px;
+                position: absolute;
+                height: 44px;
+                right: 30px;
+                top: 30px;
+                background: #FFFFFF;
+                box-shadow: 0px 4px 24px rgba(69, 68, 68, 0.25);
+                border-radius: 8px;
+                font-weight: 600;
+                font-size: 14px;
+                line-height: 20px;
+                
+                cursor: pointer;
+                "
               >
-                x
-              </button> -->
+              <i class="fas fa-expand" style="margin-top:3px;" v-if="perbesar==false"></i>
+              <i class="fas fa-compress" style="margin-top:3px;" v-else></i>
+                {{ perbesar == false ? 'Perbesar' : 'Perkecil' }}
+              </a>
               <component
                 :is="element"
                 :class="{ 'card-moveable': editLayout === true }"
@@ -299,8 +329,10 @@ export default {
           </div>
         </div>
       </div>
+      
+    </Transition> 
 
-      <div class="col-lg-3">
+      <div class="col-lg-3" :style="perbesar == false ?'display:block' : 'display:none'">
         <draggable
           v-model="list3"
           class="list-group"
@@ -419,5 +451,15 @@ export default {
   width: 100%;
   background-color: #ffffff;
   z-index: 1;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

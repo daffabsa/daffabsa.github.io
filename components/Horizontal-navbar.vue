@@ -234,7 +234,7 @@ export default {
       :class="sliderColor"
       style="-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none"
     >
-      <div class="container-fluid">
+      
         <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
           <div class="collapse navbar-collapse" id="topnav-menu-content">
             <ul class="navbar-nav">
@@ -294,7 +294,6 @@ export default {
           </div>
           <!-- end .collapsed-->
         </nav>
-      </div>
       <!-- end container-fluid -->
     </div>
     <!-- end topnav-->

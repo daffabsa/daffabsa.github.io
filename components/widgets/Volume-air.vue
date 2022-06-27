@@ -12,7 +12,7 @@ export default {
   },
   data() {
     return {
-      billing_efficiency: null,
+      volume_air: null,
       expanded: false,
       editLayout: false,
       cardBefore: "card-volume-air-before",
@@ -25,6 +25,7 @@ export default {
       contentCard: "content-light",
       collapseButton: "collapse-button-light",
       activePeriod: "active-light",
+      boxValueColor: "box-value-default",
       anim: null,
       lottieOptions: {
         animationData: addWidgetAnim.default,
@@ -51,10 +52,15 @@ export default {
   },
   beforeMount() {
     setTimeout(() => {
-      axios.get("/billing_efficiency").then((res) => {
-        this.billing_efficiency = res.data;
+      axios.get("icc-volumeterjual/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48/2022-06-01/all").then((res) => {
+        this.volume_air = res.data;
+        if(this.volume_air.data.presentase.includes('-')){
+          this.boxValueColor = "box-value-red";
+        } else {
+          this.boxValueColor = "box-value-green";
+        }
       });
-    }, 5000);
+    }, 2000);
   },
   created() {
     EventBus.$on("editLayout", (editLayoutBool) => {
@@ -115,7 +121,7 @@ export default {
     class="card container"
     :class="[expanded ? cardAfter : cardBefore, cardClass]"
   >
-    <div style="margin: 20px 0px" v-if="billing_efficiency == null">
+    <div style="margin: 20px 0px" v-if="volume_air == null">
       <lottie
         :width="250"
         :options="lottieOptions"
@@ -210,14 +216,16 @@ export default {
             </div>
             <div class="row">
               <div class="col-7">
-                <p>Volume Air Terjual Bulan Ini</p>
-                <h2 style="margin-top: -10px; font-size: 22px">928.255 m3</h2>
+                <p style="font-size:10px;">Volume Air Terjual Bulan Ini</p>
+                <h2 style="margin-top: -10px; font-size: 22px">{{ volume_air.data.pakaibi }} m3</h2>
               </div>
               <div class="col-5">
-                <div class="box-value-default">
+                <div :class="boxValueColor">
                   <div class="row">
-                    <i class="fas fa-equals box-value-icon"></i>
-                    <p class="box-value-text">0</p>
+                    <i class="fas fa-arrow-down box-value-icon" v-if="boxValueColor == 'box-value-red'"></i>
+                    <i class="fas fa-arrow-up box-value-icon" v-else-if="boxValueColor == 'box-value-green'"></i>
+                    <i class="fas fa-equals box-value-icon" v-else></i>
+                    <p class="box-value-text">{{ volume_air.data.presentase}}</p>
                   </div>
                 </div>
               </div>
@@ -235,7 +243,7 @@ export default {
                           font-size: 14px;
                         "
                       >
-                        856.112
+                        {{ volume_air.data.pakaibl }}
                       </span>
                     </p>
                   </div>
@@ -253,7 +261,7 @@ export default {
                           font-size: 14px;
                         "
                       >
-                        890.110
+                        {{ volume_air.data.pakai2bl }}
                       </span>
                     </p>
                   </div>
