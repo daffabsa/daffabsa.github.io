@@ -36,7 +36,7 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.REGISTRY_URL }}/sibs-v2/icc-dashboard:${{ steps.get_version.outputs.VERSION }}
+          tags: ${{ secrets.REGISTRY_URL }}/sibs-v2/icc-dashboard:${{ github.sha }}
           build-args: |
             VUE_APP_DEFAULT_AUTH=${{ secrets.VUE_APP_DEFAULT_AUTH_STAGING }}
             VUE_APP_APIKEY=${{ secrets.VUE_APP_APIKEY_STAGING }}
@@ -60,7 +60,7 @@ jobs:
           
       - name: Deploy
         run: |
-          kubectl --kubeconfig ./kubeconfig_icc -n icc set image deployment/icc-fe icc-fe=pelabuhan.alterra.dev/sibs-v2/icc-dashboard:${{ steps.get_version.outputs.VERSION }} --record
+          kubectl --kubeconfig ./kubeconfig_icc -n icc set image deployment/icc-fe icc-fe=pelabuhan.alterra.dev/sibs-v2/icc-dashboard:${{ github.sha }} --record
           
       - name: Clean
         run: |
