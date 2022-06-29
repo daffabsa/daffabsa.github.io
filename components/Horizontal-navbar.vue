@@ -21,8 +21,9 @@ export default {
   },
   computed: mapState(["layout"]),
   beforeMount() {
-    axios.get("/announcements").then((res) => {
-      this.announcements = res.data;
+    axios.get("icc-pengumuman/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48").then((res) => {
+      this.announcements = res.data.announcements;
+      console.log(this.announcements);
     });
     moment.locale("id");
     this.today = moment(Date()).format("dddd, Do MMMM YYYY");

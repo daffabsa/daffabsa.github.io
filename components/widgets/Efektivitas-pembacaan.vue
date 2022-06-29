@@ -12,11 +12,11 @@ export default {
   },
   data() {
     return {
-      volume_air: null,
+      efektivitas_pembacaan: null,
       expanded: false,
       editLayout: false,
-      cardBefore: "card-volume-air-before",
-      cardAfter: "card-volume-air-after",
+      cardBefore: "card-efisiensi-before",
+      cardAfter: "card-efisiensi-after",
       cardTopBefore: "card-top-before",
       cardTopAfter: "card-top-after",
       darkmode: false,
@@ -52,9 +52,9 @@ export default {
   },
   beforeMount() {
     setTimeout(() => {
-      axios.get("icc-volumeterjual/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48/2022-06-01/all").then((res) => {
-        this.volume_air = res.data;
-        if(this.volume_air.data.presentase.includes('-')){
+      axios.get("icc-efektivitaspembacaan/b91727d8799abcdd352d164bbb9615d9c4dd4316/2022-06-28.10:16:26").then((res) => {
+        this.efektivitas_pembacaan = res.data;
+        if(this.efektivitas_pembacaan.data.presentase.includes('-')){
           this.boxValueColor = "box-value-red";
         } else {
           this.boxValueColor = "box-value-green";
@@ -90,13 +90,13 @@ export default {
 };
 </script>
 <style>
-.card-volume-air-before {
-  max-height: 255px;
+.card-efisiensi-before {
+  max-height: 285px;
   transition: all 500ms ease;
   overflow: hidden;
 }
 
-.card-volume-air-after {
+.card-efisiensi-after {
   max-height: 406px;
   transition: all 500ms ease;
   overflow: hidden;
@@ -121,7 +121,7 @@ export default {
     class="card container"
     :class="[expanded ? cardAfter : cardBefore, cardClass]"
   >
-    <div style="margin: 20px 0px" v-if="volume_air == null">
+    <div style="margin: 20px 0px" v-if="efektivitas_pembacaan == null">
       <lottie
         :width="250"
         :options="lottieOptions"
@@ -195,7 +195,7 @@ export default {
                 class="heading-text"
                 :style="darkmode ? { color: 'white' } : { color: '#1B2559' }"
               >
-                Volume Air Terjual
+                Efektivitas Pembacaan
               </h3>
             </div>
           </div>
@@ -216,8 +216,10 @@ export default {
             </div>
             <div class="row">
               <div class="col-7">
-                <p style="font-size:10px;">Volume Air Terjual Bulan Ini</p>
-                <h2 style="margin-top: -10px; font-size: 22px">{{ volume_air.data.pakaibi }} m3</h2>
+                <p>Efektivitas Pembacaan</p>
+                <h2 style="margin-top: -10px">
+                  {{ efektivitas_pembacaan.data.efektifitaspembacaan }}%
+                </h2>
               </div>
               <div class="col-5">
                 <div :class="boxValueColor">
@@ -225,7 +227,7 @@ export default {
                     <i class="fas fa-arrow-down box-value-icon" v-if="boxValueColor == 'box-value-red'"></i>
                     <i class="fas fa-arrow-up box-value-icon" v-else-if="boxValueColor == 'box-value-green'"></i>
                     <i class="fas fa-equals box-value-icon" v-else></i>
-                    <p class="box-value-text">{{ volume_air.data.presentase}}%</p>
+                    <p class="box-value-text">{{ efektivitas_pembacaan.data.presentase}}%</p>
                   </div>
                 </div>
               </div>
@@ -234,34 +236,33 @@ export default {
                 <div class="col-6">
                   <div class="row">
                     <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
-                      Bulan Lalu
+                      Pelanggan Aktif
                       <span
                         style="
                           color: white;
                           font-weight: bold;
                           margin-left: 7px;
-                          font-size: 14px;
+                          font-size: 13px;
                         "
                       >
-                        {{ volume_air.data.pakaibl }}
+                        {{ efektivitas_pembacaan.data.pelangganaktif }}
                       </span>
                     </p>
                   </div>
                 </div>
                 <div class="col-6">
-                  <div class="row">
-                    <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
-                      2 Bulan Lalu
-
+                  <div class="row" style="float:right">
+                    <p style="color: #e9edf7; font-size: 12px; margin-top: 4px; margin-right:20px">
+                      Sudah Baca
                       <span
                         style="
                           color: white;
                           font-weight: bold;
                           margin-left: 7px;
-                          font-size: 14px;
+                          font-size: 13px;
                         "
                       >
-                        {{ volume_air.data.pakai2bl }}
+                        {{ efektivitas_pembacaan.data.sudahbaca }}
                       </span>
                     </p>
                   </div>
@@ -271,7 +272,8 @@ export default {
           </div>
         </div>
       </div>
-      </div>
+    </div>
+
     <!-- end card-body -->
   </div>
   <!-- end card-->

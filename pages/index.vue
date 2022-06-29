@@ -33,21 +33,18 @@ export default {
         },
       ],
       availableWidget: [
-        "EfisiensiPenagihanSaatIni",
+        "EfisiensiPenagihan",
+        "EfektivitasPembacaan",
         "SkorRoe",
-        "Campaigns",
-        "Chat",
-        "Inbox",
-        "Projections",
-        "Revenue",
+        "SkorSolvabilitas",
+        "TarifRata",
+        "VolumeAir",
+        "SkorRasioKas",
       ],
       drag: false,
       selectedList: "",
       editLayout: false,
       perbesar: false,
-      list1: ["EfisiensiPenagihan", "TarifRata", "VolumeAir"],
-      list2: ["Maps"],
-      list3: ["SkorRoe", "SkorRasioKas", "SkorSolvabilitas"],
     };
   },
   created() {
@@ -78,34 +75,6 @@ export default {
         }
       },
       deep: true,
-    },
-    '$store.state.layout.datalist.list1': {
-      immediate: true,
-      handler() {
-          this.list1 = this.$store.state.layout.datalist.list1;
-      }
-    },
-    list2: {
-      get() {
-        return this.$store.state.layout.datalist.list2;
-      },
-      set(value) {
-        this.$store.dispatch("layout/savePositionList", {
-          key: "list2",
-          list: value,
-        });
-      },
-    },
-    list3: {
-      get() {
-        return this.$store.state.layout.datalist.list3;
-      },
-      set(value) {
-        this.$store.dispatch("layout/savePositionList", {
-          key: "list3",
-          list: value,
-        });
-      },
     },
   },
   methods: {
@@ -169,6 +138,39 @@ export default {
         disabled: false,
         ghostClass: "ghost",
       };
+    },
+    list1: {
+      get() {
+        return this.$store.state.layout.datalist.list1;
+      },
+      set(value) {
+        this.$store.dispatch("layout/savePositionList", {
+          key: "list1",
+          list: value,
+        });
+      },
+    },
+    list2: {
+      get() {
+        return this.$store.state.layout.datalist.list2;
+      },
+      set(value) {
+        this.$store.dispatch("layout/savePositionList", {
+          key: "list2",
+          list: value,
+        });
+      },
+    },
+    list3: {
+      get() {
+        return this.$store.state.layout.datalist.list3;
+      },
+      set(value) {
+        this.$store.dispatch("layout/savePositionList", {
+          key: "list3",
+          list: value,
+        });
+      },
     },
   },
   middleware: "router-auth",
@@ -296,7 +298,6 @@ export default {
                 font-weight: 600;
                 font-size: 14px;
                 line-height: 20px;
-                
                 cursor: pointer;
                 "
               >
