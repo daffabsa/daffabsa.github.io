@@ -3,6 +3,7 @@ import axios from "~/plugins/axios";
 import { EventBus } from "~/plugins/eventBus.js";
 import lottie from "vue-lottie/src/lottie.vue";
 import * as addWidgetAnim from "~/assets/lottie/loading-widget.json";
+import moment from "moment";
 /**
  * Skor-roe component
  */
@@ -31,6 +32,7 @@ export default {
         animationData: addWidgetAnim.default,
         autoplay: true,
       },
+      today: '',
     };
   },
   methods: {
@@ -61,6 +63,8 @@ export default {
         }
       });
     }, 2000);
+    moment.locale("id");
+    this.today = moment(Date()).format("LT");
   },
   created() {
     EventBus.$on("editLayout", (editLayoutBool) => {
@@ -210,7 +214,7 @@ export default {
               </div>
               <div class="col-7">
                 <p style="font-size: 10px; margin-top: 5px; float: right">
-                  Last Updated: 09.15 WITA
+                  Last Updated: {{ today }} WITA
                 </p>
               </div>
             </div>
