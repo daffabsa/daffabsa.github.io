@@ -236,12 +236,12 @@ export default {
       style="-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none"
     >
       
-        <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
+        <nav class="navbar navbar-light navbar-expand-lg topnav-menu" style="height:80px;">
           <div class="collapse navbar-collapse" id="topnav-menu-content">
             <ul class="navbar-nav">
               <div
                 style="
-                  height: 55px;
+                  height: 80px;
                   background-color: #011a3d;
                   padding-left: 20px;
                   padding-right: 20px;
