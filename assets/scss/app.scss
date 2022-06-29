@@ -219,7 +219,7 @@ div.badges span {
 
 .marquee-parent {
     position: relative;
-    width: 120%;
+    width: 220%;
     overflow: hidden;
     height: 50px;
     display: block;
@@ -227,7 +227,7 @@ div.badges span {
 
 .marquee-child {
     display: flex;
-    width: 220%;
+    width: 320%;
     /* width of your text div */
     height: auto;
     /* height of your text div */
@@ -235,7 +235,7 @@ div.badges span {
     top: 50%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
-    animation: marquee 30s linear infinite;
+    animation: marquee 60s linear infinite;
     /* change 5s value to your desired speed */
 }
 
@@ -245,7 +245,7 @@ div.badges span {
     }
 
     100% {
-        left: -200%
+        left: -300%
             /* same as your text width */
     }
 }
@@ -257,6 +257,7 @@ div.badges span {
     padding: 5px 15px;
     font-weight: bold;
     display: block;
+    width: 100%;
     margin: 0px 5px;
 }
 
@@ -267,6 +268,7 @@ div.badges span {
     padding: 5px 15px;
     font-weight: bold;
     display: block;
+    width: 100%;
     margin: 0px 5px;
 }
 
