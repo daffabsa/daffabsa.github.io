@@ -18,6 +18,14 @@ export default {
       headerColor: "topbar-light",
     };
   },
+  created() {
+    EventBus.$on("editLayout", (editLayoutBool) => {
+      this.editLayout = editLayoutBool;
+    });
+    EventBus.$on("darkmode", (darkmodeBool) => {
+      this.darkmode = darkmodeBool;
+    });
+  },
   methods: {
     /**
      * Toggle menu
@@ -40,7 +48,9 @@ export default {
     },
 
     layoutEditor() {
+      console.log(this.editLayout);
       this.editLayout = !this.editLayout;
+      console.log('sesudah' + this.editLayout);
       EventBus.$emit("editLayout", this.editLayout);
     },
 
@@ -140,6 +150,7 @@ export default {
               -moz-user-select: none;
               -ms-user-select: none;
               user-select: none;
+              cursor: pointer;
             "
           >
             <i class="fe-settings mr-1"></i>
@@ -155,6 +166,7 @@ export default {
               -moz-user-select: none;
               -ms-user-select: none;
               user-select: none;
+              cursor: pointer;
             "
           >
             <i class="fa fa-plus mr-1"></i>
@@ -166,6 +178,7 @@ export default {
             class="dropdown-item"
             @click="logoutUser"
             href="jvascript: void(0);"
+            style="cursor: pointer;"
           >
             <i class="fe-log-out mr-1"></i>
             <span>{{ $t("navbar.dropdown.name.list.logout") }}</span>

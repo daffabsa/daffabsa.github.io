@@ -219,7 +219,7 @@ div.badges span {
 
 .marquee-parent {
     position: relative;
-    width: 220%;
+    width: 200%;
     overflow: hidden;
     height: 50px;
     display: block;
@@ -227,7 +227,7 @@ div.badges span {
 
 .marquee-child {
     display: flex;
-    width: 320%;
+    width: 220%;
     /* width of your text div */
     height: auto;
     /* height of your text div */
@@ -257,7 +257,6 @@ div.badges span {
     padding: 5px 15px;
     font-weight: bold;
     display: block;
-    width: 100%;
     margin: 0px 5px;
 }
 
@@ -268,7 +267,6 @@ div.badges span {
     padding: 5px 15px;
     font-weight: bold;
     display: block;
-    width: 100%;
     margin: 0px 5px;
 }
 
