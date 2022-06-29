@@ -281,7 +281,7 @@ export default {
                       'announcement-box-green': announcement.color === 'green',
                       'announcement-box-red': announcement.color === 'red',
                     }"
-                    style="height: 40px !important; padding-top:8px"
+                    style="height: 35px !important; padding-top:5px"
                   >
                     <div style="display:inline-block">+{{ announcement.count }}</div>
                     {{ announcement.message }}
