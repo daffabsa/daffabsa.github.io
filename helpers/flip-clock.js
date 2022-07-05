@@ -473,7 +473,7 @@
                         value: e.show,
                         expression: "data.show"
                     }],
-                    key: e.label,
+                    key: e.elementId,
                     staticClass: "flip-clock__piece",
                     attrs: {
                         id: e.elementId
