@@ -77,6 +77,9 @@ export default {
       localStorage.list1 = localStorage._list1;
       localStorage.list2 = localStorage._list2;
       localStorage.list3 = localStorage._list3;
+      this.list1 = localStorage._list1.split(',');
+      this.list2 = localStorage._list2.split(',');
+      this.list3 = localStorage._list3.split(',');
       this.editLayout = !this.editLayout;
       EventBus.$emit("editLayout", this.editLayout);
       this.$forceUpdate();
