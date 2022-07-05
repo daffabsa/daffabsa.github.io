@@ -11,9 +11,6 @@ export default {
   },
   data() {
     return {
-      score_roe: null,
-      expanded: false,
-      editLayout: false,
       cardBefore: "card-skor-roe-before",
       cardAfter: "card-skor-roe-after",
       cardTopBefore: "card-top-before",
