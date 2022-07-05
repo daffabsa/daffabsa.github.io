@@ -51,9 +51,6 @@ export default {
         :menu="layout.menuPosition"
       />
     </div>
-    <div :style="editLayout == true ? 'display:block' : 'display:none'">
-      <TopbarLayout />
-    </div>
     <!-- ============================================================== -->
     <!-- Start Page Content here -->
     <!-- ============================================================== -->

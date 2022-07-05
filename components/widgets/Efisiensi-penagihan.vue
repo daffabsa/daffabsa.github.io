@@ -33,6 +33,7 @@ export default {
         autoplay: true,
       },
       today: '',
+      error: false,
     };
   },
   methods: {
@@ -56,10 +57,14 @@ export default {
     setTimeout(() => {
       axios.get("icc-efektivitaspenagihan/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48/2022/rekap").then((res) => {
         this.efektivitas_penagihan = res.data;
-        if(this.efektivitas_penagihan.data.presentase.includes('-')){
-          this.boxValueColor = "box-value-red";
+        if(this.efektivitas_penagihan.data != null){
+          if(this.efektivitas_penagihan.data.presentase.includes('-')){
+            this.boxValueColor = "box-value-red";
+          } else {
+            this.boxValueColor = "box-value-green";
+          }
         } else {
-          this.boxValueColor = "box-value-green";
+          this.error = true;
         }
       });
     }, 2000);
@@ -125,7 +130,7 @@ export default {
     class="card container"
     :class="[expanded ? cardAfter : cardBefore, cardClass]"
   >
-    <div style="margin: 20px 0px" v-if="efektivitas_penagihan == null">
+    <div style="margin: 20px 0px" v-if="efektivitas_penagihan == null || error == true">
       <lottie
         :width="250"
         :options="lottieOptions"
