@@ -68,7 +68,13 @@ export default {
     },
     addWidget(list, widget) {
       if (list.indexOf(widget) < 0) {
-        list.push(widget);
+        list.push('AddingWidget');
+        var index = list.indexOf('AddingWidget');
+        this.$forceUpdate();
+        setTimeout(() => {
+          list.splice(index, 1);
+          list.push(widget);
+      }, 4000);
       } else {
         alert("Widget sudah ada");
       }
@@ -265,7 +271,7 @@ export default {
           </draggable>
           <div class="container" v-if="editLayout == true">
             <div class="row">
-              <div @click="showModalAdd('list1')" class="box-add">
+              <div @click="showModalAdd(list1)" class="box-add">
                 <div
                   class="d-flex justify-content-center"
                   style="z-index: 5; margin: auto"
@@ -339,7 +345,7 @@ export default {
           </draggable>
           <div class="container" v-if="editLayout == true">
             <div class="row">
-              <div @click="showModalAdd('list2')" class="box-add">
+              <div @click="showModalAdd(list2)" class="box-add">
                 <div
                   class="d-flex justify-content-center"
                   style="z-index: 5; margin: auto"
@@ -409,7 +415,7 @@ export default {
           </draggable>
           <div class="container" v-if="editLayout == true">
             <div class="row">
-              <div @click="showModalAdd('list3')" class="box-add">
+              <div @click="showModalAdd(list3)" class="box-add">
                 <div
                   class="d-flex justify-content-center"
                   style="z-index: 5; margin: auto"
