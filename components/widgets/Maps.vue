@@ -25,6 +25,11 @@ export default {
       this.darkmode = darkmodeBool;
     });
   },
+  mounted(){
+    if(localStorage.darkmode) {
+      this.darkmode = localStorage.darkmode
+    }
+  },
   watch: {
     darkmode: function (val) {
       if (val == true) {
@@ -50,7 +55,7 @@ export default {
 </style>
 
 <template>
-  <div class="card" style="height: 80vh; width: 100%" :class="cardClass">
+  <div class="card" style="height: 80vh; width: 100%" :class="darkmode ? 'card-dark' : 'card-light'">
     <!-- <div class="card-body"> -->
     <!-- <div style="background-color: white; padding: 10px; border-radius: 15px"> -->
       <div id="map-wrap">

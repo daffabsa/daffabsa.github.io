@@ -52,6 +52,11 @@ export default {
       this.anim.pause();
     },
   },
+  mounted(){
+    if(localStorage.darkmode) {
+      this.darkmode = localStorage.darkmode
+    }
+  },
   beforeMount() {
     setTimeout(() => {
       axios.get("icc-efektivitaspembacaan/b91727d8799abcdd352d164bbb9615d9c4dd4316/2022-06-28.10:16:26").then((res) => {
@@ -123,7 +128,7 @@ export default {
 <template>
   <div
     class="card container"
-    :class="[expanded ? cardAfter : cardBefore, cardClass]"
+    :class="[expanded ? cardAfter : cardBefore, darkmode ? 'card-dark' : 'card-light']"
   >
     <div style="margin: 20px 0px" v-if="efektivitas_pembacaan == null">
       <lottie
@@ -150,7 +155,7 @@ export default {
           <div class="col-9" style="font-size: 10px">
             <ul class="nav nav-pills nav-justified">
               <li class="nav-item">
-                <a class="nav-link" :class="activePeriod" href="#">Hari</a>
+                <a class="nav-link" :class="darkmode ? 'active-dark' : 'active-light'" href="#">Hari</a>
               </li>
               <li class="nav-item">
                 <a
@@ -182,12 +187,12 @@ export default {
       </div>
       <div
         class="row"
-        :class="contentCard"
+        :class="darkmode ? 'content-dark' : 'content-light'"
         style="border-radius: 15px 15px 0px 0px"
       >
         <div
           class="card-top-border"
-          :class="[expanded ? cardTopAfter : cardTopBefore, cardTopBorder]"
+          :class="[expanded ? cardTopAfter : cardTopBefore, darkmode ? 'card-top-border-dark' : 'card-top-border-light']"
         >
           <div class="badges">
             <span>BPPSPAM</span>
