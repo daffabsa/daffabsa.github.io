@@ -1,7 +1,6 @@
 <script>
-
 import lottie from "vue-lottie/src/lottie.vue";
-import * as deletingWidgetAnim from "~/assets/lottie/delete-widget.json";
+import * as loadingWidgetAnim from "~/assets/lottie/logo-loading.json";
 
 /**
  * Loading component
@@ -11,7 +10,12 @@ export default {
     lottie,
   },
   data: () => ({
-    loading: false
+    loading: false,
+    anim: null,
+    lottieOptions: {
+      animationData: loadingWidgetAnim.default,
+      autoplay: true,
+    },
   }),
   methods: {
     start() {
@@ -32,7 +36,7 @@ export default {
     pause() {
       this.anim.pause();
     },
-  }
+  },
 };
 </script>
 

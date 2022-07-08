@@ -31,7 +31,7 @@ export default {
         animationData: addWidgetAnim.default,
         autoplay: true,
       },
-      today: '',
+      today: "",
     };
   },
   methods: {
@@ -51,16 +51,23 @@ export default {
       this.anim.pause();
     },
   },
-  mounted(){
-    if(localStorage.darkmode) {
-      this.darkmode = localStorage.darkmode
+  mounted() {
+    if (localStorage.darkmode) {
+      this.darkmode = localStorage.darkmode;
+    }
+    if (localStorage.editLayout) {
+      this.editLayout = localStorage.editLayout;
     }
   },
   beforeMount() {
     setTimeout(() => {
-      axios.get("akuntansi-kinerja/7ba03428662358ed0af5d09749615f141eacd13f/2022-06-23.16:37:57/2022").then((res) => {
-        this.score_roe = res.data;
-      });
+      axios
+        .get(
+          "akuntansi-kinerja/7ba03428662358ed0af5d09749615f141eacd13f/2022-06-23.16:37:57/2022"
+        )
+        .then((res) => {
+          this.score_roe = res.data;
+        });
     }, 2000);
     moment.locale("id");
     this.today = moment(Date()).format("LT");
@@ -123,7 +130,10 @@ export default {
 <template>
   <div
     class="card container"
-    :class="[expanded ? cardAfter : cardBefore,darkmode ? 'card-dark' : 'card-light']"
+    :class="[
+      expanded ? cardAfter : cardBefore,
+      darkmode ? 'card-dark' : 'card-light',
+    ]"
   >
     <div style="margin: 20px 0px" v-if="score_roe == null">
       <lottie
@@ -150,7 +160,12 @@ export default {
           <div class="col-9" style="font-size: 10px">
             <ul class="nav nav-pills nav-justified">
               <li class="nav-item">
-                <a class="nav-link" :class="darkmode ? 'active-dark' : 'active-light'" href="#">Hari</a>
+                <a
+                  class="nav-link"
+                  :class="darkmode ? 'active-dark' : 'active-light'"
+                  href="#"
+                  >Hari</a
+                >
               </li>
               <li class="nav-item">
                 <a
@@ -187,7 +202,10 @@ export default {
       >
         <div
           class="card-top-border"
-          :class="[expanded ? cardTopAfter : cardTopBefore, darkmode ? 'card-top-border-dark' : 'card-top-border-light']"
+          :class="[
+            expanded ? cardTopAfter : cardTopBefore,
+            darkmode ? 'card-top-border-dark' : 'card-top-border-light',
+          ]"
         >
           <div class="badges">
             <span>BPPSPAM</span>
@@ -221,7 +239,9 @@ export default {
             <div class="row">
               <div class="col-6">
                 <p>Skor Solvabilitas</p>
-                <h2 style="margin-top: -10px">{{ score_roe.data.skorsolvabilitas }}</h2>
+                <h2 style="margin-top: -10px">
+                  {{ score_roe.data.skorsolvabilitas }}
+                </h2>
               </div>
               <div class="col-6">
                 <div class="box-value-default">

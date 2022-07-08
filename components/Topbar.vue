@@ -18,15 +18,10 @@ export default {
       headerColor: "",
     };
   },
-  mounted(){
-    if(localStorage.darkmode) {
-      this.darkmode = localStorage.darkmode
+  mounted() {
+    if (localStorage.darkmode) {
+      this.darkmode = localStorage.darkmode;
     }
-  },
-  watch: {
-    darkmode(newValue) {
-      localStorage.darkmode = newValue;
-    },
   },
   created() {
     EventBus.$on("editLayout", (editLayoutBool) => {
@@ -57,7 +52,7 @@ export default {
     layoutEditor() {
       console.log(this.editLayout);
       this.editLayout = !this.editLayout;
-      console.log('sesudah' + this.editLayout);
+      console.log("sesudah" + this.editLayout);
       EventBus.$emit("editLayout", this.editLayout);
     },
 
@@ -96,198 +91,195 @@ export default {
     "
     :class="darkmode ? 'topbar-dark' : 'topbar-light'"
   >
-    
-      <ul class="list-unstyled topnav-menu float-right mb-0">
-        <li>
-          <div
-            style="margin-top: 25px; margin-right: 20px; margin-left: -110px"
+    <ul class="list-unstyled topnav-menu float-right mb-0">
+      <li>
+        <div style="margin-top: 25px; margin-right: 20px; margin-left: -110px">
+          <label
+            style="
+              font-family: sans-serif;
+              font-weight: normal;
+              font-size: 12px;
+              float: left;
+              margin-top: 2px;
+            "
+            >Dark Mode</label
           >
-            <label
-              style="
-                font-family: sans-serif;
-                font-weight: normal;
-                font-size: 12px;
-                float: left;
-                margin-top: 2px;
+          <label class="switch" style="margin-left: 15px">
+            <input
+              type="checkbox"
+              v-model="darkmode"
+              v-on:change="changeDarkmode"
+            />
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </li>
+      <b-nav-item-dropdown
+        right
+        class="notification-list topbar-dropdown"
+        menu-class="profile-dropdown"
+        toggle-class="p-0"
+      >
+        <template slot="button-content" class="nav-link dropdown-toggle">
+          <div class="nav-user mr-0">
+            <img
+              src="~/assets/images/users/avatar-1.jpg"
+              alt="user-image"
+              class="rounded-circle"
+            />
+
+            <span
+              class="pro-user-name ml-1"
+              :style="
+                darkmode
+                  ? { color: 'white !important' }
+                  : { color: 'rgb(100,100,100) !important' }
               "
-              >Dark Mode</label
             >
-            <label class="switch" style="margin-left: 15px">
-              <input
-                type="checkbox"
-                v-model="darkmode"
-                v-on:change="changeDarkmode"
-              />
-              <span class="slider round"></span>
-            </label>
+              {{ $t("navbar.dropdown.name.text") }}
+              <i class="mdi mdi-chevron-down"></i>
+            </span>
           </div>
-        </li>
-        <b-nav-item-dropdown
-          right
-          class="notification-list topbar-dropdown"
-          menu-class="profile-dropdown"
-          toggle-class="p-0"
-        >
-          <template slot="button-content" class="nav-link dropdown-toggle">
-            <div class="nav-user mr-0">
-              <img
-                src="~/assets/images/users/avatar-1.jpg"
-                alt="user-image"
-                class="rounded-circle"
-              />
+        </template>
 
-              <span
-                class="pro-user-name ml-1"
-                :style="
-                  darkmode
-                    ? { color: 'white !important' }
-                    : { color: 'rgb(100,100,100) !important' }
-                "
-              >
-                {{ $t("navbar.dropdown.name.text") }}
-                <i class="mdi mdi-chevron-down"></i>
-              </span>
-            </div>
-          </template>
-
-          <a
-            class="dropdown-item"
-            style="
-              -webkit-user-select: none;
-              -moz-user-select: none;
-              -ms-user-select: none;
-              user-select: none;
-              cursor: pointer;
-            "
-          >
-            <i class="fe-settings mr-1"></i>
-            <span>{{ $t("navbar.dropdown.name.list.settings") }}</span>
-          </a>
-
-          <b-dropdown-divider></b-dropdown-divider>
-          <a
-            class="dropdown-item"
-            @click="layoutEditor"
-            style="
-              -webkit-user-select: none;
-              -moz-user-select: none;
-              -ms-user-select: none;
-              user-select: none;
-              cursor: pointer;
-            "
-          >
-            <i class="fa fa-plus mr-1"></i>
-            <span>{{ $t("navbar.dropdown.name.list.editlayout") }}</span>
-          </a>
-
-          <b-dropdown-divider></b-dropdown-divider>
-          <a
-            class="dropdown-item"
-            @click="logoutUser"
-            href="jvascript: void(0);"
-            style="cursor: pointer;"
-          >
-            <i class="fe-log-out mr-1"></i>
-            <span>{{ $t("navbar.dropdown.name.list.logout") }}</span>
-          </a>
-        </b-nav-item-dropdown>
-      </ul>
-
-      <!-- LOGO -->
-      <div class="logo-box">
-        <nuxt-link to="/" class="logo logo-light text-center">
-          <span class="logo-sm">
-            <img
-              src="~/assets/images/pdam_pintar.png"
-              alt
-              height="25"
-              style="margin-right: 20px"
-            />
-          </span>
-          <span class="logo-lg">
-            <img
-              src="~/assets/images/pdam_pintar_white.png"
-              alt
-              height="25"
-              style="margin-right: 20px"
-              v-if="darkmode"
-            />  
-            <img
-              src="~/assets/images/pdam_pintar.png"
-              alt
-              height="25"
-              style="margin-right: 20px"
-              v-else
-            />
-            <img src="~/assets/images/tirta.png" alt height="25" />
-          </span>
-        </nuxt-link>
-      </div>
-
-      <div style="width: 100%; padding-top: 15px" class="textTitle">
-        <p
+        <a
+          class="dropdown-item"
           style="
-            text-align: center;
-            font-weight: bold;
-            font-size: 20px;
-            line-height: 10px;
-          "
-          :style="
-            darkmode
-              ? { color: 'white !important' }
-              : { color: '#011a3d !important' }
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: pointer;
           "
         >
-          INTEGRATED COMMAND CENTER
-        </p>
-        <p
+          <i class="fe-settings mr-1"></i>
+          <span>{{ $t("navbar.dropdown.name.list.settings") }}</span>
+        </a>
+
+        <b-dropdown-divider></b-dropdown-divider>
+        <a
+          class="dropdown-item"
+          @click="layoutEditor"
           style="
-            font-family: 'Manrope';
-            text-align: center;
-            font-style: normal;
-            font-weight: 600;
-            font-size: 18px;
-            line-height: 10px;
-            letter-spacing: 0.5px;
-          "
-          :style="
-            darkmode
-              ? { color: 'white !important' }
-              : { color: '#2275ff !important' }
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            cursor: pointer;
           "
         >
-          PERUMDA AIR MINUM TIRTA SANJIWANI
-        </p>
-      </div>
+          <i class="fa fa-plus mr-1"></i>
+          <span>{{ $t("navbar.dropdown.name.list.editlayout") }}</span>
+        </a>
 
-      <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
-        <li>
-          <button
-            class="button-menu-mobile waves-effect waves-light"
-            @click="toggleMenu"
-          >
-            <i class="fe-menu"></i>
-          </button>
-        </li>
+        <b-dropdown-divider></b-dropdown-divider>
+        <a
+          class="dropdown-item"
+          @click="logoutUser"
+          href="jvascript: void(0);"
+          style="cursor: pointer"
+        >
+          <i class="fe-log-out mr-1"></i>
+          <span>{{ $t("navbar.dropdown.name.list.logout") }}</span>
+        </a>
+      </b-nav-item-dropdown>
+    </ul>
 
-        <li>
-          <!-- Mobile menu toggle (Horizontal Layout)-->
-          <a
-            class="navbar-toggle nav-link"
-            data-toggle="collapse"
-            @click="horizonalmenu()"
-            data-target="#topnav-menu-content"
-          >
-            <div class="lines">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-          </a>
-          <!-- End mobile menu toggle-->
-        </li>
-      </ul>
-      <div class="clearfix"></div>
+    <!-- LOGO -->
+    <div class="logo-box">
+      <nuxt-link to="/" class="logo logo-light text-center">
+        <span class="logo-sm">
+          <img
+            src="~/assets/images/pdam_pintar.png"
+            alt
+            height="25"
+            style="margin-right: 20px"
+          />
+        </span>
+        <span class="logo-lg">
+          <img
+            src="~/assets/images/pdam_pintar_white.png"
+            alt
+            height="25"
+            style="margin-right: 20px"
+            v-if="darkmode"
+          />
+          <img
+            src="~/assets/images/pdam_pintar.png"
+            alt
+            height="25"
+            style="margin-right: 20px"
+            v-else
+          />
+          <img src="~/assets/images/tirta.png" alt height="25" />
+        </span>
+      </nuxt-link>
+    </div>
+
+    <div style="width: 100%; padding-top: 15px" class="textTitle">
+      <p
+        style="
+          text-align: center;
+          font-weight: bold;
+          font-size: 20px;
+          line-height: 10px;
+        "
+        :style="
+          darkmode
+            ? { color: 'white !important' }
+            : { color: '#011a3d !important' }
+        "
+      >
+        INTEGRATED COMMAND CENTER
+      </p>
+      <p
+        style="
+          font-family: 'Manrope';
+          text-align: center;
+          font-style: normal;
+          font-weight: 600;
+          font-size: 18px;
+          line-height: 10px;
+          letter-spacing: 0.5px;
+        "
+        :style="
+          darkmode
+            ? { color: 'white !important' }
+            : { color: '#2275ff !important' }
+        "
+      >
+        PERUMDA AIR MINUM TIRTA SANJIWANI
+      </p>
+    </div>
+
+    <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+      <li>
+        <button
+          class="button-menu-mobile waves-effect waves-light"
+          @click="toggleMenu"
+        >
+          <i class="fe-menu"></i>
+        </button>
+      </li>
+
+      <li>
+        <!-- Mobile menu toggle (Horizontal Layout)-->
+        <a
+          class="navbar-toggle nav-link"
+          data-toggle="collapse"
+          @click="horizonalmenu()"
+          data-target="#topnav-menu-content"
+        >
+          <div class="lines">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </a>
+        <!-- End mobile menu toggle-->
+      </li>
+    </ul>
+    <div class="clearfix"></div>
   </div>
   <!-- end Topbar -->
 </template>

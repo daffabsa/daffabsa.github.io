@@ -32,7 +32,7 @@ export default {
         animationData: addWidgetAnim.default,
         autoplay: true,
       },
-      today: '',
+      today: "",
     };
   },
   methods: {
@@ -52,21 +52,28 @@ export default {
       this.anim.pause();
     },
   },
-  mounted(){
-    if(localStorage.darkmode) {
-      this.darkmode = localStorage.darkmode
+  mounted() {
+    if (localStorage.darkmode) {
+      this.darkmode = localStorage.darkmode;
+    }
+    if (localStorage.editLayout) {
+      this.editLayout = localStorage.editLayout;
     }
   },
   beforeMount() {
     setTimeout(() => {
-      axios.get("icc-volumeterjual/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48/2022-06-01/all").then((res) => {
-        this.volume_air = res.data;
-        if(this.volume_air.data.presentase.includes('-')){
-          this.boxValueColor = "box-value-red";
-        } else {
-          this.boxValueColor = "box-value-green";
-        }
-      });
+      axios
+        .get(
+          "icc-volumeterjual/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48/2022-06-01/all"
+        )
+        .then((res) => {
+          this.volume_air = res.data;
+          if (this.volume_air.data.presentase.includes("-")) {
+            this.boxValueColor = "box-value-red";
+          } else {
+            this.boxValueColor = "box-value-green";
+          }
+        });
     }, 2000);
     moment.locale("id");
     this.today = moment(Date()).format("LT");
@@ -128,7 +135,10 @@ export default {
 <template>
   <div
     class="card container"
-    :class="[expanded ? cardAfter : cardBefore, darkmode ? 'card-dark' : 'card-light']"
+    :class="[
+      expanded ? cardAfter : cardBefore,
+      darkmode ? 'card-dark' : 'card-light',
+    ]"
   >
     <div style="margin: 20px 0px" v-if="volume_air == null">
       <lottie
@@ -155,7 +165,12 @@ export default {
           <div class="col-9" style="font-size: 10px">
             <ul class="nav nav-pills nav-justified">
               <li class="nav-item">
-                <a class="nav-link" :class="darkmode ? 'active-dark' : 'active-light'" href="#">Hari</a>
+                <a
+                  class="nav-link"
+                  :class="darkmode ? 'active-dark' : 'active-light'"
+                  href="#"
+                  >Hari</a
+                >
               </li>
               <li class="nav-item">
                 <a
@@ -192,7 +207,10 @@ export default {
       >
         <div
           class="card-top-border"
-          :class="[expanded ? cardTopAfter : cardTopBefore, darkmode ? 'card-top-border-dark' : 'card-top-border-light']"
+          :class="[
+            expanded ? cardTopAfter : cardTopBefore,
+            darkmode ? 'card-top-border-dark' : 'card-top-border-light',
+          ]"
         >
           <div class="badges">
             <span>BPPSPAM</span>
@@ -225,16 +243,26 @@ export default {
             </div>
             <div class="row">
               <div class="col-7">
-                <p style="font-size:10px;">Volume Air Terjual Bulan Ini</p>
-                <h2 style="margin-top: -10px; font-size: 22px">{{ volume_air.data.pakaibi }} m3</h2>
+                <p style="font-size: 10px">Volume Air Terjual Bulan Ini</p>
+                <h2 style="margin-top: -10px; font-size: 22px">
+                  {{ volume_air.data.pakaibi }} m3
+                </h2>
               </div>
               <div class="col-5">
                 <div :class="boxValueColor">
                   <div class="row">
-                    <i class="fas fa-arrow-down box-value-icon" v-if="boxValueColor == 'box-value-red'"></i>
-                    <i class="fas fa-arrow-up box-value-icon" v-else-if="boxValueColor == 'box-value-green'"></i>
+                    <i
+                      class="fas fa-arrow-down box-value-icon"
+                      v-if="boxValueColor == 'box-value-red'"
+                    ></i>
+                    <i
+                      class="fas fa-arrow-up box-value-icon"
+                      v-else-if="boxValueColor == 'box-value-green'"
+                    ></i>
                     <i class="fas fa-equals box-value-icon" v-else></i>
-                    <p class="box-value-text">{{ volume_air.data.presentase}}%</p>
+                    <p class="box-value-text">
+                      {{ volume_air.data.presentase }}%
+                    </p>
                   </div>
                 </div>
               </div>
@@ -280,7 +308,7 @@ export default {
           </div>
         </div>
       </div>
-      </div>
+    </div>
     <!-- end card-body -->
   </div>
   <!-- end card-->
