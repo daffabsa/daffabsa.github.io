@@ -137,8 +137,12 @@ export default {
     list3(newList) {
       localStorage.list3 = newList;
     },
+    darkmode(newValue){
+      localStorage.darkmode = newValue;
+    }
   },
   mounted() {
+    if(localStorage.darkmode) this.darkmode = localStorage.darkmode;
     if(localStorage.list1) this.list1 = localStorage.list1.split(',');
     if(localStorage.list2) this.list2 = localStorage.list2.split(',');
     if(localStorage.list3) this.list3 = localStorage.list3.split(',');

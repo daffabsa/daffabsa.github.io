@@ -15,15 +15,22 @@ export default {
     return {
       editLayout: false,
       darkmode: false,
-      headerColor: "topbar-light",
+      headerColor: "",
     };
+  },
+  mounted(){
+    if(localStorage.darkmode) {
+      this.darkmode = localStorage.darkmode
+    }
+  },
+  watch: {
+    darkmode(newValue) {
+      localStorage.darkmode = newValue;
+    },
   },
   created() {
     EventBus.$on("editLayout", (editLayoutBool) => {
       this.editLayout = editLayoutBool;
-    });
-    EventBus.$on("darkmode", (darkmodeBool) => {
-      this.darkmode = darkmodeBool;
     });
   },
   methods: {
@@ -87,7 +94,7 @@ export default {
       user-select: none;
       -o-user-select: none;
     "
-    :class="headerColor"
+    :class="darkmode ? 'topbar-dark' : 'topbar-light'"
   >
     
       <ul class="list-unstyled topnav-menu float-right mb-0">
