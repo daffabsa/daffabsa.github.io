@@ -13,11 +13,11 @@ export default {
   },
   data() {
     return {
-      score_roe: null,
+      efektivitas_pembacaan: null,
       expanded: false,
       editLayout: false,
-      cardBefore: "card-skor-roe-before",
-      cardAfter: "card-skor-roe-after",
+      cardBefore: "card-efisiensi-before",
+      cardAfter: "card-efisiensi-after",
       cardTopBefore: "card-top-before",
       cardTopAfter: "card-top-after",
       darkmode: false,
@@ -26,6 +26,7 @@ export default {
       contentCard: "content-light",
       collapseButton: "collapse-button-light",
       activePeriod: "active-light",
+      boxValueColor: "box-value-default",
       anim: null,
       lottieOptions: {
         animationData: addWidgetAnim.default,
@@ -53,8 +54,13 @@ export default {
   },
   beforeMount() {
     setTimeout(() => {
-      axios.get("akuntansi-kinerja/7ba03428662358ed0af5d09749615f141eacd13f/2022-06-23.16:37:57/2022").then((res) => {
-        this.score_roe = res.data;
+      axios.get("icc-efektivitaspembacaan/b91727d8799abcdd352d164bbb9615d9c4dd4316/2022-06-28.10:16:26").then((res) => {
+        this.efektivitas_pembacaan = res.data;
+        if(this.efektivitas_pembacaan.data.presentase.includes('-')){
+          this.boxValueColor = "box-value-red";
+        } else {
+          this.boxValueColor = "box-value-green";
+        }
       });
     }, 2000);
     moment.locale("id");
@@ -87,16 +93,15 @@ export default {
   },
 };
 </script>
-
 <style>
-.card-skor-roe-before {
-  max-height: 255px;
+.card-efisiensi-before {
+  max-height: 285px;
   transition: all 500ms ease;
   overflow: hidden;
 }
 
-.card-skor-roe-after {
-  max-height: 718px;
+.card-efisiensi-after {
+  max-height: 406px;
   transition: all 500ms ease;
   overflow: hidden;
 }
@@ -120,7 +125,7 @@ export default {
     class="card container"
     :class="[expanded ? cardAfter : cardBefore, cardClass]"
   >
-    <div style="margin: 20px 0px" v-if="score_roe == null">
+    <div style="margin: 20px 0px" v-if="efektivitas_pembacaan == null">
       <lottie
         :width="250"
         :options="lottieOptions"
@@ -129,7 +134,7 @@ export default {
     </div>
 
     <div v-else>
-      <div style="color: #1b2559; height: 32px; margin-bottom: -1px">
+      <div style="color: #1b2559; height: 32px">
         <div v-if="editLayout == false" class="row header-card">
           <div class="col-3 tab-nav">
             <p
@@ -194,7 +199,7 @@ export default {
                 class="heading-text"
                 :style="darkmode ? { color: 'white' } : { color: '#1B2559' }"
               >
-                Skor Rasio Kas
+                Efektivitas Pembacaan
               </h3>
             </div>
           </div>
@@ -214,135 +219,62 @@ export default {
               </div>
             </div>
             <div class="row">
-              <div class="col-6">
-                <p>Skor Rasio Kas</p>
-                <h2 style="margin-top: -10px">{{ score_roe.data.skorrasiokas }}</h2>
+              <div class="col-7">
+                <p>Efektivitas Pembacaan</p>
+                <h2 style="margin-top: -10px">
+                  {{ efektivitas_pembacaan.data.efektifitaspembacaan }}%
+                </h2>
               </div>
-              <div class="col-6">
-                <div class="box-value-default">
+              <div class="col-5">
+                <div :class="boxValueColor">
                   <div class="row">
-                    <i class="fas fa-equals box-value-icon"></i>
-                    <p class="box-value-text">0</p>
+                    <i class="fas fa-arrow-down box-value-icon" v-if="boxValueColor == 'box-value-red'"></i>
+                    <i class="fas fa-arrow-up box-value-icon" v-else-if="boxValueColor == 'box-value-green'"></i>
+                    <i class="fas fa-equals box-value-icon" v-else></i>
+                    <p class="box-value-text">{{ efektivitas_pembacaan.data.presentase}}%</p>
                   </div>
                 </div>
               </div>
               <span class="container horirow"></span>
-              <div class="row" style="margin: 10px; 0px;">
-                <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
-                  Skor Rasio Kas Bulan Lalu
-                </p>
-                <p
-                  style="
-                    color: white;
-                    font-weight: bold;
-                    margin-left: 7px;
-                    font-size: 18px;
-                  "
-                >
-                  2
-                </p>
+              <div class="row" style="margin: 10px; 0px; width:100%">
+                <div class="col-6">
+                  <div class="row">
+                    <p style="color: #e9edf7; font-size: 12px; margin-top: 4px">
+                      Pelanggan Aktif
+                      <span
+                        style="
+                          color: white;
+                          font-weight: bold;
+                          margin-left: 7px;
+                          font-size: 13px;
+                        "
+                      >
+                        {{ efektivitas_pembacaan.data.pelangganaktif }}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="row" style="float:right">
+                    <p style="color: #e9edf7; font-size: 12px; margin-top: 4px; margin-right:20px">
+                      Sudah Baca
+                      <span
+                        style="
+                          color: white;
+                          font-weight: bold;
+                          margin-left: 7px;
+                          font-size: 13px;
+                        "
+                      >
+                        {{ efektivitas_pembacaan.data.sudahbaca }}
+                      </span>
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-          <div
-            @click="expandWidget()"
-            class="d-flex justify-content-center expand-button"
-            v-if="expanded == false"
-            style="cursor: pointer"
-          >
-            <i
-              style="margin-top: 7px"
-              class="fa fa-angle-double-down"
-              aria-hidden="true"
-            ></i>
-          </div>
         </div>
-      </div>
-      <div
-        :class="contentCard"
-        style="margin-right: -20px; margin-left: -20px; padding: 0px 20px"
-      >
-        <div
-          class="row"
-          :class="contentCard"
-          style="padding-top: 24px; padding-left: 12px; padding-right: 20px"
-        >
-          <p class="alternate-text">Detail Skor</p>
-        </div>
-        <div class="row" style="margin-bottom: -20px">
-          <div class="col-9">
-            <p>Laba Setelah Pajak</p>
-          </div>
-          <div class="col-3">
-            <p class="value-text">{{ score_roe.profit_after_tax }}</p>
-            <div class="row" style="float: right; margin-right: 0px">
-              <i
-                class="fa fa-arrow-up"
-                style="font-size: 11px; line-height: 0px; color: #009f68"
-              ></i>
-              <p class="value-plus-text">
-                {{ score_roe.profit_after_tax_accumulatives }}%
-              </p>
-            </div>
-          </div>
-        </div>
-        <hr />
-        <div class="row" style="margin-bottom: -20px">
-          <div class="col-9">
-            <p>Ekuitas</p>
-          </div>
-          <div class="col-3">
-            <p class="value-text">{{ score_roe.equity }}</p>
-            <div class="row" style="float: right; margin-right: 0px">
-              <i
-                class="fa fa-arrow-down"
-                style="font-size: 11px; line-height: 0px; color: #ff4a6d"
-              ></i>
-              <p class="value-minus-text">
-                {{ score_roe.equity_accumulatives }}%
-              </p>
-            </div>
-          </div>
-        </div>
-        <hr />
-        <div class="row" style="margin-bottom: -20px">
-          <div class="col-9">
-            <p>Batas Maksimal</p>
-          </div>
-          <div class="col-3">
-            <p class="value-text">{{ score_roe.max_limit }}</p>
-
-            <p class="value-default-text">
-              {{ score_roe.max_limit_percentage }}%
-            </p>
-          </div>
-        </div>
-        <hr />
-        <div class="row" style="margin-bottom: -20px">
-          <div class="col-9">
-            <p>Nilai Roe</p>
-          </div>
-          <div class="col-3">
-            <p class="value-text">{{ score_roe.roe_value }}</p>
-
-            <p class="value-default-text">
-              {{ score_roe.roe_value_percentage }}%
-            </p>
-          </div>
-          <div
-            @click="expandWidget()"
-            class="d-flex justify-content-center collapse-button"
-            :class="collapseButton"
-            style="cursor: pointer"
-          >
-            <i
-              style="margin-top: 7px"
-              class="fa fa-angle-double-up"
-              aria-hidden="true"
-            ></i>
-          </div>
-        </div>
-        <br />
       </div>
     </div>
 

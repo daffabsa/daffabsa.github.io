@@ -4,10 +4,26 @@ import { EventBus } from "~/plugins/eventBus.js";
  * Topbar component
  */
 export default {
+  head() {
+    return {
+      bodyAttrs: {
+        class: this.darkmode ? "dark" : "light",
+      },
+    };
+  },
   data() {
     return {
       editLayout: true,
+      darkmode: false,
     };
+  },
+  created() {
+    EventBus.$on("editLayout", (editLayoutBool) => {
+      this.editLayout = editLayoutBool;
+    });
+    EventBus.$on("darkmode", (darkmodeBool) => {
+      this.darkmode = darkmodeBool;
+    });
   },
   methods: {
     /**

@@ -1,7 +1,7 @@
 <script>
 import { EventBus } from "~/plugins/eventBus.js";
 import lottie from "vue-lottie/src/lottie.vue";
-import * as deletingWidgetAnim from "~/assets/lottie/delete-widget.json";
+import * as deletingWidgetAnim from "~/assets/lottie/add-widget.json";
 /**
  *Delete Widget component
  */

@@ -80,7 +80,7 @@ body[data-layout-mode="horizontal"] {
 
 @include media-breakpoint-up(lg) {
   .topnav {
-    height: $topnav-height;
+    height: 60px;
 
     .navbar-nav {
       .nav-item {
@@ -165,7 +165,7 @@ body[data-layout-mode="horizontal"] {
 
   body[data-layout-mode="horizontal"] {
     .content-page {
-      padding: calc(#{$topbar-height} + #{$topnav-height}) 12px 65px 12px;
+      padding: calc(70px + 70px) 12px 65px 12px;
     }
   }
 }

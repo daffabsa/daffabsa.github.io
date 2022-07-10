@@ -21,8 +21,9 @@ export default {
   },
   computed: mapState(["layout"]),
   beforeMount() {
-    axios.get("/announcements").then((res) => {
-      this.announcements = res.data;
+    axios.get("icc-pengumuman/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48").then((res) => {
+      this.announcements = res.data.announcements;
+      console.log(this.announcements);
     });
     moment.locale("id");
     this.today = moment(Date()).format("dddd, Do MMMM YYYY");
@@ -237,32 +238,29 @@ export default {
       
         <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
           <div class="collapse navbar-collapse" id="topnav-menu-content">
-            <ul class="navbar-nav">
-              <div
-                style="
-                  height: 55px;
-                  background-color: #011a3d;
-                  padding-left: 20px;
-                  padding-right: 20px;
-                "
-              >
-                <div class="row">
-                  <div class="col-md-5">
+            <ul class="navbar-nav" style="width:37%">
+              <div>
+                <div class="row" style="
+                    height: 60px;
+                    width: 102%;
+                    background-color: #011a3d;
+                    padding-right: 20px;
+                  ">
+                  <div class="col-md-4" style="margin: auto;">
                     <p
                       style="
                         color: white;
-                        text-align: left;
-                        vertical-align: baseline;
-                        padding-top: 17px;
-                        padding-bottom: 17px;
                         width: 200px;
+                        margin-top: 15px;
+                        font-size:15px;
                       "
                     >
                       {{ today }}
+                      <!-- Minggu, 27 Desember 2022 -->
                     </p>
                   </div>
-                  <div class="col-md-7">
-                    <div style="width: 230px; margin-top: 10px">
+                  <div class="col-md-7" style="margin-left:30px; margin-right:-20px">
+                    <div style="width: 280px; margin-top: 7px; float:right">
                       <flip-countdown
                         deadline="2052-12-25 00:00:00"
                         :showDays="false"
@@ -273,7 +271,7 @@ export default {
                 </div>
               </div>
             </ul>
-            <div style="width: 80%">
+            <div style="width: 70%;">
               <div class="marquee-parent">
                 <div class="marquee-child">
                   <div
@@ -283,8 +281,9 @@ export default {
                       'announcement-box-green': announcement.color === 'green',
                       'announcement-box-red': announcement.color === 'red',
                     }"
+                    style="height: 35px !important; padding-top:5px"
                   >
-                    <div>+{{ announcement.count }}</div>
+                    <div style="display:inline-block">+{{ announcement.count }}</div>
                     {{ announcement.message }}
                   </div>
                 </div>

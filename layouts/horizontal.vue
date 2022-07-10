@@ -11,6 +11,7 @@ export default {
   data() {
     return {
       editLayout: false,
+      darkmode: false,
     };
   },
   components: {
@@ -32,6 +33,9 @@ export default {
     EventBus.$on("editLayout", (editLayoutBool) => {
       this.editLayout = editLayoutBool;
     });
+    EventBus.$on("darkmode", (darkmodeBool) => {
+      this.darkmode = darkmodeBool;
+    });
   },
 };
 </script>
@@ -39,7 +43,7 @@ export default {
 <template>
   <!-- Begin page -->
   <div id="wrapper">
-    <div v-if="editLayout == false">
+    <div :style="editLayout == false ? 'display:block' : 'display:none'">
       <Topbar />
       <HorizontalNavbar
         :type="layout.topbar"
@@ -47,13 +51,10 @@ export default {
         :menu="layout.menuPosition"
       />
     </div>
-    <div v-else>
-      <TopbarLayout />
-    </div>
     <!-- ============================================================== -->
     <!-- Start Page Content here -->
     <!-- ============================================================== -->
-    <div class="content-page">
+    <div class="content-page" :style="darkmode ? 'background-color:#011A3D' : 'background-color: #f3f4f6 '">
       <div class="content">
           <Nuxt />
       </div>

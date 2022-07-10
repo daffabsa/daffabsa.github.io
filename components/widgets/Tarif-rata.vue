@@ -3,6 +3,7 @@ import axios from "~/plugins/axios";
 import { EventBus } from "~/plugins/eventBus.js";
 import lottie from "vue-lottie/src/lottie.vue";
 import * as addWidgetAnim from "~/assets/lottie/loading-widget.json";
+import moment from "moment";
 /**
  * Skor-roe component
  */
@@ -31,6 +32,7 @@ export default {
         animationData: addWidgetAnim.default,
         autoplay: true,
       },
+      today: '',
     };
   },
   methods: {
@@ -59,9 +61,10 @@ export default {
         } else {
           this.boxValueColor = "box-value-green";
         }
-        // console.log(res.data);
       });
     }, 2000);
+    moment.locale("id");
+    this.today = moment(Date()).format("LT");
   },
   created() {
     EventBus.$on("editLayout", (editLayoutBool) => {
@@ -212,7 +215,7 @@ export default {
               </div>
               <div class="col-7">
                 <p style="font-size: 10px; margin-top: 5px; float: right">
-                  Last Updated: 09.15 WITA
+                  Last Updated: {{ today }} WITA
                 </p>
               </div>
             </div>
@@ -227,7 +230,7 @@ export default {
                     <i class="fas fa-arrow-down box-value-icon" v-if="boxValueColor == 'box-value-red'"></i>
                     <i class="fas fa-arrow-up box-value-icon" v-else-if="boxValueColor == 'box-value-green'"></i>
                     <i class="fas fa-equals box-value-icon" v-else></i>
-                    <p class="box-value-text">{{ tarif_rata.data.presentase}}</p>
+                    <p class="box-value-text">{{ tarif_rata.data.presentase}}%</p>
                   </div>
                 </div>
               </div>
@@ -271,40 +274,6 @@ export default {
               </div>
             </div>
           </div>
-          <div
-            @click="expandWidget()"
-            class="d-flex justify-content-center expand-button"
-            v-if="expanded == false"
-            style="cursor: pointer"
-          >
-            <i
-              style="margin-top: 7px"
-              class="fa fa-angle-double-down"
-              aria-hidden="true"
-            ></i>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="row"
-        :class="contentCard"
-        style="padding-top: 24px; padding-left: 20px; padding-right: 20px"
-      >
-        <p class="alternate-text">Detail</p>
-      </div>
-      <div class="row">
-        <div
-          @click="expandWidget()"
-          class="d-flex justify-content-center collapse-button"
-          :class="collapseButton"
-          style="cursor: pointer"
-        >
-          <i
-            style="margin-top: 7px"
-            class="fa fa-angle-double-up"
-            aria-hidden="true"
-          ></i>
         </div>
       </div>
 
