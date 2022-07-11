@@ -185,7 +185,7 @@ export default {
   <div>
     <div :style="editLayout == true ? 'display:block' : 'display:none'">
       <div class="navbar-custom-layout">
-        <div style="padding-top: 15px; padding-bottom: 15px">
+        <div style="padding-top: 15px; padding-bottom: 15px; margin-top: 2px">
           <p
             style="
               color: white;
@@ -234,7 +234,11 @@ export default {
         user-select: none;
         -o-user-select: none;
       "
-      class="mt-2"
+      :style="
+        editLayout == false
+          ? 'margin-top: 20px; transition: margin 0.3s'
+          : 'margin-top: -50px; transition: margin 0.3s'
+      "
     >
       <div class="row">
         <div
@@ -276,7 +280,7 @@ export default {
                   <i
                     v-if="editLayout == true"
                     class="fa fa-cog"
-                    style="color: #dfe3e8; margin-right: 20px; cursor: pointer"
+                    style="color: #dfe3e8; margin-right: 5px; cursor: pointer"
                   ></i>
 
                   <i
@@ -295,10 +299,14 @@ export default {
           </draggable>
           <div class="container" v-if="editLayout == true">
             <div class="row">
-              <div @click="showModalAdd(list1)" class="box-add">
+              <div
+                @click="showModalAdd(list1)"
+                class="box-add"
+                :style="darkmode ? '' : 'background-color:white'"
+              >
                 <div
                   class="d-flex justify-content-center"
-                  style="z-index: 5; margin: auto"
+                  style="z-index: 5; margin: auto; color: #a3aed0"
                 >
                   <i
                     style="font-size: 19px"
@@ -315,17 +323,11 @@ export default {
         <Transition name="fade" :duration="550">
           <div class="col-lg-6">
             <div
-              style="
-                position: fixed;
-                top: 150px;
-                left: 0;
-                right: 0;
-                z-index: 100;
-              "
+              style="position: fixed; left: 0; right: 0; z-index: 100"
               :style="
                 perbesar == false
-                  ? 'width: 48.5%; margin: 0px auto; transition: width 1s, margin 1s;'
-                  : 'width: 100%; margin: 0px auto; transition: width 1s, margin 1s;'
+                  ? 'width: 48.5%; margin: 0px auto; transition: width 1.5s;'
+                  : 'width: 98%; margin: 0px auto; transition: width 1.5s;'
               "
             >
               <draggable
@@ -436,7 +438,7 @@ export default {
                     v-on:click="removeWidget(index, list3)"
                     v-if="editLayout == true"
                     class="fa fa-cog"
-                    style="color: #dfe3e8; margin-right: 20px; cursor: pointer"
+                    style="color: #dfe3e8; margin-right: 5px; cursor: pointer"
                   ></i>
 
                   <i
@@ -455,10 +457,14 @@ export default {
           </draggable>
           <div class="container" v-if="editLayout == true">
             <div class="row">
-              <div @click="showModalAdd(list3)" class="box-add">
+              <div
+                @click="showModalAdd(list3)"
+                class="box-add"
+                :style="darkmode ? '' : 'background-color:white'"
+              >
                 <div
                   class="d-flex justify-content-center"
-                  style="z-index: 5; margin: auto"
+                  style="z-index: 5; margin: auto; color: #a3aed0"
                 >
                   <i
                     style="font-size: 19px"
@@ -525,7 +531,6 @@ export default {
   padding: 40px 0px 40px 0px;
   margin: 0 auto;
   width: 100%;
-  background-color: #ffffff;
   z-index: 1;
 }
 
