@@ -19,8 +19,8 @@ export default {
   },
   computed: mapState(["layout"]),
   mounted() {
-    if(localStorage.darkmode) {
-      this.darkmode = localStorage.darkmode
+    if (localStorage.darkmode) {
+      this.darkmode = localStorage.darkmode;
     }
     document.body.setAttribute("data-layout-mode", "horizontal");
   },
@@ -57,9 +57,14 @@ export default {
     <!-- ============================================================== -->
     <!-- Start Page Content here -->
     <!-- ============================================================== -->
-    <div class="content-page" :style="darkmode ? 'background-color:#011A3D' : 'background-color: #f3f4f6 '">
+    <div
+      class="content-page"
+      :style="
+        darkmode ? 'background-color:#011A3D' : 'background-color: #f3f4f6 '
+      "
+    >
       <div class="content">
-          <Nuxt />
+        <Nuxt />
       </div>
       <!-- content -->
     </div>

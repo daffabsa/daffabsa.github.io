@@ -185,7 +185,7 @@ export default {
   <div>
     <div :style="editLayout == true ? 'display:block' : 'display:none'">
       <div class="navbar-custom-layout">
-        <div style="padding-top: 15px; padding-bottom: 15px">
+        <div style="padding-top: 15px; padding-bottom: 15px; margin-top: 2px">
           <p
             style="
               color: white;
@@ -234,12 +234,20 @@ export default {
         user-select: none;
         -o-user-select: none;
       "
-      class="mt-2"
+      :style="
+        editLayout == false
+          ? 'margin-top: 20px; transition: margin 0.3s'
+          : 'margin-top: -50px; transition: margin 0.3s'
+      "
     >
       <div class="row">
         <div
           class="col-lg-3"
-          :style="perbesar == false ? 'display:block' : 'display:none'"
+          :style="
+            perbesar == false
+              ? 'opacity:1'
+              : 'opacity:0; transition: opacity 0.5s'
+          "
         >
           <draggable
             v-model="list1"
@@ -272,7 +280,7 @@ export default {
                   <i
                     v-if="editLayout == true"
                     class="fa fa-cog"
-                    style="color: #dfe3e8; margin-right: 20px; cursor: pointer"
+                    style="color: #dfe3e8; margin-right: 5px; cursor: pointer"
                   ></i>
 
                   <i
@@ -291,10 +299,14 @@ export default {
           </draggable>
           <div class="container" v-if="editLayout == true">
             <div class="row">
-              <div @click="showModalAdd(list1)" class="box-add">
+              <div
+                @click="showModalAdd(list1)"
+                class="box-add"
+                :style="darkmode ? '' : 'background-color:white'"
+              >
                 <div
                   class="d-flex justify-content-center"
-                  style="z-index: 5; margin: auto"
+                  style="z-index: 5; margin: auto; color: #a3aed0"
                 >
                   <i
                     style="font-size: 19px"
@@ -309,95 +321,91 @@ export default {
         </div>
 
         <Transition name="fade" :duration="550">
-          <div :class="perbesar == false ? 'col-lg-6' : 'col-lg-12'">
-            <draggable
-              v-model="list2"
-              class="list-group"
-              :disabled="!editLayout"
-              group="widgets2"
-              v-bind="dragOptions"
-              @start="drag = true"
-              @end="handleDrop"
+          <div class="col-lg-6">
+            <div
+              style="position: fixed; left: 0; right: 0; z-index: 100"
+              :style="
+                perbesar == false
+                  ? 'width: 48.5%; margin: 0px auto; transition: width 1.5s;'
+                  : 'width: 98%; margin: 0px auto; transition: width 1.5s;'
+              "
             >
-              <!-- @end="drag = false" -->
-              <transition-group
-                type="transition"
-                :name="!drag ? 'flip-list' : null"
+              <draggable
+                v-model="list2"
+                class="list-group"
+                :disabled="!editLayout"
+                group="widgets2"
+                v-bind="dragOptions"
+                @start="drag = true"
+                @end="handleDrop"
               >
-                <div
-                  style="position: relative"
-                  v-for="element in list2"
-                  :key="element"
+                <!-- @end="drag = false" -->
+                <transition-group
+                  type="transition"
+                  :name="!drag ? 'flip-list' : null"
                 >
-                  <a
-                    @click="fullscreenGis"
-                    :style="
-                      darkmode
-                        ? 'background: #233753; color: white'
-                        : 'background: #FFFFFF;color: #2275FF'
-                    "
-                    style="
-                      z-index: 1;
-                      display: flex;
-                      flex-direction: row;
-                      align-items: flex-start;
-                      padding: 12px;
-                      gap: 10px;
-                      position: absolute;
-                      height: 44px;
-                      right: 30px;
-                      top: 30px;
-                      background: #ffffff;
-                      box-shadow: 0px 4px 24px rgba(69, 68, 68, 0.25);
-                      border-radius: 8px;
-                      font-weight: 600;
-                      font-size: 14px;
-                      line-height: 20px;
-                      cursor: pointer;
-                    "
-                  >
-                    <i
-                      class="fas fa-expand"
-                      style="margin-top: 3px"
-                      v-if="perbesar == false"
-                    ></i>
-                    <i
-                      class="fas fa-compress"
-                      style="margin-top: 3px"
-                      v-else
-                    ></i>
-                    {{ perbesar == false ? "Perbesar" : "Perkecil" }}
-                  </a>
-                  <component
-                    :is="element"
-                    :class="{ 'card-moveable': editLayout === true }"
-                  ></component>
-                </div>
-              </transition-group>
-            </draggable>
-            <div class="container" v-if="editLayout == true">
-              <div class="row">
-                <div @click="showModalAdd(list2)" class="box-add">
                   <div
-                    class="d-flex justify-content-center"
-                    style="z-index: 5; margin: auto"
+                    style="position: relative"
+                    v-for="element in list2"
+                    :key="element"
                   >
-                    <i
-                      style="font-size: 19px"
-                      class="fa fa-plus"
-                      aria-hidden="true"
-                    ></i>
-                    &nbsp; &nbsp;Tambah Card
+                    <a
+                      @click="fullscreenGis"
+                      :style="
+                        darkmode
+                          ? 'background: #233753; color: white'
+                          : 'background: #FFFFFF;color: #2275FF'
+                      "
+                      style="
+                        z-index: 1;
+                        display: flex;
+                        flex-direction: row;
+                        align-items: flex-start;
+                        padding: 12px;
+                        gap: 10px;
+                        position: absolute;
+                        height: 44px;
+                        right: 30px;
+                        top: 30px;
+                        background: #ffffff;
+                        box-shadow: 0px 4px 24px rgba(69, 68, 68, 0.25);
+                        border-radius: 8px;
+                        font-weight: 600;
+                        font-size: 14px;
+                        line-height: 20px;
+                        cursor: pointer;
+                      "
+                    >
+                      <i
+                        class="fas fa-expand"
+                        style="margin-top: 3px"
+                        v-if="perbesar == false"
+                      ></i>
+                      <i
+                        class="fas fa-compress"
+                        style="margin-top: 3px"
+                        v-else
+                      ></i>
+                      {{ perbesar == false ? "Perbesar" : "Perkecil" }}
+                    </a>
+                    <component
+                      :is="element"
+                      :class="{ 'card-moveable': editLayout === true }"
+                    ></component>
                   </div>
-                </div>
-              </div>
+                </transition-group>
+              </draggable>
             </div>
           </div>
         </Transition>
 
         <div
           class="col-lg-3"
-          :style="perbesar == false ? 'display:block' : 'display:none'"
+          :style="
+            perbesar == false
+              ? 'opacity:1'
+              : 'opacity:0; transition: opacity 0.5s'
+          "
         >
           <draggable
             v-model="list3"
@@ -430,7 +438,7 @@ export default {
                     v-on:click="removeWidget(index, list3)"
                     v-if="editLayout == true"
                     class="fa fa-cog"
-                    style="color: #dfe3e8; margin-right: 20px; cursor: pointer"
+                    style="color: #dfe3e8; margin-right: 5px; cursor: pointer"
                   ></i>
 
                   <i
@@ -449,10 +457,14 @@ export default {
           </draggable>
           <div class="container" v-if="editLayout == true">
             <div class="row">
-              <div @click="showModalAdd(list3)" class="box-add">
+              <div
+                @click="showModalAdd(list3)"
+                class="box-add"
+                :style="darkmode ? '' : 'background-color:white'"
+              >
                 <div
                   class="d-flex justify-content-center"
-                  style="z-index: 5; margin: auto"
+                  style="z-index: 5; margin: auto; color: #a3aed0"
                 >
                   <i
                     style="font-size: 19px"
@@ -519,7 +531,6 @@ export default {
   padding: 40px 0px 40px 0px;
   margin: 0 auto;
   width: 100%;
-  background-color: #ffffff;
   z-index: 1;
 }
 
