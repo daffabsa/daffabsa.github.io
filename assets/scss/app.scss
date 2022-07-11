@@ -219,7 +219,7 @@ div.badges span {
 
 .marquee-parent {
     position: relative;
-    width: 200%;
+    width: 220%;
     overflow: hidden;
     height: 50px;
     display: block;
@@ -227,7 +227,7 @@ div.badges span {
 
 .marquee-child {
     display: flex;
-    width: 300%;
+    width: 330%;
     /* width of your text div */
     height: auto;
     /* height of your text div */
@@ -254,7 +254,7 @@ div.badges span {
     border-radius: 20px;
     background: #e6faf5;
     color: #009f68;
-    padding: 5px 15px;
+    padding: 8px 15px;
     font-weight: bold;
     display: block;
     margin: 0px 5px;
@@ -264,7 +264,7 @@ div.badges span {
     border-radius: 20px;
     background: #FDEFED;
     color: #FF3855;
-    padding: 5px 15px;
+    padding: 8px 15px;
     font-weight: bold;
     display: block;
     margin: 0px 5px;
@@ -274,7 +274,7 @@ div.badges span {
     border-radius: 20px;
     background: #009f68;
     color: white;
-    padding: 0px 5px;
+    padding: 0px 10px;
     font-weight: bold;
     display: inline;
     margin-right: 10px;
@@ -284,7 +284,7 @@ div.badges span {
     border-radius: 20px;
     background: #FF3855;
     color: white;
-    padding: 0px 5px;
+    padding: 0px 10px;
     font-weight: bold;
     display: inline;
     margin-right: 10px;
