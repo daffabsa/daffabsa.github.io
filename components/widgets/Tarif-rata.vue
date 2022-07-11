@@ -32,7 +32,7 @@ export default {
         animationData: addWidgetAnim.default,
         autoplay: true,
       },
-      today: '',
+      today: "",
     };
   },
   methods: {
@@ -52,16 +52,28 @@ export default {
       this.anim.pause();
     },
   },
+  mounted() {
+    if (localStorage.darkmode) {
+      this.darkmode = localStorage.darkmode;
+    }
+    if (localStorage.editLayout) {
+      this.editLayout = localStorage.editLayout;
+    }
+  },
   beforeMount() {
     setTimeout(() => {
-      axios.get("icc-tarifrata/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48/2022-06-01/all").then((res) => {
-        this.tarif_rata = res.data;
-        if(this.tarif_rata.data.presentase.includes('-')){
-          this.boxValueColor = "box-value-red";
-        } else {
-          this.boxValueColor = "box-value-green";
-        }
-      });
+      axios
+        .get(
+          "icc-tarifrata/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48/2022-06-01/all"
+        )
+        .then((res) => {
+          this.tarif_rata = res.data;
+          if (this.tarif_rata.data.presentase.includes("-")) {
+            this.boxValueColor = "box-value-red";
+          } else {
+            this.boxValueColor = "box-value-green";
+          }
+        });
     }, 2000);
     moment.locale("id");
     this.today = moment(Date()).format("LT");
@@ -124,7 +136,10 @@ export default {
 <template>
   <div
     class="card container"
-    :class="[expanded ? cardAfter : cardBefore, cardClass]"
+    :class="[
+      expanded ? cardAfter : cardBefore,
+      darkmode ? 'card-dark' : 'card-light',
+    ]"
   >
     <div style="margin: 20px 0px" v-if="tarif_rata == null">
       <lottie
@@ -151,7 +166,12 @@ export default {
           <div class="col-9" style="font-size: 10px">
             <ul class="nav nav-pills nav-justified">
               <li class="nav-item">
-                <a class="nav-link" :class="activePeriod" href="#">Hari</a>
+                <a
+                  class="nav-link"
+                  :class="darkmode ? 'active-dark' : 'active-light'"
+                  href="#"
+                  >Hari</a
+                >
               </li>
               <li class="nav-item">
                 <a
@@ -183,12 +203,15 @@ export default {
       </div>
       <div
         class="row"
-        :class="contentCard"
+        :class="darkmode ? 'content-dark' : 'content-light'"
         style="border-radius: 15px 15px 0px 0px"
       >
         <div
           class="card-top-border"
-          :class="[expanded ? cardTopAfter : cardTopBefore, cardTopBorder]"
+          :class="[
+            expanded ? cardTopAfter : cardTopBefore,
+            darkmode ? 'card-top-border-dark' : 'card-top-border-light',
+          ]"
         >
           <div class="badges">
             <span>BPPSPAM</span>
@@ -222,15 +245,25 @@ export default {
             <div class="row">
               <div class="col-7">
                 <p>Tarif Rata-Rata Bulan Ini</p>
-                <h2 style="margin-top: -10px; font-size: 22px">{{ tarif_rata.data.tarifbi }} Rp/m3</h2>
+                <h2 style="margin-top: -10px; font-size: 22px">
+                  {{ tarif_rata.data.tarifbi }} Rp/m3
+                </h2>
               </div>
               <div class="col-5">
                 <div :class="boxValueColor">
                   <div class="row">
-                    <i class="fas fa-arrow-down box-value-icon" v-if="boxValueColor == 'box-value-red'"></i>
-                    <i class="fas fa-arrow-up box-value-icon" v-else-if="boxValueColor == 'box-value-green'"></i>
+                    <i
+                      class="fas fa-arrow-down box-value-icon"
+                      v-if="boxValueColor == 'box-value-red'"
+                    ></i>
+                    <i
+                      class="fas fa-arrow-up box-value-icon"
+                      v-else-if="boxValueColor == 'box-value-green'"
+                    ></i>
                     <i class="fas fa-equals box-value-icon" v-else></i>
-                    <p class="box-value-text">{{ tarif_rata.data.presentase}}%</p>
+                    <p class="box-value-text">
+                      {{ tarif_rata.data.presentase }}%
+                    </p>
                   </div>
                 </div>
               </div>

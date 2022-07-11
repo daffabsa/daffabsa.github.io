@@ -31,7 +31,7 @@ export default {
         animationData: addWidgetAnim.default,
         autoplay: true,
       },
-      today: '',
+      today: "",
     };
   },
   methods: {
@@ -51,11 +51,23 @@ export default {
       this.anim.pause();
     },
   },
+  mounted() {
+    if (localStorage.darkmode) {
+      this.darkmode = localStorage.darkmode;
+    }
+    if (localStorage.editLayout) {
+      this.editLayout = localStorage.editLayout;
+    }
+  },
   beforeMount() {
     setTimeout(() => {
-      axios.get("akuntansi-kinerja/7ba03428662358ed0af5d09749615f141eacd13f/2022-06-23.16:37:57/2022").then((res) => {
-        this.score_roe = res.data;
-      });
+      axios
+        .get(
+          "akuntansi-kinerja/7ba03428662358ed0af5d09749615f141eacd13f/2022-06-23.16:37:57/2022"
+        )
+        .then((res) => {
+          this.score_roe = res.data;
+        });
     }, 2000);
     moment.locale("id");
     this.today = moment(Date()).format("LT");
@@ -118,7 +130,10 @@ export default {
 <template>
   <div
     class="card container"
-    :class="[expanded ? cardAfter : cardBefore, cardClass]"
+    :class="[
+      expanded ? cardAfter : cardBefore,
+      darkmode ? 'card-dark' : 'card-light',
+    ]"
   >
     <div style="margin: 20px 0px" v-if="score_roe == null">
       <lottie
@@ -145,7 +160,12 @@ export default {
           <div class="col-9" style="font-size: 10px">
             <ul class="nav nav-pills nav-justified">
               <li class="nav-item">
-                <a class="nav-link" :class="activePeriod" href="#">Hari</a>
+                <a
+                  class="nav-link"
+                  :class="darkmode ? 'active-dark' : 'active-light'"
+                  href="#"
+                  >Hari</a
+                >
               </li>
               <li class="nav-item">
                 <a
@@ -177,12 +197,15 @@ export default {
       </div>
       <div
         class="row"
-        :class="contentCard"
+        :class="darkmode ? 'content-dark' : 'content-light'"
         style="border-radius: 15px 15px 0px 0px"
       >
         <div
           class="card-top-border"
-          :class="[expanded ? cardTopAfter : cardTopBefore, cardTopBorder]"
+          :class="[
+            expanded ? cardTopAfter : cardTopBefore,
+            darkmode ? 'card-top-border-dark' : 'card-top-border-light',
+          ]"
         >
           <div class="badges">
             <span>BPPSPAM</span>
@@ -216,7 +239,9 @@ export default {
             <div class="row">
               <div class="col-6">
                 <p>Skor Rasio Kas</p>
-                <h2 style="margin-top: -10px">{{ score_roe.data.skorrasiokas }}</h2>
+                <h2 style="margin-top: -10px">
+                  {{ score_roe.data.skorrasiokas }}
+                </h2>
               </div>
               <div class="col-6">
                 <div class="box-value-default">
@@ -259,22 +284,24 @@ export default {
         </div>
       </div>
       <div
-        :class="contentCard"
+        :class="darkmode ? 'content-dark' : 'content-light'"
         style="margin-right: -20px; margin-left: -20px; padding: 0px 20px"
       >
         <div
           class="row"
-          :class="contentCard"
+          :class="darkmode ? 'content-dark' : 'content-light'"
           style="padding-top: 24px; padding-left: 12px; padding-right: 20px"
         >
           <p class="alternate-text">Detail Skor</p>
         </div>
-        <div class="row" style="margin-bottom: -20px">
+        <div class="row" style="margin-bottom: -20px; margin-top: -10px">
           <div class="col-9">
             <p>Laba Setelah Pajak</p>
           </div>
           <div class="col-3">
-            <p class="value-text">{{ score_roe.profit_after_tax }}</p>
+            <p class="value-text" style="margin-bottom: 7px">
+              {{ score_roe.data.lababersih }}
+            </p>
             <div class="row" style="float: right; margin-right: 0px">
               <i
                 class="fa fa-arrow-up"
@@ -287,12 +314,14 @@ export default {
           </div>
         </div>
         <hr />
-        <div class="row" style="margin-bottom: -20px">
+        <div class="row" style="margin-bottom: -20px; margin-top: -10px">
           <div class="col-9">
             <p>Ekuitas</p>
           </div>
           <div class="col-3">
-            <p class="value-text">{{ score_roe.equity }}</p>
+            <p class="value-text" style="margin-bottom: 7px">
+              {{ score_roe.data.equitas }}
+            </p>
             <div class="row" style="float: right; margin-right: 0px">
               <i
                 class="fa fa-arrow-down"
@@ -305,12 +334,14 @@ export default {
           </div>
         </div>
         <hr />
-        <div class="row" style="margin-bottom: -20px">
+        <div class="row" style="margin-bottom: -20px; margin-top: -10px">
           <div class="col-9">
             <p>Batas Maksimal</p>
           </div>
           <div class="col-3">
-            <p class="value-text">{{ score_roe.max_limit }}</p>
+            <p class="value-text" style="margin-bottom: 7px">
+              {{ score_roe.max_limit }}
+            </p>
 
             <p class="value-default-text">
               {{ score_roe.max_limit_percentage }}%
@@ -318,12 +349,14 @@ export default {
           </div>
         </div>
         <hr />
-        <div class="row" style="margin-bottom: -20px">
+        <div class="row" style="margin-bottom: -20px; margin-top: -10px">
           <div class="col-9">
             <p>Nilai Roe</p>
           </div>
           <div class="col-3">
-            <p class="value-text">{{ score_roe.roe_value }}</p>
+            <p class="value-text" style="margin-bottom: 7px">
+              {{ score_roe.data.roe }}
+            </p>
 
             <p class="value-default-text">
               {{ score_roe.roe_value_percentage }}%
@@ -332,7 +365,7 @@ export default {
           <div
             @click="expandWidget()"
             class="d-flex justify-content-center collapse-button"
-            :class="collapseButton"
+            :class="darkmode ? 'collapse-button-dark' : 'collapse-button-light'"
             style="cursor: pointer"
           >
             <i
@@ -345,8 +378,5 @@ export default {
         <br />
       </div>
     </div>
-
-    <!-- end card-body -->
   </div>
-  <!-- end card-->
 </template>

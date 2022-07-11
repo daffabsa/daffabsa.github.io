@@ -19,6 +19,9 @@ export default {
   },
   computed: mapState(["layout"]),
   mounted() {
+    if(localStorage.darkmode) {
+      this.darkmode = localStorage.darkmode
+    }
     document.body.setAttribute("data-layout-mode", "horizontal");
   },
   methods: {

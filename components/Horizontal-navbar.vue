@@ -23,7 +23,6 @@ export default {
   beforeMount() {
     axios.get("icc-pengumuman/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48").then((res) => {
       this.announcements = res.data.announcements;
-      console.log(this.announcements);
     });
     moment.locale("id");
     this.today = moment(Date()).format("dddd, Do MMMM YYYY");
@@ -109,7 +108,15 @@ export default {
       },
     },
   },
+  watch: {
+    darkmode(newValue) {
+      localStorage.darkmode = newValue;
+    },
+  },
   mounted() {
+    if(localStorage.darkmode) {
+      this.darkmode = localStorage.darkmode
+    }
     this.activateParentDropdown();
 
     this.$router.afterEach((routeTo, routeFrom) => {
@@ -232,7 +239,7 @@ export default {
   <div>
     <div
       class="topnav"
-      :class="sliderColor"
+      :class="darkmode ? 'slider-dark' : 'slider-light'"
       style="-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none"
     >
       
