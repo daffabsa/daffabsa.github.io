@@ -237,107 +237,6 @@ export default {
 .slider-light {
   background-color: white;
 }
-
-.marquee-wrapper {
-  text-align: center;
-}
-
-.marquee-wrapper .container {
-  overflow: hidden;
-}
-
-.marquee-inner span {
-  float: left;
-  width: 50%;
-}
-
-.marquee-wrapper .marquee-block {
-  height: 60px;
-  width: 124%;
-  overflow: hidden;
-  box-sizing: border-box;
-  position: absolute;
-  margin: auto;
-  padding: 0;
-  margin-left: -12px;
-}
-
-.marquee-inner {
-  display: block;
-  width: 200%;
-  position: absolute;
-}
-
-.marquee-inner.to-left {
-  animation: marqueeLeft 25s linear infinite;
-}
-.announcement-box-green {
-  height: auto;
-  display: inline-block;
-  margin: 10px 10px;
-  float: left;
-  transition: all 0.2s ease-out;
-  border-radius: 20px;
-  background: #e6faf5;
-  color: #009f68;
-  padding: 8px 15px;
-  font-weight: bold;
-  width: auto;
-}
-
-.announcement-box-red {
-  height: auto;
-  display: inline-block;
-  margin: 10px 10px;
-  float: left;
-  transition: all 0.2s ease-out;
-  border-radius: 20px;
-  background: #fdefed;
-  color: #ff3855;
-  padding: 8px 15px;
-  font-weight: bold;
-  width: auto;
-}
-
-.announcement-box-green div {
-  border-radius: 20px;
-  background: #009f68;
-  color: white;
-  padding: 0px 10px;
-  font-weight: bold;
-  display: inline;
-  margin-right: 10px;
-}
-
-.announcement-box-red div {
-  border-radius: 20px;
-  background: #ff3855;
-  color: white;
-  padding: 0px 10px;
-  font-weight: bold;
-  display: inline;
-  margin-right: 10px;
-}
-
-@keyframes marqueeLeft {
-  0% {
-    left: 0;
-  }
-
-  100% {
-    left: -100%;
-  }
-}
-
-@keyframes marqueeRight {
-  0% {
-    left: -100%;
-  }
-
-  100% {
-    left: 0;
-  }
-}
 </style>
 
 <template>
@@ -370,7 +269,6 @@ export default {
                     "
                   >
                     {{ today }}
-                    <!-- Minggu, 27 Desember 2022 -->
                   </p>
                 </div>
                 <div
@@ -382,7 +280,6 @@ export default {
                       deadline="2052-12-25 00:00:00"
                       :showDays="false"
                     ></flip-countdown>
-                    <!-- <span style="font-size: 30px; color: red;">:</span> -->
                   </div>
                 </div>
               </div>
@@ -435,22 +332,6 @@ export default {
                 </div>
               </div>
             </div>
-            <!-- <div class="marquee-parent">
-                <div class="marquee-child">
-                  <div
-                    v-for="(announcement, index) in announcements"
-                    :key="index"
-                    :class="{
-                      'announcement-box-green': announcement.color === 'green',
-                      'announcement-box-red': announcement.color === 'red',
-                    }"
-                    style="height: 35px !important; padding-top:5px"
-                  >
-                    <div style="display:inline-block">+{{ announcement.count }}</div>
-                    {{ announcement.message }}
-                  </div>
-                </div>
-              </div> -->
           </div>
           <!-- end navbar-->
         </div>
