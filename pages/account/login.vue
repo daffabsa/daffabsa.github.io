@@ -140,41 +140,24 @@ export default {
         </p>
         <div class="card-body p-4">
           <form action="#" @submit.prevent="tryToLogIn">
-            <b-alert
-              :variant="notification.type"
-              class="mt-3"
-              v-if="notification.message"
-              :show="notificationAutoCloseDuration"
-              dismissible
-              >{{ notification.message }}</b-alert
-            >
 
-            <b-alert
-              variant="danger"
-              class="mt-3"
-              v-model="isAuthError"
-              :show="notificationAutoCloseDuration"
-              dismissible
-              >{{ authError }}</b-alert
-            >
             <div class="form-group mb-3" style="width: 520px">
               <label for="emailaddress" style="color: #1B2559; font-weight: 500;">Email</label>
               <div class="inner-addon left-addon">
                   <i class="left fa fa-envelope" style="font-size:18px; margin-top:2px; color: #B6C7D8"></i>
                   <input
                     v-model="email"
-                    type="email"
+                    type="text"
                     id="emailaddress"
                     placeholder="Masukkan Email Anda"
                     class="form-control"
-                    style="padding: 25px 45px; border-color: #9e9e9e; border-radius: 6px;"
-                    :class="{ 'is-invalid': submitted && $v.email.$error }"
+                    style="padding: 25px 45px; border-radius: 6px;"
+                    :style="submitted && $v.email.$error ? 'border-color: #E04A4A;' : 'border-color: #9e9e9e;'"
                   />
               </div>
 
-              <div v-if="submitted && $v.email.$error" class="invalid-feedback">
-                <span v-if="!$v.email.required">Email is required.</span>
-                <span v-if="!$v.email.email">Please enter valid email.</span>
+              <div v-if="submitted && $v.email.$error" style="color: #E04A4A; margin-left: 20px; margin-top: 10px;">
+                <span>Format email salah, mohon cek kembali email Anda</span>
               </div>
             </div>
 
@@ -189,14 +172,22 @@ export default {
                   class="form-control"
                   placeholder="Masukkan Password Anda"
                   style="padding: 25px 45px; border-color: #9e9e9e; border-radius: 6px;"
-                  :class="{ 'is-invalid': submitted && $v.password.$error }"
+                  :style="submitted && $v.password.$error ? 'border-color: #E04A4A;' : 'border-color: #9e9e9e;'"
                 />
                 <i @click="showPassword" class="right far" :class="eye == false ? 'fa-eye-slash' : 'fa-eye'" style="font-size:18px; margin-top: 2px; color: #B6C7D8; cursor:pointer"></i>
               </div>
+
+              <div v-if="submitted && $v.password.$error" style="color: #E04A4A; margin-left: 20px; margin-top: 10px;">
+                <span>Password wajib diisi</span>
+              </div>
             </div>
 
-            <div class="form-group mb-0 text-center mt-5 mr-1">
+            <div class="form-group mb-0 text-center mt-4 mr-1">
               <button class="login-button" type="submit">Masuk</button>
+            </div>
+
+            <div v-if="notification.message" style="color: #E04A4A;" class="text-center mt-4">
+              <span>Email atau password yang Anda masukkan <br>salah, mohon cek dan coba kembali</span>
             </div>
 
             <div class="form-group mb-0 text-center mt-4">
