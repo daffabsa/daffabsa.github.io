@@ -158,7 +158,7 @@ export default {
               >{{ authError }}</b-alert
             >
             <div class="form-group mb-3" style="width: 520px">
-              <label for="emailaddress">Email</label>
+              <label for="emailaddress" style="color: #1B2559; font-weight: 500;">Email</label>
               <div class="inner-addon left-addon">
                   <i class="left fa fa-envelope" style="font-size:18px; margin-top:2px; color: #B6C7D8"></i>
                   <input
@@ -179,7 +179,7 @@ export default {
             </div>
 
             <div class="form-group mb-3" style="width: 520px">
-              <label for="password">Password</label>
+              <label for="password" style="color: #1B2559; font-weight: 500;">Password</label>
               <div class="inner-addon left-addon right-addon">
                   <i class="left fa fa-lock" style="font-size:18px; margin-top:2px; color: #B6C7D8"></i>
                   <input
@@ -219,29 +219,3 @@ export default {
   </div>
   <!-- end row -->
 </template>
-
-<style>
-.inner-addon { 
-    position: relative; 
-}
-
-/* style icon */
-.inner-addon .fa {
-  position: absolute;
-  padding: 15px;
-}
-
-/* style icon */
-.inner-addon .far {
-  position: absolute;
-  padding: 15px;
-}
-
-/* align icon */
-.left-addon .left  { left:  0px;}
-.right-addon .right { right: 0px; top: 0px;}
-
-/* add padding  */
-.left-addon input  { padding-left:  30px; }
-.right-addon input { padding-right: 30px; }
-</style>

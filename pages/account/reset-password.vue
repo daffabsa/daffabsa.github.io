@@ -7,12 +7,13 @@ import { required, email } from "vuelidate/lib/validators";
 export default {
   data() {
     return {
-      password: "123456",
-      confirm_password: "123456",
+      password: "",
+      confirm_password: "",
       submitted: false,
       error: null,
       tryingToReset: false,
       isResetError: false,
+      eye: false,
     };
   },
   // validations: {
@@ -22,6 +23,10 @@ export default {
   //   },
   // },
   methods: {
+    showPassword(){
+      this.eye = !this.eye;
+    },
+
     goToPrev() {
       this.$router.go(-1);
     },
@@ -108,54 +113,36 @@ export default {
               >{{ error }}</b-alert
             >
             <div class="form-group mb-3" style="width: 520px">
-              <label for="password">Password Baru</label>
-              <div class="input-group input-group-merge">
-                <input
+              <label for="password" style="color: #1B2559; font-weight: 500;">Masukkan Password Baru</label>
+              <div class="inner-addon left-addon right-addon">
+                  <i class="left fa fa-lock" style="font-size:18px; margin-top:2px; color: #B6C7D8"></i>
+                  <input
                   v-model="password"
-                  type="password"
+                  :type="eye == false ? 'password' : 'text'"
                   id="password"
                   class="form-control"
-                  placeholder="Masukkan Password Anda"
+                  placeholder="Password Baru"
+                  style="padding: 25px 45px; border-color: #9e9e9e; border-radius: 6px;"
                   :class="{ 'is-invalid': submitted && $v.password.$error }"
                 />
-
-                <div class="input-group-append" data-password="false">
-                  <div class="input-group-text">
-                    <span class="password-eye"></span>
-                  </div>
-                </div>
-                <div
-                  v-if="submitted && !$v.password.required"
-                  class="invalid-feedback"
-                >
-                  Password is required.
-                </div>
+                <i @click="showPassword" class="right far" :class="eye == false ? 'fa-eye-slash' : 'fa-eye'" style="font-size:18px; margin-top: 2px; color: #B6C7D8; cursor:pointer"></i>
               </div>
             </div>
 
             <div class="form-group mb-3" style="width: 520px">
-              <label for="password">Konfirmasi Password Baru</label>
-              <div class="input-group input-group-merge">
-                <input
+              <label for="password" style="color: #1B2559; font-weight: 500;">Konfirmasi Password Baru</label>
+              <div class="inner-addon left-addon right-addon">
+                  <i class="left fa fa-lock" style="font-size:18px; margin-top:2px; color: #B6C7D8"></i>
+                  <input
                   v-model="confirm_password"
-                  type="password"
+                  :type="eye == false ? 'password' : 'text'"
                   id="password"
                   class="form-control"
-                  placeholder="Masukkan Password Anda"
+                  placeholder="Konfirmasi Password"
+                  style="padding: 25px 45px; border-color: #9e9e9e; border-radius: 6px;"
                   :class="{ 'is-invalid': submitted && $v.password.$error }"
                 />
-
-                <div class="input-group-append" data-password="false">
-                  <div class="input-group-text">
-                    <span class="password-eye"></span>
-                  </div>
-                </div>
-                <div
-                  v-if="submitted && !$v.password.required"
-                  class="invalid-feedback"
-                >
-                  Password is required.
-                </div>
+                <i @click="showPassword" class="right far" :class="eye == false ? 'fa-eye-slash' : 'fa-eye'" style="font-size:18px; margin-top: 2px; color: #B6C7D8; cursor:pointer"></i>
               </div>
             </div>
 
