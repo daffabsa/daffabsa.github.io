@@ -191,7 +191,7 @@ export default {
                   style="padding: 25px 45px; border-color: #9e9e9e; border-radius: 6px;"
                   :class="{ 'is-invalid': submitted && $v.password.$error }"
                 />
-                <i @click="showPassword" class="right fa" :class="eye == false ? 'fa-eye-slash' : 'fa-eye'" style="font-size:18px; margin-top: 2px; color: #B6C7D8; cursor:pointer"></i>
+                <i @click="showPassword" class="right far" :class="eye == false ? 'fa-eye-slash' : 'fa-eye'" style="font-size:18px; margin-top: 2px; color: #B6C7D8; cursor:pointer"></i>
               </div>
             </div>
 
@@ -227,6 +227,12 @@ export default {
 
 /* style icon */
 .inner-addon .fa {
+  position: absolute;
+  padding: 15px;
+}
+
+/* style icon */
+.inner-addon .far {
   position: absolute;
   padding: 15px;
 }
