@@ -21,9 +21,13 @@ export default {
   },
   computed: mapState(["layout"]),
   beforeMount() {
-    axios.get("icc-pengumuman/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48").then((res) => {
-      this.announcements = res.data.announcements;
-    });
+    axios
+      .get(
+        "icc-pengumuman/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48"
+      )
+      .then((res) => {
+        this.announcements = res.data.announcements;
+      });
     moment.locale("id");
     this.today = moment(Date()).format("dddd, Do MMMM YYYY");
   },
@@ -114,8 +118,8 @@ export default {
     },
   },
   mounted() {
-    if(localStorage.darkmode) {
-      this.darkmode = localStorage.darkmode
+    if (localStorage.darkmode) {
+      this.darkmode = localStorage.darkmode;
     }
     this.activateParentDropdown();
 
@@ -233,6 +237,107 @@ export default {
 .slider-light {
   background-color: white;
 }
+
+.marquee-wrapper {
+  text-align: center;
+}
+
+.marquee-wrapper .container {
+  overflow: hidden;
+}
+
+.marquee-inner span {
+  float: left;
+  width: 50%;
+}
+
+.marquee-wrapper .marquee-block {
+  height: 60px;
+  width: 124%;
+  overflow: hidden;
+  box-sizing: border-box;
+  position: absolute;
+  margin: auto;
+  padding: 0;
+  margin-left: -12px;
+}
+
+.marquee-inner {
+  display: block;
+  width: 200%;
+  position: absolute;
+}
+
+.marquee-inner.to-left {
+  animation: marqueeLeft 25s linear infinite;
+}
+.announcement-box-green {
+  height: auto;
+  display: inline-block;
+  margin: 10px 10px;
+  float: left;
+  transition: all 0.2s ease-out;
+  border-radius: 20px;
+  background: #e6faf5;
+  color: #009f68;
+  padding: 8px 15px;
+  font-weight: bold;
+  width: auto;
+}
+
+.announcement-box-red {
+  height: auto;
+  display: inline-block;
+  margin: 10px 10px;
+  float: left;
+  transition: all 0.2s ease-out;
+  border-radius: 20px;
+  background: #fdefed;
+  color: #ff3855;
+  padding: 8px 15px;
+  font-weight: bold;
+  width: auto;
+}
+
+.announcement-box-green div {
+  border-radius: 20px;
+  background: #009f68;
+  color: white;
+  padding: 0px 10px;
+  font-weight: bold;
+  display: inline;
+  margin-right: 10px;
+}
+
+.announcement-box-red div {
+  border-radius: 20px;
+  background: #ff3855;
+  color: white;
+  padding: 0px 10px;
+  font-weight: bold;
+  display: inline;
+  margin-right: 10px;
+}
+
+@keyframes marqueeLeft {
+  0% {
+    left: 0;
+  }
+
+  100% {
+    left: -100%;
+  }
+}
+
+@keyframes marqueeRight {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 0;
+  }
+}
 </style>
 
 <template>
@@ -242,44 +347,95 @@ export default {
       :class="darkmode ? 'slider-dark' : 'slider-light'"
       style="-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none"
     >
-      
-        <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
-          <div class="collapse navbar-collapse" id="topnav-menu-content">
-            <ul class="navbar-nav" style="width:37%">
-              <div>
-                <div class="row" style="
-                    height: 60px;
-                    width: 102%;
-                    background-color: #011a3d;
-                    padding-right: 20px;
-                  ">
-                  <div class="col-md-4" style="margin: auto;">
-                    <p
-                      style="
-                        color: white;
-                        width: 200px;
-                        margin-top: 15px;
-                        font-size:15px;
-                      "
-                    >
-                      {{ today }}
-                      <!-- Minggu, 27 Desember 2022 -->
-                    </p>
-                  </div>
-                  <div class="col-md-7" style="margin-left:30px; margin-right:-20px">
-                    <div style="width: 280px; margin-top: 7px; float:right">
-                      <flip-countdown
-                        deadline="2052-12-25 00:00:00"
-                        :showDays="false"
-                      ></flip-countdown>
-                      <!-- <span style="font-size: 30px; color: red;">:</span> -->
-                    </div>
+      <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
+        <div class="collapse navbar-collapse" id="topnav-menu-content">
+          <ul class="navbar-nav" style="width: 37%">
+            <div>
+              <div
+                class="row"
+                style="
+                  height: 60px;
+                  width: 102%;
+                  background-color: #011a3d;
+                  padding-right: 20px;
+                "
+              >
+                <div class="col-md-4" style="margin: auto">
+                  <p
+                    style="
+                      color: white;
+                      width: 200px;
+                      margin-top: 15px;
+                      font-size: 15px;
+                    "
+                  >
+                    {{ today }}
+                    <!-- Minggu, 27 Desember 2022 -->
+                  </p>
+                </div>
+                <div
+                  class="col-md-7"
+                  style="margin-left: 30px; margin-right: -20px"
+                >
+                  <div style="width: 280px; margin-top: 7px; float: right">
+                    <flip-countdown
+                      deadline="2052-12-25 00:00:00"
+                      :showDays="false"
+                    ></flip-countdown>
+                    <!-- <span style="font-size: 30px; color: red;">:</span> -->
                   </div>
                 </div>
               </div>
-            </ul>
-            <div style="width: 70%;">
-              <div class="marquee-parent">
+            </div>
+          </ul>
+          <div style="width: 70%">
+            <div class="marquee-wrapper">
+              <div class="container">
+                <div class="marquee-block">
+                  <div class="marquee-inner to-left">
+                    <span>
+                      <div
+                        v-for="(announcement, index) in announcements.slice(
+                          0,
+                          9
+                        )"
+                        :key="index"
+                        :class="{
+                          'announcement-box-green':
+                            announcement.color === 'green',
+                          'announcement-box-red': announcement.color === 'red',
+                        }"
+                      >
+                        <div style="display: inline-block">
+                          +{{ announcement.count }}
+                        </div>
+                        {{ announcement.message }}
+                      </div>
+                    </span>
+                    <span>
+                      <div
+                        v-for="(announcement, index) in announcements.slice(
+                          0,
+                          9
+                        )"
+                        :key="index"
+                        :class="{
+                          'announcement-box-green':
+                            announcement.color === 'green',
+                          'announcement-box-red': announcement.color === 'red',
+                        }"
+                      >
+                        <div style="display: inline-block">
+                          +{{ announcement.count }}
+                        </div>
+                        {{ announcement.message }}
+                      </div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- <div class="marquee-parent">
                 <div class="marquee-child">
                   <div
                     v-for="(announcement, index) in announcements"
@@ -294,12 +450,12 @@ export default {
                     {{ announcement.message }}
                   </div>
                 </div>
-              </div>
-            </div>
-            <!-- end navbar-->
+              </div> -->
           </div>
-          <!-- end .collapsed-->
-        </nav>
+          <!-- end navbar-->
+        </div>
+        <!-- end .collapsed-->
+      </nav>
       <!-- end container-fluid -->
     </div>
     <!-- end topnav-->
