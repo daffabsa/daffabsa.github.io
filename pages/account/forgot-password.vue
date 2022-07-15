@@ -129,15 +129,19 @@ export default {
               >{{ error }}</b-alert
             >
             <div class="form-group mb-3">
-              <label for="emailaddress">Email</label>
-              <input
-                v-model="email"
-                class="form-control"
-                type="email"
-                id="emailaddress"
-                :class="{ 'is-invalid': submitted && $v.email.$error }"
-                placeholder="Write your email"
-              />
+              <label for="emailaddress" style="color: #1B2559; font-weight: 500;">Email</label>
+              <div class="inner-addon left-addon">
+                  <i class="left fa fa-envelope" style="font-size:18px; margin-top:2px; color: #B6C7D8"></i>
+                  <input
+                    v-model="email"
+                    type="email"
+                    id="emailaddress"
+                    placeholder="Masukkan Email Anda"
+                    class="form-control"
+                    style="padding: 25px 45px; border-color: #9e9e9e; border-radius: 6px;"
+                    :class="{ 'is-invalid': submitted && $v.email.$error }"
+                  />
+              </div>
               <div v-if="submitted && $v.email.$error" class="invalid-feedback">
                 <span v-if="!$v.email.required">Email is required.</span>
                 <span v-if="!$v.email.email">Please enter valid email.</span>

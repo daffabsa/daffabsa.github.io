@@ -38,7 +38,7 @@ export function configureFakeBackend() {
                         resolve({ ok: true, text: () => Promise.resolve(JSON.stringify(responseJson)) });
                     } else {
                         // else return error
-                        reject('These credentials do not match our records.');
+                        reject('Email atau password yang Anda masukkan salah, mohon cek dan coba kembali');
                     }
 
                     return;

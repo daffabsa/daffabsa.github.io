@@ -524,3 +524,27 @@ input:checked+.slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .fa {
+  position: absolute;
+  padding: 15px;
+}
+
+/* style icon */
+.inner-addon .far {
+  position: absolute;
+  padding: 15px;
+}
+
+/* align icon */
+.left-addon .left  { left:  0px;}
+.right-addon .right { right: 0px; top: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
