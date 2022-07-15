@@ -13,6 +13,7 @@ export default {
       authError: null,
       tryingToLogIn: false,
       isAuthError: false,
+      eye: false,
     };
   },
   computed: {
@@ -36,6 +37,10 @@ export default {
   methods: {
     // Try to log the user in with the username
     // and password they provided.
+    showPassword(){
+      this.eye = !this.eye;
+    },
+
     tryToLogIn() {
       this.submitted = true;
       // stop here if form is invalid
@@ -154,14 +159,19 @@ export default {
             >
             <div class="form-group mb-3" style="width: 520px">
               <label for="emailaddress">Email</label>
-              <input
-                class="form-control"
-                v-model="email"
-                type="email"
-                id="emailaddress"
-                placeholder="Masukkan Email Anda"
-                :class="{ 'is-invalid': submitted && $v.email.$error }"
-              />
+              <div class="inner-addon left-addon">
+                  <i class="left fa fa-envelope" style="font-size:18px; margin-top:2px; color: #B6C7D8"></i>
+                  <input
+                    v-model="email"
+                    type="email"
+                    id="emailaddress"
+                    placeholder="Masukkan Email Anda"
+                    class="form-control"
+                    style="padding: 25px 45px; border-color: #9e9e9e; border-radius: 6px;"
+                    :class="{ 'is-invalid': submitted && $v.email.$error }"
+                  />
+              </div>
+
               <div v-if="submitted && $v.email.$error" class="invalid-feedback">
                 <span v-if="!$v.email.required">Email is required.</span>
                 <span v-if="!$v.email.email">Please enter valid email.</span>
@@ -170,27 +180,18 @@ export default {
 
             <div class="form-group mb-3" style="width: 520px">
               <label for="password">Password</label>
-              <div class="input-group input-group-merge">
-                <input
+              <div class="inner-addon left-addon right-addon">
+                  <i class="left fa fa-lock" style="font-size:18px; margin-top:2px; color: #B6C7D8"></i>
+                  <input
                   v-model="password"
-                  type="password"
+                  :type="eye == false ? 'password' : 'text'"
                   id="password"
                   class="form-control"
                   placeholder="Masukkan Password Anda"
+                  style="padding: 25px 45px; border-color: #9e9e9e; border-radius: 6px;"
                   :class="{ 'is-invalid': submitted && $v.password.$error }"
                 />
-
-                <div class="input-group-append" data-password="false">
-                  <div class="input-group-text">
-                    <span class="password-eye"></span>
-                  </div>
-                </div>
-                <div
-                  v-if="submitted && !$v.password.required"
-                  class="invalid-feedback"
-                >
-                  Password is required.
-                </div>
+                <i @click="showPassword" class="right fa" :class="eye == false ? 'fa-eye-slash' : 'fa-eye'" style="font-size:18px; margin-top: 2px; color: #B6C7D8; cursor:pointer"></i>
               </div>
             </div>
 
@@ -218,3 +219,23 @@ export default {
   </div>
   <!-- end row -->
 </template>
+
+<style>
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .fa {
+  position: absolute;
+  padding: 15px;
+}
+
+/* align icon */
+.left-addon .left  { left:  0px;}
+.right-addon .right { right: 0px; top: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+</style>

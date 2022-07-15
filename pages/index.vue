@@ -235,7 +235,7 @@ export default {
         -o-user-select: none;
       "
       :style="
-        editLayout == false
+        editLayout == false || editLayout == null
           ? 'margin-top: 20px; transition: margin 0.3s'
           : 'margin-top: -50px; transition: margin 0.3s'
       "
