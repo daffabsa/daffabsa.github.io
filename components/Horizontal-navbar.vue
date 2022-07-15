@@ -21,9 +21,13 @@ export default {
   },
   computed: mapState(["layout"]),
   beforeMount() {
-    axios.get("icc-pengumuman/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48").then((res) => {
-      this.announcements = res.data.announcements;
-    });
+    axios
+      .get(
+        "icc-pengumuman/d299fe835e259065c5341e37b6ee8928042f8a54/2022-06-23.13:44:48"
+      )
+      .then((res) => {
+        this.announcements = res.data.announcements;
+      });
     moment.locale("id");
     this.today = moment(Date()).format("dddd, Do MMMM YYYY");
   },
@@ -114,8 +118,8 @@ export default {
     },
   },
   mounted() {
-    if(localStorage.darkmode) {
-      this.darkmode = localStorage.darkmode
+    if (localStorage.darkmode) {
+      this.darkmode = localStorage.darkmode;
     }
     this.activateParentDropdown();
 
@@ -242,64 +246,97 @@ export default {
       :class="darkmode ? 'slider-dark' : 'slider-light'"
       style="-webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none"
     >
-      
-        <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
-          <div class="collapse navbar-collapse" id="topnav-menu-content">
-            <ul class="navbar-nav" style="width:37%">
-              <div>
-                <div class="row" style="
-                    height: 60px;
-                    width: 102%;
-                    background-color: #011a3d;
-                    padding-right: 20px;
-                  ">
-                  <div class="col-md-4" style="margin: auto;">
-                    <p
-                      style="
-                        color: white;
-                        width: 200px;
-                        margin-top: 15px;
-                        font-size:15px;
-                      "
-                    >
-                      {{ today }}
-                      <!-- Minggu, 27 Desember 2022 -->
-                    </p>
-                  </div>
-                  <div class="col-md-7" style="margin-left:30px; margin-right:-20px">
-                    <div style="width: 280px; margin-top: 7px; float:right">
-                      <flip-countdown
-                        deadline="2052-12-25 00:00:00"
-                        :showDays="false"
-                      ></flip-countdown>
-                      <!-- <span style="font-size: 30px; color: red;">:</span> -->
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ul>
-            <div style="width: 70%;">
-              <div class="marquee-parent">
-                <div class="marquee-child">
-                  <div
-                    v-for="(announcement, index) in announcements"
-                    :key="index"
-                    :class="{
-                      'announcement-box-green': announcement.color === 'green',
-                      'announcement-box-red': announcement.color === 'red',
-                    }"
-                    style="height: 35px !important; padding-top:5px"
+      <nav class="navbar navbar-light navbar-expand-lg topnav-menu">
+        <div class="collapse navbar-collapse" id="topnav-menu-content">
+          <ul class="navbar-nav" style="width: 37%">
+            <div>
+              <div
+                class="row"
+                style="
+                  height: 60px;
+                  width: 102%;
+                  background-color: #011a3d;
+                  padding-right: 20px;
+                "
+              >
+                <div class="col-md-4" style="margin: auto">
+                  <p
+                    style="
+                      color: white;
+                      width: 200px;
+                      margin-top: 15px;
+                      font-size: 15px;
+                    "
                   >
-                    <div style="display:inline-block">+{{ announcement.count }}</div>
-                    {{ announcement.message }}
+                    {{ today }}
+                  </p>
+                </div>
+                <div
+                  class="col-md-7"
+                  style="margin-left: 30px; margin-right: -20px"
+                >
+                  <div style="width: 280px; margin-top: 7px; float: right">
+                    <flip-countdown
+                      deadline="2052-12-25 00:00:00"
+                      :showDays="false"
+                    ></flip-countdown>
                   </div>
                 </div>
               </div>
             </div>
-            <!-- end navbar-->
+          </ul>
+          <div style="width: 70%">
+            <div class="marquee-wrapper">
+              <div class="container">
+                <div class="marquee-block">
+                  <div class="marquee-inner to-left">
+                    <span>
+                      <div
+                        v-for="(announcement, index) in announcements.slice(
+                          0,
+                          9
+                        )"
+                        :key="index"
+                        :class="{
+                          'announcement-box-green':
+                            announcement.color === 'green',
+                          'announcement-box-red': announcement.color === 'red',
+                        }"
+                      >
+                        <div style="display: inline-block">
+                          +{{ announcement.count }}
+                        </div>
+                        {{ announcement.message }}
+                      </div>
+                    </span>
+                    <span>
+                      <div
+                        v-for="(announcement, index) in announcements.slice(
+                          0,
+                          9
+                        )"
+                        :key="index"
+                        :class="{
+                          'announcement-box-green':
+                            announcement.color === 'green',
+                          'announcement-box-red': announcement.color === 'red',
+                        }"
+                      >
+                        <div style="display: inline-block">
+                          +{{ announcement.count }}
+                        </div>
+                        {{ announcement.message }}
+                      </div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <!-- end .collapsed-->
-        </nav>
+          <!-- end navbar-->
+        </div>
+        <!-- end .collapsed-->
+      </nav>
       <!-- end container-fluid -->
     </div>
     <!-- end topnav-->
