@@ -170,8 +170,7 @@ export default {
             user-select: none;
             cursor: pointer;
             padding: 12px;
-            border-color: #e6eaf6;
-            border-top: 1px solid;
+            border-top: 1px solid #e6eaf6;
           "
         >
           <i class="fa fa-plus mr-1" style="color: #1b2559"></i>
@@ -183,12 +182,7 @@ export default {
           class="dropdown-item"
           @click="logoutUser"
           href="jvascript: void(0);"
-          style="
-            cursor: pointer;
-            padding: 12px;
-            border-color: #e6eaf6;
-            border-top: 1px solid;
-          "
+          style="cursor: pointer; padding: 12px; border-top: 1px solid #e6eaf6"
         >
           <i class="fe-log-out mr-1" style="color: #1b2559"></i>
           <span style="color: #1b2559">{{
