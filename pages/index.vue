@@ -1,5 +1,4 @@
 <script>
-import CrmWidget from "~/components/widgets/Crm-widget";
 import draggable from "vuedraggable";
 import { EventBus } from "~/plugins/eventBus.js";
 
@@ -13,7 +12,6 @@ export default {
     };
   },
   components: {
-    CrmWidget,
     draggable,
   },
   data() {
@@ -62,6 +60,7 @@ export default {
     EventBus.$on("darkmode", (darkmodeBool) => {
       this.darkmode = darkmodeBool;
     });
+    EventBus.$emit("settings", false);
   },
   methods: {
     removeWidget(index, list) {

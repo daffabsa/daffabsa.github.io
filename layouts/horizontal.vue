@@ -12,6 +12,7 @@ export default {
     return {
       editLayout: false,
       darkmode: false,
+      settings: false,
     };
   },
   components: {
@@ -39,6 +40,9 @@ export default {
     EventBus.$on("darkmode", (darkmodeBool) => {
       this.darkmode = darkmodeBool;
     });
+    EventBus.$on("settings", (settingsBool) => {
+      this.settings = settingsBool;
+    });
   },
 };
 </script>
@@ -48,11 +52,13 @@ export default {
   <div id="wrapper">
     <div :style="editLayout == false ? 'display:block' : 'display:none'">
       <Topbar />
-      <HorizontalNavbar
-        :type="layout.topbar"
-        :width="layout.layoutWidth"
-        :menu="layout.menuPosition"
-      />
+      <div v-if="settings == false">
+        <HorizontalNavbar
+          :type="layout.topbar"
+          :width="layout.layoutWidth"
+          :menu="layout.menuPosition"
+        />
+      </div>
     </div>
     <!-- ============================================================== -->
     <!-- Start Page Content here -->
