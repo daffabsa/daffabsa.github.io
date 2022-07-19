@@ -40,7 +40,6 @@ export default {
   },
   methods: {},
   computed: {},
-  layout: "horizontal-settings",
   watch: {
     editLayout(newValue) {
       if (newValue == false) {
@@ -66,5 +65,11 @@ export default {
 </script>
 
 <template>
-  <div></div>
+  <div style="margin-top: -40px; margin-left: 20px; margin-right: 20px">
+    <div class="row">
+      <div class="col-md-3">
+        <SidebarSettings />
+      </div>
+    </div>
+  </div>
 </template>
