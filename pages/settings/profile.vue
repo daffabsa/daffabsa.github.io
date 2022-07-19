@@ -107,7 +107,10 @@ export default {
                 />
               </div>
               <div class="col-md-8" style="margin: auto">
-                <p style="font-weight: 600; font-size: 20px; color: #1b2559">
+                <p
+                  style="font-weight: 600; font-size: 20px"
+                  :style="darkmode ? 'color: white' : 'color: #1b2559'"
+                >
                   Moch Anji Sumarno
                 </p>
                 <p
@@ -115,9 +118,9 @@ export default {
                     font-style: normal;
                     font-weight: 400;
                     font-size: 14px;
-                    color: #60677d;
                     margin-top: -15px;
                   "
+                  :style="darkmode ? 'color: white' : 'color: #60677d'"
                 >
                   Direktur
                 </p>
@@ -152,7 +155,11 @@ export default {
 
           <div style="margin: 0px 32px">
             <div class="row">
-              <div class="col-md-3" style="margin: auto">
+              <div
+                class="col-md-3"
+                style="margin: auto"
+                :style="darkmode ? 'color: white' : 'color: #60677D'"
+              >
                 <p>Username</p>
                 <p
                   style="
@@ -172,6 +179,11 @@ export default {
                 <input
                   type="text"
                   class="form-control"
+                  :style="
+                    darkmode
+                      ? 'background: rgba(223, 227, 232, 0.2); color: white;'
+                      : 'background: rgba(242, 243, 245, 1);'
+                  "
                   disabled
                   value="anjisumarno"
                 />
@@ -179,19 +191,32 @@ export default {
             </div>
 
             <div class="row">
-              <div class="col-md-3" style="margin: auto">
+              <div
+                class="col-md-3"
+                style="margin: auto"
+                :style="darkmode ? 'color: white' : 'color: #60677D'"
+              >
                 <p style="margin: auto">Nama Lengkap</p>
               </div>
               <div class="col-md-9" style="margin-top: 5px">
                 <input
                   type="text"
                   class="form-control"
+                  :style="
+                    darkmode
+                      ? 'background: transparent; color: white;'
+                      : 'background: white;'
+                  "
                   value="Moch Anji Sumarno"
                 />
               </div>
             </div>
 
-            <div class="row" style="margin-top: 10px">
+            <div
+              class="row"
+              style="margin-top: 10px"
+              :style="darkmode ? 'color: white' : 'color: #60677D'"
+            >
               <div class="col-md-3" style="margin: auto">
                 <p style="margin: auto">Email</p>
               </div>
@@ -199,26 +224,57 @@ export default {
                 <input
                   type="email"
                   class="form-control"
+                  :style="
+                    darkmode
+                      ? 'background: transparent; color: white;'
+                      : 'background: white;'
+                  "
                   value="abdulsukirman99@gmail.com"
                 />
               </div>
             </div>
 
-            <div class="row" style="margin-top: 10px">
+            <div
+              class="row"
+              style="margin-top: 10px"
+              :style="darkmode ? 'color: white' : 'color: #60677D'"
+            >
               <div class="col-md-3" style="margin: auto">
                 <p style="margin: auto">No. Handphone</p>
               </div>
               <div class="col-md-9" style="margin-top: 5px">
-                <input type="text" class="form-control" value="081234567891" />
+                <input
+                  type="text"
+                  class="form-control"
+                  :style="
+                    darkmode
+                      ? 'background: transparent; color: white;'
+                      : 'background: white;'
+                  "
+                  value="081234567891"
+                />
               </div>
             </div>
 
-            <div class="row" style="margin-top: 10px">
+            <div
+              class="row"
+              style="margin-top: 10px"
+              :style="darkmode ? 'color: white' : 'color: #60677D'"
+            >
               <div class="col-md-3" style="margin: auto">
                 <p style="margin: auto">Password</p>
               </div>
               <div class="col-md-9" style="margin-top: 5px">
-                <input type="password" class="form-control" value="*****" />
+                <input
+                  type="password"
+                  class="form-control"
+                  :style="
+                    darkmode
+                      ? 'background: transparent; color: white;'
+                      : 'background: white;'
+                  "
+                  value="*****"
+                />
               </div>
             </div>
           </div>
