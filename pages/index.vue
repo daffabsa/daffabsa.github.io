@@ -62,6 +62,7 @@ export default {
     EventBus.$on("darkmode", (darkmodeBool) => {
       this.darkmode = darkmodeBool;
     });
+    EventBus.$emit("settings", false);
   },
   methods: {
     removeWidget(index, list) {
