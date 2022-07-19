@@ -142,21 +142,24 @@ export default {
           </div>
         </template>
 
-        <a
-          class="dropdown-item"
-          style="
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-            cursor: pointer;
-          "
+        <nuxt-link to="/settings/profile"
+          ><a
+            class="dropdown-item"
+            style="
+              -webkit-user-select: none;
+              -moz-user-select: none;
+              -ms-user-select: none;
+              user-select: none;
+              cursor: pointer;
+              padding: 12px;
+            "
+          >
+            <i class="fa fa-cog mr-1" style="color: #1b2559"></i>
+            <span style="color: #1b2559">{{
+              $t("navbar.dropdown.name.list.settings")
+            }}</span>
+          </a></nuxt-link
         >
-          <i class="fe-settings mr-1"></i>
-          <span>{{ $t("navbar.dropdown.name.list.settings") }}</span>
-        </a>
-
-        <b-dropdown-divider></b-dropdown-divider>
         <a
           class="dropdown-item"
           @click="layoutEditor"
@@ -166,21 +169,31 @@ export default {
             -ms-user-select: none;
             user-select: none;
             cursor: pointer;
+            padding: 12px;
+            border-color: #e6eaf6;
+            border-top: 1px solid;
           "
         >
-          <i class="fa fa-plus mr-1"></i>
-          <span>{{ $t("navbar.dropdown.name.list.editlayout") }}</span>
+          <i class="fa fa-plus mr-1" style="color: #1b2559"></i>
+          <span style="color: #1b2559">{{
+            $t("navbar.dropdown.name.list.editlayout")
+          }}</span>
         </a>
-
-        <b-dropdown-divider></b-dropdown-divider>
         <a
           class="dropdown-item"
           @click="logoutUser"
           href="jvascript: void(0);"
-          style="cursor: pointer"
+          style="
+            cursor: pointer;
+            padding: 12px;
+            border-color: #e6eaf6;
+            border-top: 1px solid;
+          "
         >
-          <i class="fe-log-out mr-1"></i>
-          <span>{{ $t("navbar.dropdown.name.list.logout") }}</span>
+          <i class="fe-log-out mr-1" style="color: #1b2559"></i>
+          <span style="color: #1b2559">{{
+            $t("navbar.dropdown.name.list.logout")
+          }}</span>
         </a>
       </b-nav-item-dropdown>
     </ul>
