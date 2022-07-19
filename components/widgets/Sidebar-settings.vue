@@ -3,7 +3,9 @@ import { EventBus } from "~/plugins/eventBus.js";
 
 export default {
   data() {
-    return {};
+    return {
+      darkmode: false,
+    };
   },
   methods: {},
   mounted() {
@@ -20,35 +22,57 @@ export default {
 </script>
 
 <template>
-  <div class="card-side">
+  <div
+    class="card-side"
+    :style="
+      darkmode
+        ? 'background: #233753; border: 1px solid rgba(223, 227, 232, 0.2);'
+        : 'background: #ffffff; border: 1px solid #e6eaf7;'
+    "
+  >
     <p
       style="
         padding: 20px;
-        color: #1b2559;
         font-style: normal;
         font-weight: 600;
         font-size: 18px;
-        border-bottom: 1px solid #e6eaf7;
+      "
+      :style="
+        darkmode
+          ? 'border-bottom: 1px solid rgba(223, 227, 232, 0.2); color: white'
+          : 'border-bottom: 1px solid #DFE3E8; color: #1b2559;'
       "
     >
       Pengaturan
     </p>
     <span>
-      <div class="row card-item" style="margin-top: -20px">
+      <div
+        class="row card-item"
+        style="margin-top: -15px"
+        :style="
+          darkmode
+            ? 'border-bottom: 1px solid rgba(223, 227, 232, 0.2);'
+            : 'border-bottom: 1px solid #DFE3E8'
+        "
+      >
         <div style="text-align: right" class="col-md-2">
           <i
             class="fa fa-user-cog"
-            style="
-              color: #1b2559;
-              font-size: 20px;
-              margin-right: -10px;
-              margin-top: 2px;
-            "
+            style="font-size: 20px; margin-right: -10px; margin-top: 2px"
+            :style="darkmode ? 'color: white' : 'color: #1b2559;'"
           ></i>
         </div>
         <div class="col-md-10">
-          <p class="title">Akun Saya</p>
-          <p class="subtitle">
+          <p
+            class="title"
+            :style="darkmode ? 'color: white' : 'color: #1b2559;'"
+          >
+            Akun Saya
+          </p>
+          <p
+            class="subtitle"
+            :style="darkmode ? 'color: #CFD6EC' : 'color: #60677D;'"
+          >
             Pengaturan foto profil, nama akun, dan <br />
             password.
           </p>
@@ -56,21 +80,34 @@ export default {
       </div>
     </span>
     <span>
-      <div class="row card-item">
+      <div
+        class="row card-item"
+        :style="
+          darkmode
+            ? 'border-bottom: 1px solid rgba(223, 227, 232, 0.2);'
+            : 'border-bottom: 1px solid #DFE3E8'
+        "
+      >
         <div style="text-align: right" class="col-md-2">
           <i
             class="fa fa-cogs"
-            style="
-              color: #1b2559;
-              font-size: 20px;
-              margin-right: -10px;
-              margin-top: 2px;
-            "
+            style="font-size: 20px; margin-right: -10px; margin-top: 2px"
+            :style="darkmode ? 'color: white' : 'color: #1b2559;'"
           ></i>
         </div>
         <div class="col-md-10">
-          <p class="title">Isi Data Widget</p>
-          <p class="subtitle">Pengaturan Data Widget tanpa API</p>
+          <p
+            class="title"
+            :style="darkmode ? 'color: white' : 'color: #1b2559;'"
+          >
+            Isi Data Widget
+          </p>
+          <p
+            class="subtitle"
+            :style="darkmode ? 'color: #CFD6EC' : 'color: #60677D;'"
+          >
+            Pengaturan Data Widget tanpa API
+          </p>
         </div>
       </div>
     </span>
@@ -79,22 +116,18 @@ export default {
 
 <style>
 .card-side {
-  background: #ffffff;
-  border: 1px solid #e6eaf7;
   box-shadow: 0px 18px 40px rgba(112, 144, 176, 0.12);
   border-radius: 15px;
-  height: 85vh;
+  height: 80vh;
 }
 
 .card-side .title {
-  color: #1b2559;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
 }
 
 .card-side .subtitle {
-  color: #60677d;
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -102,13 +135,12 @@ export default {
 }
 
 .card-item {
-  border-bottom: 1px solid #e6eaf7;
   padding-top: 20px;
   margin: 0px 0px;
   cursor: pointer;
 }
 
 .card-item:hover {
-  background: #f0f6ff;
+  background: rgba(209, 227, 255, 0.4);
 }
 </style>
